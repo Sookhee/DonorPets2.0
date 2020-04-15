@@ -8,11 +8,24 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="7.5dp"
+                android:layout_marginTop="15dp"
+                android:background="#e8e8e8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shelterProfileLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shelterProfileLayout"
@@ -87,16 +100,6 @@
                 </com.loopeer.shadow.ShadowView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="wrap_content"
-                android:layout_height="7.5dp"
-                android:layout_marginTop="15dp"
-                android:background="#e8e8e8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shelterProfileLayout" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shelterDonationLayout"
                 android:layout_width="match_parent"
@@ -121,11 +124,49 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shelterStoryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shelterDonationLayout">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="8.5sp"
+                    android:text="스토리"
+                    android:textColor="@color/black"
+                    android:textSize="17.5sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="6sp"
+                    android:text="모두 보기"
+                    android:textColor="#818183"
+                    android:textSize="12.5sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
