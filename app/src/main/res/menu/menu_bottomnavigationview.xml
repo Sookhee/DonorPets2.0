@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/shelterItem"
+        android:icon="@drawable/icon_shelter"
+        android:title="@string/shelter" />
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/icon_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/mypageItem"
+        android:icon="@drawable/icon_mypage"
+        android:title="@string/mypage" />
+</menu>

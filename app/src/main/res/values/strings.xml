@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">reDonorPets</string>
+    <string name="home">홈</string>
+    <string name="shelter">보호소</string>
+    <string name="mypage">마이페이지</string>
+    <string name="setting">환경설정</string>
+    <string name="donation">기부하기</string>
+    <string name="story">스토리</string>
+</resources>
