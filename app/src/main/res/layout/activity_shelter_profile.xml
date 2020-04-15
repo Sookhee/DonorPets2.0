@@ -6,17 +6,126 @@
     android:layout_height="match_parent"
     tools:context=".ShelterProfileActivity">
 
-    <ImageView
-        android:id="@+id/shelter_background"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shelter_background" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shelterProfileLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/shelterBackgroundImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/shelter_background" />
+
+                <TextView
+                    android:id="@+id/shelterNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="9.5sp"
+                    android:text="도너츠 유기견 보호소"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shadow_view" />
+
+                <TextView
+                    android:id="@+id/shelterPhoneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="4.5sp"
+                    android:text="010-0000-0000"
+                    android:textColor="@color/greyish"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shelterNameTextView" />
+
+                <com.loopeer.shadow.ShadowView
+                    android:id="@+id/shadow_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="72dp"
+                    android:elevation="1.5dp"
+                    app:cornerRadius="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shadowColor="#26000000"
+                    app:shadowDy="2"
+                    app:shadowMarginBottom="7.5dp"
+                    app:shadowMarginLeft="15dp"
+                    app:shadowMarginRight="15dp"
+                    app:shadowMarginTop="15dp"
+                    app:shadowRadius="6dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/shelterProfileImageView"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
+                        android:src="@drawable/ic_launcher_background" />
+
+                </com.loopeer.shadow.ShadowView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="7.5dp"
+                android:layout_marginTop="15dp"
+                android:background="#e8e8e8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shelterProfileLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/shelterDonationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="17.5sp"
+                    android:text="기부품목"
+                    android:textColor="@color/black"
+                    android:textSize="17.5sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +133,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/button_back"
+            android:id="@+id/backButton"
             android:layout_width="16.1dp"
             android:layout_height="15.9dp"
             android:layout_marginStart="15dp"
@@ -46,4 +155,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/donationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/deep_sky_blue"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:lineSpacingExtra="7.5sp"
+        android:text="이 보호소에 기부하기"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

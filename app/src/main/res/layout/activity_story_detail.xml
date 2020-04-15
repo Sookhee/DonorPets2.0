@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/button_back"
+            android:id="@+id/backButton"
             android:layout_width="16.1dp"
             android:layout_height="15.9dp"
             android:layout_marginStart="15dp"
@@ -126,7 +126,7 @@
                     app:shadowRadius="6dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profile_image"
+                        android:id="@+id/shelterProfileImageView"
                         android:layout_width="33.5dp"
                         android:layout_height="33.5dp"
                         android:src="@drawable/ic_launcher_background" />
