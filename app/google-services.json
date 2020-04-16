@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "497901348330",
+    "firebase_url": "https://donorpetsver2.firebaseio.com",
+    "project_id": "donorpetsver2",
+    "storage_bucket": "donorpetsver2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497901348330:android:19ab5a54336f56be417e93",
+        "android_client_info": {
+          "package_name": "kr.hs.emirim.sookhee.redonorpets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497901348330-dhksr3i0qf4vggsgohfqnk0qg3snvb4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.sookhee.redonorpets",
+            "certificate_hash": "f2b6f183c8bb4202760ec0ffb71330d6d10beb74"
+          }
+        },
+        {
+          "client_id": "497901348330-nfdhrjkg42avdhsta4h47f869fk2saln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQs5fAlmv1tlwnVZWblVkERgOcxmgkb_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497901348330-nfdhrjkg42avdhsta4h47f869fk2saln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

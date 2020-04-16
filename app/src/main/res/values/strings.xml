@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">reDonorPets</string>
+    <string name="app_name">DonorPets</string>
     <string name="home">홈</string>
     <string name="shelter">보호소</string>
     <string name="mypage">마이페이지</string>
