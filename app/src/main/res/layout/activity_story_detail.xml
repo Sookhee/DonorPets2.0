@@ -19,6 +19,7 @@
             android:layout_width="16.1dp"
             android:layout_height="15.9dp"
             android:layout_marginStart="15dp"
+            android:onClick="onBackClick"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"
