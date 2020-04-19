@@ -23,6 +23,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
     private Context mCtx;
     private HashMap<String, StoryData> mData;
+    private ArrayList<String> shelterPosition = new ArrayList<>();
 
     public StoryAdapter(Context mCtx) {
         this.mCtx = mCtx;
@@ -40,13 +41,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
-        StoryData person = (StoryData) mData.values().toArray()[position];
+        StoryData story = (StoryData) mData.values().toArray()[position];
 
-        String img1 = person.getMainImg();
+        String img = story.getMainImg();
+        shelterPosition.add(story.getShelterPosition());
 
-        holder.tvTitle.setText(person.getTitle());
-        holder.tvShelter.setText(person.getShelterName());
-        Picasso.get().load(img1).into(holder.ivMainImg);
+        holder.tvTitle.setText(story.getTitle());
+        holder.tvShelter.setText(story.getShelterName());
+        Picasso.get().load(img).into(holder.ivMainImg);
 
     }
 
@@ -75,8 +77,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
                 public void onClick(View v){
                     Intent intent;
                     intent = new Intent(v.getContext(), StoryDetailActivity.class);
+                    intent.putExtra("storyPosition", String.valueOf(getAdapterPosition()));
+                    intent.putExtra("shelterPosition", shelterPosition.get(getAdapterPosition()));
                     v.getContext().startActivity(intent);
-
                 }
             });
         }

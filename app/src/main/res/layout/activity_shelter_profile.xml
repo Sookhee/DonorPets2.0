@@ -41,6 +41,7 @@
                     android:layout_height="150dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/shelter_background" />
@@ -95,6 +96,7 @@
                         android:id="@+id/shelterProfileImageView"
                         android:layout_width="105dp"
                         android:layout_height="105dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_background" />
 
                 </com.loopeer.shadow.ShadowView>
@@ -178,6 +180,7 @@
             android:layout_width="16.1dp"
             android:layout_height="15.9dp"
             android:layout_marginStart="15dp"
+            android:onClick="onBackClick"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"
