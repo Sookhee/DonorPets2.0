@@ -13,16 +13,16 @@
         <activity android:name=".EditPasswdActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".DonationActivity"></activity>
-        <activity android:name=".ShelterProfileActivity">
+        <activity android:name=".ShelterProfileActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".StoryDetailActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".StoryDetailActivity" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
