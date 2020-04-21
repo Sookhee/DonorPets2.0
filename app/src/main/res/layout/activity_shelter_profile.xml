@@ -74,6 +74,118 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shelterNameTextView" />
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/shelterPhoneTextView">
+
+                    <LinearLayout
+                        android:id="@+id/storyCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/storyTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="스토리"
+                            android:textColor="@color/greyish"
+                            android:textSize="12.5sp" />
+
+                        <TextView
+                            android:id="@+id/storyCountTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2.5dp"
+                            android:fontFamily="@font/notosanscjkkr_medium"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="5sp"
+                            android:text="120"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/donorCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/donorTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="후원자"
+                            android:textColor="@color/greyish"
+                            android:textSize="12.5sp" />
+
+                        <TextView
+                            android:id="@+id/donorCountTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2.5dp"
+                            android:fontFamily="@font/notosanscjkkr_medium"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="5sp"
+                            android:text="12"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/likeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/likeTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="관심"
+                            android:textColor="@color/greyish"
+                            android:textSize="12.5sp" />
+
+                        <TextView
+                            android:id="@+id/likeCountTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2.5dp"
+                            android:fontFamily="@font/notosanscjkkr_medium"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="5sp"
+                            android:text="500"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <com.loopeer.shadow.ShadowView
                     android:id="@+id/shadow_view"
                     android:layout_width="wrap_content"
