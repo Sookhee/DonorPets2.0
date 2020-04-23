@@ -19,9 +19,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class FragmentShelter extends Fragment {
-    View v;
+    View shelterView;
     Context context = getContext();
     TextView tvCheck1, tvCheck2, tvCheck3;
     View vCheck1, vCheck2, vCheck3;
@@ -32,6 +33,7 @@ public class FragmentShelter extends Fragment {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference().child("shelter");
+    Query shelterQuery = mRef;
 
     @Nullable
     @Override
@@ -43,9 +45,65 @@ public class FragmentShelter extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        this.v = view;
+        this.shelterView = view;
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.shelterRecyclerView);
+        recyclerView = (RecyclerView)shelterView.findViewById(R.id.shelterRecyclerView);
+
+        resetShelterRecyclerView(shelterView);
+
+        vCheck1 = shelterView.findViewById(R.id.shelterCheckView1);
+        vCheck2 = shelterView.findViewById(R.id.shelterCheckView2);
+        vCheck3 = shelterView.findViewById(R.id.shelterCheckView3);
+
+        tvCheck1 = (TextView)shelterView.findViewById(R.id.shelterCheckTextView1);
+        tvCheck1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vCheck1.setVisibility(View.VISIBLE);
+                vCheck2.setVisibility(View.INVISIBLE);
+                vCheck3.setVisibility(View.INVISIBLE);
+                tvCheck1.setTextColor(Color.parseColor("#000000"));
+                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+                shelterQuery = mRef;
+                resetShelterRecyclerView(shelterView);
+            }
+        });
+
+        tvCheck2 = (TextView)shelterView.findViewById(R.id.shelterCheckTextView2);
+        tvCheck2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vCheck1.setVisibility(View.INVISIBLE);
+                vCheck2.setVisibility(View.VISIBLE);
+                vCheck3.setVisibility(View.INVISIBLE);
+                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+                tvCheck2.setTextColor(Color.parseColor("#000000"));
+                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+                shelterQuery = mRef.orderByChild("region").equalTo("수도권");
+                resetShelterRecyclerView(shelterView);
+
+            }
+        });
+
+        tvCheck3 = (TextView)shelterView.findViewById(R.id.shelterCheckTextView3);
+        tvCheck3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vCheck1.setVisibility(View.INVISIBLE);
+                vCheck2.setVisibility(View.INVISIBLE);
+                vCheck3.setVisibility(View.VISIBLE);
+                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+                tvCheck3.setTextColor(Color.parseColor("#000000"));
+                shelterQuery = mRef.orderByChild("region").equalTo("강원도");
+                resetShelterRecyclerView(shelterView);
+
+            }
+        });
+    }
+
+    public void resetShelterRecyclerView(View view) {
         adapter = new ShelterAdapter(getActivity());
         mLayoutManager = new LinearLayoutManager(getActivity());
 //        mLayoutManager.setReverseLayout(true);
@@ -53,7 +111,7 @@ public class FragmentShelter extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        mRef.addChildEventListener(new ChildEventListener() {
+        shelterQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String key = dataSnapshot.getKey();
@@ -84,49 +142,6 @@ public class FragmentShelter extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-        vCheck1 = v.findViewById(R.id.shelterCheckView1);
-        vCheck2 = v.findViewById(R.id.shelterCheckView2);
-        vCheck3 = v.findViewById(R.id.shelterCheckView3);
-
-        tvCheck1 = (TextView)v.findViewById(R.id.shelterCheckTextView1);
-        tvCheck1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vCheck1.setVisibility(View.VISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#000000"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-            }
-        });
-
-        tvCheck2 = (TextView)v.findViewById(R.id.shelterCheckTextView2);
-        tvCheck2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.VISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#000000"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-            }
-        });
-
-        tvCheck3 = (TextView)v.findViewById(R.id.shelterCheckTextView3);
-        tvCheck3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.VISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#000000"));
             }
         });
     }

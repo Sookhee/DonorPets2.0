@@ -7,6 +7,7 @@ public class StoryData {
     public String mainImg;
     public String date;
     public String shelterPosition;
+    public String storyPosition;
 
 
     public StoryData() {
@@ -59,5 +60,13 @@ public class StoryData {
 
     public void setShelterPosition(String shelterPosition) {
         this.shelterPosition = shelterPosition;
+    }
+
+    public String getStoryPosition() {
+        return storyPosition;
+    }
+
+    public void setStoryPosition(String storyPosition) {
+        this.storyPosition = storyPosition;
     }
 }
