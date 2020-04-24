@@ -8,7 +8,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/donationButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -45,34 +47,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/shelter_background" />
-
-                <TextView
-                    android:id="@+id/shelterNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="9.5sp"
-                    android:text="도너츠 유기견 보호소"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shadow_view" />
-
-                <TextView
-                    android:id="@+id/shelterPhoneTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="4.5sp"
-                    android:text="010-0000-0000"
-                    android:textColor="@color/greyish"
-                    android:textSize="10sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shelterNameTextView" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -113,7 +87,7 @@
                             android:gravity="center"
                             android:includeFontPadding="false"
                             android:lineSpacingExtra="5sp"
-                            android:text="120"
+                            android:text="00"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -146,7 +120,7 @@
                             android:gravity="center"
                             android:includeFontPadding="false"
                             android:lineSpacingExtra="5sp"
-                            android:text="12"
+                            android:text="00"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -179,12 +153,40 @@
                             android:gravity="center"
                             android:includeFontPadding="false"
                             android:lineSpacingExtra="5sp"
-                            android:text="500"
+                            android:text="00"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/shelterPhoneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="4.5sp"
+                    android:text="010-0000-0000"
+                    android:textColor="@color/greyish"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shelterNameTextView" />
+
+                <TextView
+                    android:id="@+id/shelterNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="9.5sp"
+                    android:text="도너츠 유기견 보호소"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/shadow_view" />
 
                 <com.loopeer.shadow.ShadowView
                     android:id="@+id/shadow_view"
@@ -241,7 +243,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shelterStoryLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shelterDonationLayout">
@@ -274,6 +276,15 @@
                     android:textSize="12.5sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView7"
                     app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/shelterProfileRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView7" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -297,6 +308,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"
             app:srcCompat="@drawable/icon_back_white" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:srcCompat="@drawable/icon_shelter_like" />
 
         <TextView
             android:id="@+id/textView"

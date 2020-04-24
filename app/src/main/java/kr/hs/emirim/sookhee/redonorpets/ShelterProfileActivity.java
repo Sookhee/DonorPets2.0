@@ -1,7 +1,10 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -29,10 +34,16 @@ public class ShelterProfileActivity extends AppCompatActivity {
     ImageView ivShelterImg;
     Button btnDonation;
 
+    RecyclerView recyclerView;
+    LinearLayoutManager mLayoutManager;
+    StoryAdapter adapter;
+
 
     // Firebase
     private FirebaseDatabase FirebaseDatabase;
     private DatabaseReference shelterDatabaseReference;
+    private DatabaseReference storyDatabaseReference = FirebaseDatabase.getInstance().getReference().child("story");
+    Query storyQuery;
 
     //
     private String shelterPosition;
@@ -76,6 +87,50 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView = (RecyclerView)findViewById(R.id.shelterProfileRecyclerView);
+        storyQuery = storyDatabaseReference.orderByChild("shelterPosition").equalTo(shelterPosition).limitToLast(2);
+        storyQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String key = dataSnapshot.getKey();
+                StoryData story = dataSnapshot.getValue(StoryData.class);
+
+                adapter.addDataAndUpdate(key, story);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String key = dataSnapshot.getKey();
+                StoryData story = dataSnapshot.getValue(StoryData.class);
+
+                adapter.addDataAndUpdate(key, story);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                adapter.deleteDataAndUpdate(key);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        adapter = new StoryAdapter(this);
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+
+
         btnDonation = findViewById(R.id.donationButton);
         btnDonation.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -90,6 +145,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setDonationObject(){
         donationObject.add(new DonationObjectData("사료", 20));
         donationObject.add(new DonationObjectData("간식", 10));

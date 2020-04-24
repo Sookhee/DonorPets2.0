@@ -97,6 +97,7 @@ public class DonationActivity extends AppCompatActivity {
             }
         });
 
+        // 기부물품 선택 Chip 생성
         ChipGroup chipGroup = findViewById(R.id.donationObjectGroup);
         for(int i = 0; i < donationObject.size(); i++){
             final Chip chip = new Chip(this); // Must contain context in parameter
@@ -109,11 +110,11 @@ public class DonationActivity extends AppCompatActivity {
             chip.setHeight((int)dm.density*70);
             chip.setChipStartPadding(dm.density*9);
             if(donationObject.get(i).getIsDonation()){
-                chip.setChipIcon(getResources().getDrawable(R.drawable.icon_shelter));
+                chip.setChipIcon(getResources().getDrawable(R.drawable.icon_check_true));
                 chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.deep_sky_blue)));
                 setTotalPoint(donationObject.get(i).getPoint(), true);
             }else{
-                chip.setChipIcon(getResources().getDrawable(R.drawable.icon_add));
+                chip.setChipIcon(getResources().getDrawable(R.drawable.icon_check_false));
                 chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.greyish)));
             }
             chip.setTextColor(getResources().getColor(R.color.white));
@@ -129,7 +130,7 @@ public class DonationActivity extends AppCompatActivity {
                         donationObject.get(tag).setIsDonation(true);
                         realDonationList.add(donationObject.get(tag).getObject());
                         realDonationObjectList.add(new DonationObjectData(donationObject.get(tag).getObject(), donationObject.get(tag).getPoint(), true));
-                        chip.setChipIcon(getResources().getDrawable(R.drawable.icon_shelter));
+                        chip.setChipIcon(getResources().getDrawable(R.drawable.icon_check_true));
                         chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(v.getContext(), R.color.deep_sky_blue)));
                         setTotalPoint(donationObject.get(tag).getPoint(), true);
                         resetList();
@@ -139,7 +140,7 @@ public class DonationActivity extends AppCompatActivity {
                         donationObject.get(tag).setCount(1);
                         realDonationObjectList.remove(realDonationList.indexOf(donationObject.get(tag).getObject()));
                         realDonationList.remove(donationObject.get(tag).getObject());
-                        chip.setChipIcon(getResources().getDrawable(R.drawable.icon_add));
+                        chip.setChipIcon(getResources().getDrawable(R.drawable.icon_check_false));
                         chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(v.getContext(), R.color.greyish)));
                         resetList();
                     }
@@ -156,6 +157,7 @@ public class DonationActivity extends AppCompatActivity {
         mAdapter = new DonationAdapter(this, realDonationObjectList);
         recyclerView.setAdapter(mAdapter);
 
+        // 약관 동의
         ivCheck1=(ImageView)findViewById(R.id.checkImg1);
         ivCheck2=(ImageView)findViewById(R.id.checkImg2);
         ivCheck3=(ImageView)findViewById(R.id.checkImg3);
@@ -239,12 +241,14 @@ public class DonationActivity extends AppCompatActivity {
             }
         });
 
+        // 기부 폼 제출
         btnSubmit = (Button)findViewById(R.id.submitButton);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkTerms[1] == true && checkTerms[2] && totalPoint > 0){
                     Toast.makeText(getApplicationContext(), "제출", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else if(totalPoint == 0){
                     Toast.makeText(getApplicationContext(), "기부할 항목을 선택해주세요", Toast.LENGTH_SHORT).show();
