@@ -86,7 +86,7 @@
                     app:srcCompat="@drawable/icon_chat" />
 
                 <TextView
-                    android:id="@+id/storyChatCountTextView"
+                    android:id="@+id/storyCommentCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"

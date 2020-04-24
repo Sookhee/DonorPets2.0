@@ -49,6 +49,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
         holder.tvTitle.setText(story.getTitle());
         holder.tvShelter.setText(story.getShelterName());
+        holder.tvLikeCount.setText(Integer.toString(story.getLikeCount()));
+        holder.tvCommentCount.setText(Integer.toString(story.getCommentCount()));
         Picasso.get().load(img).into(holder.ivMainImg);
 
     }
@@ -62,6 +64,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
         TextView tvTitle;
         TextView tvShelter;
+        TextView tvLikeCount;
+        TextView tvCommentCount;
         ImageView ivMainImg;
         public View pView;
 
@@ -71,6 +75,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
             this.pView = itemView;
             tvTitle = itemView.findViewById(R.id.storyTitle);
             tvShelter = itemView.findViewById(R.id.storyShelter);
+            tvLikeCount = itemView.findViewById(R.id.storyLikeCountTextView);
+            tvCommentCount = itemView.findViewById(R.id.storyCommentCountTextView);
             ivMainImg = itemView.findViewById(R.id.storyMainImg);
 
             itemView.setOnClickListener(new View.OnClickListener(){

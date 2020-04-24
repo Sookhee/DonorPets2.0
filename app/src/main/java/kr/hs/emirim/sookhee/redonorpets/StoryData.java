@@ -8,17 +8,21 @@ public class StoryData {
     public String date;
     public String shelterPosition;
     public String storyPosition;
+    public int likeCount;
+    public int commentCount;
 
 
     public StoryData() {
     }
 
-    public StoryData(String title, String shelterName, String mainImg, String date, String shelterPosition) {
+    public StoryData(String title, String shelterName, String mainImg, String date, String shelterPosition, int likeCount, int commentCount) {
         this.title = title;
         this.shelterName = shelterName;
         this.mainImg = mainImg;
         this.date = date;
         this.shelterPosition = shelterPosition;
+        this.likeCount = likeCount;
+        this.commentCount = commentCount;
     }
 
 
@@ -68,5 +72,21 @@ public class StoryData {
 
     public void setStoryPosition(String storyPosition) {
         this.storyPosition = storyPosition;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
     }
 }
