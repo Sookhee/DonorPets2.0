@@ -4,10 +4,36 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory>
+        <Preference
+            android:title="비밀번호 변경">
+            <intent
+                android:action="android.intent.action.VIEW"/>
+        </Preference>
         <SwitchPreference
-            android:key="message"
+            android:key="app_message"
             android:defaultValue="false"
-            android:title="메시지 알림"/>
+            android:title="앱 알림받기"/>
+        <SwitchPreference
+            android:key="shelter_message"
+            android:defaultValue="false"
+            android:title="후원한 보호소 알림 받기" />
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+        <Preference
+            android:title="이용약관 보기" >
+            <intent
+                android:action="android.intent.action.VIEW"/>
+        </Preference>
+        <Preference
+            android:title="탈퇴하기">
+            <intent
+                android:action="android.intent.action.VIEW"/>
+        </Preference>
+        <Preference
+            android:title="로그아웃"
+            android:key="logout"
+            android:id="@+id/logout" />
     </PreferenceCategory>
 
 </PreferenceScreen>
