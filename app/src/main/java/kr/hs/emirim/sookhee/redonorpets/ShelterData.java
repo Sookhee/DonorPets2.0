@@ -5,16 +5,18 @@ public class ShelterData {
     public String phone;
     public String profileImg;
     public String shelterPosition;
+    public int storyCount;
 
     public ShelterData(){
 
     }
 
-    public ShelterData(String name, String phone, String profileImg, String shelterPosition){
+    public ShelterData(String name, String phone, String profileImg, String shelterPosition, int storyCount){
         this.name = name;
         this.phone = phone;
         this.profileImg = profileImg;
         this.shelterPosition = shelterPosition;
+        this.storyCount = storyCount;
     }
 
     public String getName() {
@@ -47,6 +49,14 @@ public class ShelterData {
 
     public void setShelterPosition(String shelterPosition) {
         this.shelterPosition = shelterPosition;
+    }
+
+    public int getStoryCount(){
+        return storyCount;
+    }
+
+    public void setStoryCount(int storyCount){
+        this.storyCount = storyCount;
     }
 
 

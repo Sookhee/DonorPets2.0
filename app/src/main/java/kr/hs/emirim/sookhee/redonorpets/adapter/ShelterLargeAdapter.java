@@ -1,4 +1,4 @@
-package kr.hs.emirim.sookhee.redonorpets;
+package kr.hs.emirim.sookhee.redonorpets.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +16,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomViewHolder> {
+import kr.hs.emirim.sookhee.redonorpets.R;
+import kr.hs.emirim.sookhee.redonorpets.ShelterData;
+import kr.hs.emirim.sookhee.redonorpets.ShelterProfileActivity;
+
+public class ShelterLargeAdapter extends RecyclerView.Adapter<ShelterLargeAdapter.CustomViewHolder> {
 
     private Context mCtx;
     private HashMap<String, ShelterData> mData;
     private ArrayList<String> shelterPosition = new ArrayList<>();
 
-    public ShelterAdapter(Context mCtx) {
+    public ShelterLargeAdapter(Context mCtx) {
         this.mCtx = mCtx;
         mData = new HashMap<>();
     }
@@ -31,7 +34,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomVi
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mCtx).inflate(R.layout.shelter_item, parent, false);
+        View v = LayoutInflater.from(mCtx).inflate(R.layout.shelter_item_large, parent, false);
 
 
         return new CustomViewHolder(v);
@@ -45,7 +48,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomVi
         holder.shelterPositionInAdpater = shelter.getShelterPosition();
 
         holder.tvShelterName.setText(shelter.getName());
-        holder.tvShelterPhone.setText(shelter.getPhone());
+        holder.tvShelterStoryCount.setText(shelter.getStoryCount() + "개의 스토리");
         Picasso.get().load(img).into(holder.ivShelterProfile);
     }
 
@@ -57,7 +60,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomVi
     class CustomViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvShelterName;
-        TextView tvShelterPhone;
+        TextView tvShelterStoryCount;
         ImageView ivShelterProfile;
         View pView;
         String shelterPositionInAdpater;
@@ -68,7 +71,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomVi
 
             pView = itemView;
             tvShelterName = itemView.findViewById(R.id.shelterNameTextView);
-            tvShelterPhone = itemView.findViewById(R.id.shelterPhoneTextView);
+            tvShelterStoryCount = itemView.findViewById(R.id.shelterStoryCountTextView);
             ivShelterProfile = itemView.findViewById(R.id.shelterProfileImageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {

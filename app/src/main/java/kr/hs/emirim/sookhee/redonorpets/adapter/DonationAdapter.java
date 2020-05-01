@@ -1,4 +1,4 @@
-package kr.hs.emirim.sookhee.redonorpets;
+package kr.hs.emirim.sookhee.redonorpets.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.IntegerRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import kr.hs.emirim.sookhee.redonorpets.DonationActivity;
+import kr.hs.emirim.sookhee.redonorpets.DonationObjectData;
+import kr.hs.emirim.sookhee.redonorpets.R;
 
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHolder> {
 

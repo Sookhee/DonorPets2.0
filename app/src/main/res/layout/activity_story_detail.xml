@@ -55,60 +55,10 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story_infomation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
-
-                <TextView
-                    android:id="@+id/dateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosanscjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="6sp"
-                    android:text="2020.00.00"
-                    android:textColor="@color/greyish"
-                    android:textSize="12.5sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/titleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:text="도너츠 보호소에\n많은 기부 감사합니다!"
-                    android:textColor="@color/black"
-                    android:textSize="26sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shelter_infomation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/shelterNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosanscjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="6sp"
-                    android:onClick="onShelterProfileClick"
-                    android:text="도너츠 유기견 보호소"
-                    android:textColor="@color/black"
-                    android:textSize="12.5sp"
-                    app:layout_constraintEnd_toStartOf="@+id/shadow_view"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.loopeer.shadow.ShadowView
                     android:id="@+id/shadow_view"
@@ -118,12 +68,12 @@
                     android:onClick="onShelterProfileClick"
                     app:cornerRadius="80dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shadowColor="#26000000"
                     app:shadowDy="2"
                     app:shadowMarginBottom="15dp"
-                    app:shadowMarginLeft="7.5dp"
+                    app:shadowMarginLeft="15dp"
                     app:shadowMarginRight="15dp"
                     app:shadowMarginTop="15dp"
                     app:shadowRadius="6dp">
@@ -137,19 +87,82 @@
                 </com.loopeer.shadow.ShadowView>
 
                 <TextView
-                    android:id="@+id/shelterPhoneTextView"
+                    android:id="@+id/shelterNameTextView"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="6sp"
+                    android:onClick="onShelterProfileClick"
+                    android:text="도너츠 유기견 보호소"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@+id/shadow_view"
+                    app:layout_constraintTop_toTopOf="@+id/shadow_view" />
+
+                <TextView
+                    android:id="@+id/dateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="18dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
-                    android:lineSpacingExtra="5.5sp"
-                    android:text="010-0000-0000"
-                    android:textColor="@color/black"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/shadow_view" />
+                    android:lineSpacingExtra="6sp"
+                    android:text="2020.00.00"
+                    android:textColor="@color/greyish"
+                    android:textSize="8sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/shadow_view"
+                    app:layout_constraintStart_toEndOf="@+id/shadow_view" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="도너츠 보호소에\n많은 기부 감사합니다!"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <LinearLayout
+                android:id="@+id/storyContentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical"></LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/storyLkeButton"
+                    android:layout_width="16dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon_story_like" />
+
+                <TextView
+                    android:id="@+id/storyLikeCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="3000명이 응원합니다!"
+                    app:layout_constraintBottom_toBottomOf="@id/storyLkeButton"
+                    app:layout_constraintStart_toEndOf="@+id/storyLkeButton"
+                    app:layout_constraintTop_toTopOf="@id/storyLkeButton" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

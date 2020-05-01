@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterAdapter;
+import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterLargeAdapter;
+
 public class FragmentShelter extends Fragment {
     View shelterView;
     Context context = getContext();
@@ -28,8 +32,8 @@ public class FragmentShelter extends Fragment {
     View vCheck1, vCheck2, vCheck3;
 
     RecyclerView recyclerView;
-    LinearLayoutManager mLayoutManager;
-    ShelterAdapter adapter;
+    GridLayoutManager mLayoutManager;
+    ShelterLargeAdapter adapter;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference().child("shelter");
@@ -62,7 +66,7 @@ public class FragmentShelter extends Fragment {
                 vCheck1.setVisibility(View.VISIBLE);
                 vCheck2.setVisibility(View.INVISIBLE);
                 vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#000000"));
+                tvCheck1.setTextColor(Color.parseColor("#137ef5"));
                 tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
                 tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
                 shelterQuery = mRef;
@@ -78,7 +82,7 @@ public class FragmentShelter extends Fragment {
                 vCheck2.setVisibility(View.VISIBLE);
                 vCheck3.setVisibility(View.INVISIBLE);
                 tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#000000"));
+                tvCheck2.setTextColor(Color.parseColor("#137ef5"));
                 tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
                 shelterQuery = mRef.orderByChild("region").equalTo("수도권");
                 resetShelterRecyclerView(shelterView);
@@ -95,7 +99,7 @@ public class FragmentShelter extends Fragment {
                 vCheck3.setVisibility(View.VISIBLE);
                 tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
                 tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#000000"));
+                tvCheck3.setTextColor(Color.parseColor("#137ef5"));
                 shelterQuery = mRef.orderByChild("region").equalTo("강원도");
                 resetShelterRecyclerView(shelterView);
 
@@ -104,8 +108,8 @@ public class FragmentShelter extends Fragment {
     }
 
     public void resetShelterRecyclerView(View view) {
-        adapter = new ShelterAdapter(getActivity());
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        adapter = new ShelterLargeAdapter(getActivity());
+        mLayoutManager = new GridLayoutManager(getActivity(), 2);
 //        mLayoutManager.setReverseLayout(true);
 //        mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
