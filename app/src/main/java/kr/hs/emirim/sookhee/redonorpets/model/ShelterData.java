@@ -1,4 +1,4 @@
-package kr.hs.emirim.sookhee.redonorpets;
+package kr.hs.emirim.sookhee.redonorpets.model;
 
 public class ShelterData {
     public String name;

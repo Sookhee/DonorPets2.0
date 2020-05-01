@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class FragmentHome extends Fragment {
     View homeView;

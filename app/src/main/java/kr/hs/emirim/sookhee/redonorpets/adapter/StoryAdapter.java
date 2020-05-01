@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.hs.emirim.sookhee.redonorpets.R;
-import kr.hs.emirim.sookhee.redonorpets.StoryData;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 import kr.hs.emirim.sookhee.redonorpets.StoryDetailActivity;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHolder> {

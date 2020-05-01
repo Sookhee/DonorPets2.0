@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.hs.emirim.sookhee.redonorpets.R;
-import kr.hs.emirim.sookhee.redonorpets.ShelterData;
+import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 import kr.hs.emirim.sookhee.redonorpets.ShelterProfileActivity;
 
 public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomViewHolder> {

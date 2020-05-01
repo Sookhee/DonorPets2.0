@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -22,8 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterLargeAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 
 public class FragmentShelter extends Fragment {
     View shelterView;

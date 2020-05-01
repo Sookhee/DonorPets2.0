@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
 
 public class DonationActivity extends AppCompatActivity {
     public static Context mContext;

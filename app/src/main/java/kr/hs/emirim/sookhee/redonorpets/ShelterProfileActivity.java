@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -24,9 +27,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
+import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterDonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class ShelterProfileActivity extends AppCompatActivity {
+    public static Context mContext;
+
     TextView tvShelterName;
     TextView tvPhone;
     TextView tvStoryCount;
@@ -38,6 +47,9 @@ public class ShelterProfileActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     StoryAdapter adapter;
+
+    RecyclerView donationRecyclerView;
+    ShelterDonationAdapter donationAdapter;
 
 
     // Firebase
@@ -57,8 +69,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_profile);
 
-        setDonationObject();
-
+        mContext = this;
         Intent intent = getIntent();
         shelterPosition = intent.getExtras().getString("shelterPosition");
 
@@ -124,6 +135,23 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        donationRecyclerView = (RecyclerView)findViewById(R.id.shelterDonationObjectRecyclerView);
+        FirebaseDatabase.getReference("shelter").child(shelterPosition).child("donationObject").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DonationObjectData object = snapshot.getValue(DonationObjectData.class);
+                    donationObject.add(object);
+                }
+                setDonationObject();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         adapter = new StoryAdapter(this);
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setReverseLayout(true);
@@ -148,24 +176,24 @@ public class ShelterProfileActivity extends AppCompatActivity {
     }
 
     private void setDonationObject(){
-        donationObject.add(new DonationObjectData("사료", 20));
-        donationObject.add(new DonationObjectData("간식", 10));
-        donationObject.add(new DonationObjectData("수건", 5));
-        donationObject.add(new DonationObjectData("휴지", 5));
-        donationObject.add(new DonationObjectData("이불", 30));
 
+        Log.e("CHECK", "들어옴!");
+        donationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        donationAdapter = new ShelterDonationAdapter(this, donationObject);
+        donationRecyclerView.setAdapter(donationAdapter);
+    }
 
-        realDonationObjectList.add(new DonationObjectData("사료", 20,true));
-        realDonationObjectList.add(new DonationObjectData("수건", 5, true));
-        realDonationObjectList.add(new DonationObjectData("휴지", 5, true));
+    public void addRealDonationObjectList(String object, int point, int tag){
+        realDonationObjectList.add(new DonationObjectData(object, point,true));
+        realDonationList.add(object);
+        donationObject.get(tag).setIsDonation(true);
+    }
 
-        realDonationList.add("사료");
-        realDonationList.add("수건");
-        realDonationList.add("휴지");
-
-        donationObject.get(0).setIsDonation(true);
-        donationObject.get(2).setIsDonation(true);
-        donationObject.get(3).setIsDonation(true);
+    public void removeRealDonationObjectList(String object, int tag){
+        int index = realDonationList.indexOf(object);
+        realDonationObjectList.remove(index);
+        realDonationList.remove(index);
+        donationObject.get(tag).setIsDonation(false);
     }
 
     public void onBackClick(View v){

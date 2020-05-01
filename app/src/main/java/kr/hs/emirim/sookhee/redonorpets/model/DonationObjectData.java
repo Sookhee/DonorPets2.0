@@ -1,23 +1,23 @@
-package kr.hs.emirim.sookhee.redonorpets;
+package kr.hs.emirim.sookhee.redonorpets.model;
 
 import java.io.Serializable;
-
-import kotlin.properties.ReadOnlyProperty;
 
 public class DonationObjectData implements Serializable {
     private String object;
     private boolean isDonation;
     private int point;
     private int count;
+    private String img;
 
     public DonationObjectData() {
     }
 
-    public DonationObjectData(String object, int point) {
+    public DonationObjectData(String object, int point, String img) {
         this.object = object;
         this.isDonation = false;
         this.point = point;
         this.count = 1;
+        this.img = img;
     }
 
     public DonationObjectData(String object, int point, boolean isDonation) {
@@ -25,6 +25,7 @@ public class DonationObjectData implements Serializable {
         this.isDonation = isDonation;
         this.point = point;
         this.count = 1;
+        this.img = null;
     }
 
 
@@ -32,8 +33,16 @@ public class DonationObjectData implements Serializable {
         return object;
     }
 
-    public void getObject(String object) {
+    public void setObject(String object) {
         this.object = object;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public boolean getIsDonation() {

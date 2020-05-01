@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import kr.hs.emirim.sookhee.redonorpets.DonationActivity;
-import kr.hs.emirim.sookhee.redonorpets.DonationObjectData;
+import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
 import kr.hs.emirim.sookhee.redonorpets.R;
 
 public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHolder> {
