@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Preference
+        android:title="비밀번호 변경">
+        <intent
+            android:action="android.intent.action.VIEW" />
+    </Preference>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="app_message"
+        android:title="앱 알림받기" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="shelter_message"
+        android:title="후원한 보호소 알림 받기" />
+
+    <PreferenceCategory>
+        <Preference
+            android:title="이용약관 보기" >
+            <intent
+                android:action="android.intent.action.VIEW"/>
+        </Preference>
+        <Preference
+            android:title="탈퇴하기">
+            <intent
+                android:action="android.intent.action.VIEW"/>
+        </Preference>
+        <Preference
+            android:title="로그아웃"
+            android:key="logout"
+            android:id="@+id/logout" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
