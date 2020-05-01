@@ -23,6 +23,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="3.5sp" />
 
+    <TextView
+        android:id="@+id/pointTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="50p"
+        android:textColor="@color/greyish"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/objectNameTextView"
+        app:layout_constraintStart_toEndOf="@+id/objectNameTextView"
+        app:layout_constraintTop_toTopOf="@+id/objectNameTextView" />
+
     <EditText
         android:id="@+id/countObjectTextView"
         android:layout_width="40dp"

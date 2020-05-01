@@ -41,6 +41,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
         int count = d.getCount();
 
         holder.tvObjectName.setText(d.getObject());
+        holder.tvObjectPoint.setText(d.getPoint() + "p");
         holder.tvCountObject.setText(Integer.toString(d.getCount()));
 
     }
@@ -53,6 +54,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView tvObjectName;
+        public TextView tvObjectPoint;
         public EditText tvCountObject;
         public Button btnAdd;
         public Button btnMinus;
@@ -63,6 +65,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
 
             pView = itemView;
             tvObjectName = (TextView) itemView.findViewById(R.id.objectNameTextView);
+            tvObjectPoint = (TextView) itemView.findViewById(R.id.pointTextView);
             tvCountObject =  (EditText) itemView.findViewById(R.id.countObjectTextView);
             btnAdd = (Button) itemView.findViewById(R.id.addObjectCountButton);
             btnAdd.setOnClickListener(new View.OnClickListener(){
@@ -81,7 +84,6 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
                     if(count > 1) {
                         setCountInAdapter(pView, count-1);
                         ((DonationActivity)DonationActivity.mContext).setTotalPoint(getPointInAdpater(pView), false);
-
                     }
                 }
             });

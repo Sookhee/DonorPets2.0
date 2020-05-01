@@ -49,6 +49,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
     StoryAdapter adapter;
 
     RecyclerView donationRecyclerView;
+    LinearLayoutManager donationLayoutManager;
     ShelterDonationAdapter donationAdapter;
 
 
@@ -177,9 +178,11 @@ public class ShelterProfileActivity extends AppCompatActivity {
 
     private void setDonationObject(){
 
-        Log.e("CHECK", "들어옴!");
-        donationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         donationAdapter = new ShelterDonationAdapter(this, donationObject);
+        donationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        donationRecyclerView.setLayoutManager(donationLayoutManager);
+        donationLayoutManager.setReverseLayout(true);
+        donationLayoutManager.setStackFromEnd(true);
         donationRecyclerView.setAdapter(donationAdapter);
     }
 

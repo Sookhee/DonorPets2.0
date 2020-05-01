@@ -43,18 +43,23 @@
 
     <com.loopeer.shadow.ShadowView
         android:id="@+id/shelterDonationObjectCheckImageView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:visibility="invisible"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="#26000000"
+        app:shadowMargin="5dp"
+        app:shadowRadius="6dp">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/icon_add" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/icon_check_true" />
 
     </com.loopeer.shadow.ShadowView>
 

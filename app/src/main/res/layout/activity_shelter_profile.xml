@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ShelterProfileActivity">
+
+    <Button
+        android:id="@+id/donationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/deep_sky_blue"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:lineSpacingExtra="7.5sp"
+        android:text="이 보호소에 기부하기"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -264,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="8.5sp"
@@ -273,20 +288,6 @@
                     android:textSize="17.5sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:fontFamily="@font/notosanscjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="6sp"
-                    android:text="모두 보기"
-                    android:textColor="#818183"
-                    android:textSize="12.5sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/shelterProfileRecyclerView"
@@ -343,19 +344,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/donationButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/deep_sky_blue"
-        android:fontFamily="@font/notosanscjkkr_medium"
-        android:lineSpacingExtra="7.5sp"
-        android:text="이 보호소에 기부하기"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
