@@ -1,12 +1,20 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,6 +80,37 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
+        storyDatabaseReference.child("text").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String text = postSnapshot.getValue(String.class);
+                    storyTextList.add(text);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        storyDatabaseReference.child("img").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String img = postSnapshot.getValue(String.class);
+                    storyImgList.add(img);
+                }
+                setStoryContentLayout(0, 0);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         shelterDatabaseReference = FirebaseDatabase.getReference("shelter").child(shelterPosition);
         shelterDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -102,5 +141,37 @@ public class StoryDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setStoryContentLayout(int text, int img){
+        lStoryContent.removeAllViews();
+        do{
+            Log.e( "들어옴", "" + this.storyTextList.size() + " " + this.storyImgList.size());
+            if(text < storyTextList.size()){
+                TextView tv = new TextView(this);
+                tv.setText(storyTextList.get(text));
+                tv.setLineSpacing(0, 1.1f);
+                tv.setPadding(0, (int)convertDpToPixel(15), 0, 0);
+                tv.setTypeface(ResourcesCompat.getFont(this, R.font.notosanscjkkr_regular));
+                tv.setIncludeFontPadding(false);
+                tv.setTextColor(Color.BLACK);
+                lStoryContent.addView(tv);
+            }
+            if(img < storyImgList.size()){
+                ImageView iv = new ImageView(this);
+                Picasso.get().load(storyImgList.get(img)).into(iv);
+                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                iv.setPadding(0, (int)convertDpToPixel(15), 0, 0);
+                lStoryContent.addView(iv);
+            }
+            text++;
+            img++;
+        }while(text < storyTextList.size() || img < storyImgList.size());
     }
+
+    public float convertDpToPixel(float dp){
+        Resources resources = this.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
+    }
+
 }

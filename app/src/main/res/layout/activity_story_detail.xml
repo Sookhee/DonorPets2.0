@@ -97,7 +97,7 @@
                     android:onClick="onShelterProfileClick"
                     android:text="도너츠 유기견 보호소"
                     android:textColor="@color/black"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     app:layout_constraintStart_toEndOf="@+id/shadow_view"
                     app:layout_constraintTop_toTopOf="@+id/shadow_view" />
 
@@ -105,13 +105,13 @@
                     android:id="@+id/dateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
+                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
-                    android:lineSpacingExtra="6sp"
+                    android:lineSpacingExtra="4.5sp"
                     android:text="2020.00.00"
                     android:textColor="@color/greyish"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@+id/shadow_view"
                     app:layout_constraintStart_toEndOf="@+id/shadow_view" />
 
@@ -128,6 +128,15 @@
                 android:text="도너츠 보호소에\n많은 기부 감사합니다!"
                 android:textColor="@color/black"
                 android:textSize="26sp" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/greyish" />
 
             <LinearLayout
                 android:id="@+id/storyContentLayout"
