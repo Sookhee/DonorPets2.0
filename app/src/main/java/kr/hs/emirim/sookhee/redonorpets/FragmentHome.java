@@ -34,6 +34,8 @@ public class FragmentHome extends Fragment {
     LinearLayoutManager mLayoutManager;
     StoryAdapter adapter;
 
+    private int checkView = 1;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference().child("story");
     Query storyQuery = mRef;
@@ -64,15 +66,8 @@ public class FragmentHome extends Fragment {
         tvCheck1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.VISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#000000"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-                storyQuery = mRef;
-                resetStoryRecyclerView(homeView);
-
+                setView1();
+                checkView = 1;
             }
         });
 
@@ -80,14 +75,8 @@ public class FragmentHome extends Fragment {
         tvCheck2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.VISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#000000"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-                storyQuery = mRef.orderByChild("region").equalTo("수도권");
-                resetStoryRecyclerView(homeView);
+                setView2();
+                checkView = 2;
             }
         });
 
@@ -95,16 +84,21 @@ public class FragmentHome extends Fragment {
         tvCheck3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.VISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#000000"));
-                storyQuery = mRef.orderByChild("region").equalTo("강원도");
-                resetStoryRecyclerView(homeView);
+                setView3();
+                checkView = 3;
             }
         });
+
+        if(checkView == 1){
+            setView1();
+        }
+        else if(checkView == 2){
+            setView2();
+        }
+        else if(checkView == 3){
+            setView3();
+        }
+
     }
 
     public void resetStoryRecyclerView(View view){
@@ -151,5 +145,37 @@ public class FragmentHome extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    private void setView1(){
+        vCheck1.setVisibility(View.VISIBLE);
+        vCheck2.setVisibility(View.INVISIBLE);
+        vCheck3.setVisibility(View.INVISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#000000"));
+        tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+        storyQuery = mRef;
+        resetStoryRecyclerView(homeView);
+    }
+
+    private void setView2(){
+        vCheck1.setVisibility(View.INVISIBLE);
+        vCheck2.setVisibility(View.VISIBLE);
+        vCheck3.setVisibility(View.INVISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck2.setTextColor(Color.parseColor("#000000"));
+        tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+        storyQuery = mRef.orderByChild("region").equalTo("수도권");
+        resetStoryRecyclerView(homeView);
+    }
+
+    private void setView3(){
+        vCheck1.setVisibility(View.INVISIBLE);
+        vCheck2.setVisibility(View.INVISIBLE);
+        vCheck3.setVisibility(View.VISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck3.setTextColor(Color.parseColor("#000000"));
+        storyQuery = mRef.orderByChild("region").equalTo("강원도");
+        resetStoryRecyclerView(homeView);
+    }
 
 }

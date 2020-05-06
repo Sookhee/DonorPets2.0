@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class FragmentShelter extends Fragment {
     GridLayoutManager mLayoutManager;
     ShelterLargeAdapter adapter;
 
+    private int checkView = 1;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference().child("shelter");
     Query shelterQuery = mRef;
@@ -51,7 +54,6 @@ public class FragmentShelter extends Fragment {
         this.shelterView = view;
 
         recyclerView = (RecyclerView)shelterView.findViewById(R.id.shelterRecyclerView);
-
         resetShelterRecyclerView(shelterView);
 
         vCheck1 = shelterView.findViewById(R.id.shelterCheckView1);
@@ -62,14 +64,8 @@ public class FragmentShelter extends Fragment {
         tvCheck1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.VISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#137ef5"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-                shelterQuery = mRef;
-                resetShelterRecyclerView(shelterView);
+                setView1();
+                checkView = 1;
             }
         });
 
@@ -77,15 +73,8 @@ public class FragmentShelter extends Fragment {
         tvCheck2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.VISIBLE);
-                vCheck3.setVisibility(View.INVISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#137ef5"));
-                tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
-                shelterQuery = mRef.orderByChild("region").equalTo("수도권");
-                resetShelterRecyclerView(shelterView);
-
+                setView2();
+                checkView = 2;
             }
         });
 
@@ -93,18 +82,22 @@ public class FragmentShelter extends Fragment {
         tvCheck3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vCheck1.setVisibility(View.INVISIBLE);
-                vCheck2.setVisibility(View.INVISIBLE);
-                vCheck3.setVisibility(View.VISIBLE);
-                tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
-                tvCheck3.setTextColor(Color.parseColor("#137ef5"));
-                shelterQuery = mRef.orderByChild("region").equalTo("강원도");
-                resetShelterRecyclerView(shelterView);
-
+                setView3();
+                checkView = 3;
             }
         });
+
+        if(checkView == 1){
+            setView1();
+        }
+        else if(checkView == 2){
+            setView2();
+        }
+        else if(checkView == 3){
+            setView3();
+        }
     }
+
 
     public void resetShelterRecyclerView(View view) {
         adapter = new ShelterLargeAdapter(getActivity());
@@ -147,5 +140,38 @@ public class FragmentShelter extends Fragment {
 
             }
         });
+    }
+
+    private void setView1(){
+        vCheck1.setVisibility(View.VISIBLE);
+        vCheck2.setVisibility(View.INVISIBLE);
+        vCheck3.setVisibility(View.INVISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#137ef5"));
+        tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+        shelterQuery = mRef;
+        resetShelterRecyclerView(shelterView);
+    }
+
+    private void setView2(){
+        vCheck1.setVisibility(View.INVISIBLE);
+        vCheck2.setVisibility(View.VISIBLE);
+        vCheck3.setVisibility(View.INVISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck2.setTextColor(Color.parseColor("#137ef5"));
+        tvCheck3.setTextColor(Color.parseColor("#b4b4b4"));
+        shelterQuery = mRef.orderByChild("region").equalTo("수도권");
+        resetShelterRecyclerView(shelterView);
+    }
+
+    private void setView3(){
+        vCheck1.setVisibility(View.INVISIBLE);
+        vCheck2.setVisibility(View.INVISIBLE);
+        vCheck3.setVisibility(View.VISIBLE);
+        tvCheck1.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck2.setTextColor(Color.parseColor("#b4b4b4"));
+        tvCheck3.setTextColor(Color.parseColor("#137ef5"));
+        shelterQuery = mRef.orderByChild("region").equalTo("강원도");
+        resetShelterRecyclerView(shelterView);
     }
 }
