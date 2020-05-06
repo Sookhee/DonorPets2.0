@@ -15,14 +15,14 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 
 import kr.hs.emirim.sookhee.redonorpets.R;
-import kr.hs.emirim.sookhee.redonorpets.model.ChatData;
+import kr.hs.emirim.sookhee.redonorpets.model.CommentData;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.CustomViewHolder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CustomViewHolder> {
 
     private Context mCtx;
-    private HashMap<String, ChatData> mData;
+    private HashMap<String, CommentData> mData;
 
-    public ChatAdapter(Context mCtx) {
+    public CommentAdapter(Context mCtx) {
         this.mCtx = mCtx;
         mData = new HashMap<>();
     }
@@ -30,14 +30,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.CustomViewHold
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mCtx).inflate(R.layout.chat_item, parent, false);
+        View v = LayoutInflater.from(mCtx).inflate(R.layout.comment_item, parent, false);
 
         return new CustomViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
-        ChatData chat = (ChatData) mData.values().toArray()[position];
+        CommentData chat = (CommentData) mData.values().toArray()[position];
 
         String img = chat.getImg();
 
@@ -63,16 +63,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.CustomViewHold
             super(itemView);
 
             this.pView = itemView;
-            tvName = itemView.findViewById(R.id.chatNameTextView);
-            tvContent = itemView.findViewById(R.id.chatContentTextView);
-            ivProfile = itemView.findViewById(R.id.chatProfileImageView);
+            tvName = itemView.findViewById(R.id.commentNameTextView);
+            tvContent = itemView.findViewById(R.id.commentContentTextView);
+            ivProfile = itemView.findViewById(R.id.commentProfileImageView);
 
         }
 
     }
 
 
-    public void addDataAndUpdate(String key, ChatData p){
+    public void addDataAndUpdate(String key, CommentData p){
         mData.put(key, p);
         notifyDataSetChanged();
     }

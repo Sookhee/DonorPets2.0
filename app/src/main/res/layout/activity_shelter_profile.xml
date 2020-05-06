@@ -329,7 +329,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView"
-            app:srcCompat="@drawable/icon_shelter_like" />
+            app:srcCompat="@drawable/icon_like_white" />
 
         <TextView
             android:id="@+id/textView"

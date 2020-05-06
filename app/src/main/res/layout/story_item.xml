@@ -80,8 +80,8 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="10dp"
-                    android:layout_height="9dp"
+                    android:layout_width="12dp"
+                    android:layout_height="11dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/icon_chat" />
 
@@ -99,11 +99,11 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="10dp"
-                    android:layout_height="9dp"
+                    android:layout_width="12dp"
+                    android:layout_height="11dp"
                     android:layout_marginLeft="11dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/icon_heart" />
+                    app:srcCompat="@drawable/icon_like_story" />
 
                 <TextView
                     android:id="@+id/storyLikeCountTextView"

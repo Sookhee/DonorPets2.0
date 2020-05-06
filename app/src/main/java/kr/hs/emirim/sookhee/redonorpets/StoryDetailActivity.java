@@ -2,7 +2,6 @@ package kr.hs.emirim.sookhee.redonorpets;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,15 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,26 +30,28 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import kr.hs.emirim.sookhee.redonorpets.adapter.ChatAdapter;
-import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
-import kr.hs.emirim.sookhee.redonorpets.model.ChatData;
-import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
+import kr.hs.emirim.sookhee.redonorpets.adapter.CommentAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.CommentData;
 
 public class StoryDetailActivity extends AppCompatActivity {
 
     TextView tvTitle;
     TextView tvDate;
     TextView tvShelterName;
-    TextView tvChatSubmit;
-    EditText etChat;
+    TextView tvLikeCount;
+    TextView tvCommentSubmit;
+    EditText etComment;
+    Button btnStoryLike;
     ImageView ivShelterImg;
     LinearLayout lStoryContent;
     View view;
 
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
-    ChatAdapter adapter;
+    CommentAdapter adapter;
 
     // Firebase
     private FirebaseDatabase FirebaseDatabase;
@@ -63,7 +60,9 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     private String storyPosition;
     private String shelterPosition;
+    private boolean isLike = false;
     private int text = 0, img = 0;
+    private int storyLikeCount, commentCount;
     final ArrayList<String> storyImgList = new ArrayList<>();
     final ArrayList<String> storyTextList = new ArrayList<>();
 
@@ -77,11 +76,15 @@ public class StoryDetailActivity extends AppCompatActivity {
         storyPosition = intent.getExtras().getString("storyPosition");
         shelterPosition = intent.getExtras().getString("shelterPosition");
 
-        recyclerView = (RecyclerView)findViewById(R.id.storyDetailChatLayout);
+        btnStoryLike = (Button) findViewById(R.id.storyLkeButton);
+        tvLikeCount = findViewById(R.id.storyLikeCountTextView);
+        recyclerView = (RecyclerView)findViewById(R.id.storyDetailCommentLayout);
 
         FirebaseDatabase =FirebaseDatabase.getInstance();
 
         lStoryContent = (LinearLayout)findViewById(R.id.storyContentLayout);
+
+        //스토리 기본 정보 불러오기
         storyDatabaseReference = FirebaseDatabase.getReference("story").child(storyPosition);
         storyDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,6 +93,9 @@ public class StoryDetailActivity extends AppCompatActivity {
                 tvTitle.setText(dataSnapshot.child("title").getValue(String.class));
                 tvDate = findViewById(R.id.dateTextView);
                 tvDate.setText(dataSnapshot.child("date").getValue(String.class));
+                commentCount = dataSnapshot.child("commentCount").getValue(int.class);
+                storyLikeCount = dataSnapshot.child("likeCount").getValue(int.class);
+                tvLikeCount.setText(storyLikeCount + "명이 응원합니다!");
             }
 
             @Override
@@ -98,6 +104,7 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
+        // 스토리 컨텐츠(text) 불러오기
         storyDatabaseReference.child("text").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -114,6 +121,7 @@ public class StoryDetailActivity extends AppCompatActivity {
         });
 
 
+        // 스토리 컨텐츠(img) 불러오기
         storyDatabaseReference.child("img").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -130,6 +138,7 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
+        // 보호소 프로필 불러오기
         shelterDatabaseReference = FirebaseDatabase.getReference("shelter").child(shelterPosition);
         shelterDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -147,21 +156,95 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
-        storyDatabaseReference.child("chat").addChildEventListener(new ChildEventListener() {
+        //스토리 좋아요 버튼 기능 구현
+        storyDatabaseReference.child("liker").child("donor").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (Boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnStoryLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnStoryLike.setBackgroundResource(R.drawable.icon_like_gray);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnStoryLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnStoryLike.setBackgroundResource(R.drawable.icon_like_gray);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnStoryLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isLike){
+                    //true -> false
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put("donor/isLike", false);
+
+                    Map<String, Object> storyCountMap = new HashMap<String, Object>();
+                    storyCountMap.put("likeCount", storyLikeCount-1);
+
+                    storyDatabaseReference.child("liker").updateChildren(isLikeMap);
+                    storyDatabaseReference.updateChildren(storyCountMap);
+
+                }else{
+                    //false -> true
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put("donor/isLike", true);
+
+                    Map<String, Object> storyCountMap = new HashMap<String, Object>();
+                    storyCountMap.put("likeCount", storyLikeCount+1);
+
+                    storyDatabaseReference.child("liker").updateChildren(isLikeMap);
+                    storyDatabaseReference.updateChildren(storyCountMap);
+                }
+            }
+        });
+
+
+        // 스토리 댓글 기능 구현
+        storyDatabaseReference.child("comment").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String key = dataSnapshot.getKey();
-                ChatData chatData = dataSnapshot.getValue(ChatData.class);
+                CommentData commentData = dataSnapshot.getValue(CommentData.class);
 
-                adapter.addDataAndUpdate(key, chatData);
+                adapter.addDataAndUpdate(key, commentData);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String key = dataSnapshot.getKey();
-                ChatData chatData = dataSnapshot.getValue(ChatData.class);
+                CommentData commentData = dataSnapshot.getValue(CommentData.class);
 
-                adapter.addDataAndUpdate(key, chatData);
+                adapter.addDataAndUpdate(key, commentData);
             }
 
             @Override
@@ -181,27 +264,33 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ChatAdapter(this);
+        adapter = new CommentAdapter(this);
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        etChat = findViewById(R.id.storyDetailChatEditText);
-        tvChatSubmit = findViewById(R.id.storyDetailChatSubmitButton);
-        tvChatSubmit.setOnClickListener(new View.OnClickListener() {
+        // 댓글 작성
+        etComment = findViewById(R.id.storyDetailCommentEditText);
+        tvCommentSubmit = findViewById(R.id.storyDetailCommentSubmitButton);
+        tvCommentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = etChat.getText().toString();
+                String message = etComment.getText().toString();
                 Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).show();
                 if (!TextUtils.isEmpty(message)) {
-                    etChat.setText("");
-                    ChatData chatData = new ChatData();
-                    chatData.setName("test_name");
-                    chatData.setContent(message);
-                    chatData.setImg("https://images.unsplash.com/photo-1522039553440-46d3e1e61e4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80");
-                    storyDatabaseReference.child("chat").push().setValue(chatData);
+                    etComment.setText("");
+                    CommentData commentData = new CommentData();
+                    commentData.setName("test_name");
+                    commentData.setContent(message);
+                    commentData.setImg("https://images.unsplash.com/photo-1522039553440-46d3e1e61e4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80");
+                    storyDatabaseReference.child("comment").push().setValue(commentData);
+
+                    Map<String, Object> commentCountMap = new HashMap<String, Object>();
+                    commentCountMap.put("commentCount", commentCount+1);
+
+                    storyDatabaseReference.updateChildren(commentCountMap);
                 }
             }
         });
@@ -210,6 +299,10 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     public void onBackClick(View v){
         super.onBackPressed();
+    }
+
+    public void setIsLike(boolean isLike){
+        this.isLike = isLike;
     }
 
     public void onShelterProfileClick(View v){

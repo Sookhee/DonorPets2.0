@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/chatProfileImageView"
+        android:id="@+id/commentProfileImageView"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="15dp"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/chatNameTextView"
+        android:id="@+id/commentNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,12 +25,12 @@
         android:text="donor_pets"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chatProfileImageView"
-        app:layout_constraintStart_toEndOf="@+id/chatProfileImageView"
-        app:layout_constraintTop_toTopOf="@+id/chatProfileImageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/commentProfileImageView"
+        app:layout_constraintStart_toEndOf="@+id/commentProfileImageView"
+        app:layout_constraintTop_toTopOf="@+id/commentProfileImageView" />
 
     <TextView
-        android:id="@+id/chatContentTextView"
+        android:id="@+id/commentContentTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
@@ -42,8 +42,8 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chatNameTextView"
-        app:layout_constraintTop_toTopOf="@+id/chatNameTextView" />
+        app:layout_constraintStart_toEndOf="@+id/commentNameTextView"
+        app:layout_constraintTop_toTopOf="@+id/commentNameTextView" />
 
     <View
         android:id="@+id/view5"
@@ -54,5 +54,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatContentTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/commentContentTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

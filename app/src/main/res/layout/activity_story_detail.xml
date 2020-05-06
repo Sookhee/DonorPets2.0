@@ -153,15 +153,16 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp">
 
-                <ImageView
+                <Button
                     android:id="@+id/storyLkeButton"
                     android:layout_width="16dp"
                     android:layout_height="14dp"
                     android:layout_marginStart="15dp"
+                    android:stateListAnimator="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_story_like" />
+                    android:background="@drawable/icon_like_gray" />
 
                 <TextView
                     android:id="@+id/storyLikeCountTextView"
@@ -175,10 +176,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/storyDetailChatLayout"
+                android:id="@+id/storyDetailCommentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
     </ScrollView>
@@ -193,7 +196,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/storyDetailChatEditText"
+            android:id="@+id/storyDetailCommentEditText"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
@@ -208,11 +211,11 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/storyDetailChatUserProfileImageView"
+            app:layout_constraintStart_toEndOf="@+id/storyDetailCommentUserProfileImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/storyDetailChatSubmitButton"
+            android:id="@+id/storyDetailCommentSubmitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -221,12 +224,12 @@
             android:text="게시"
             android:textColor="@color/deep_sky_blue"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/storyDetailChatEditText"
-            app:layout_constraintEnd_toEndOf="@id/storyDetailChatEditText"
-            app:layout_constraintTop_toTopOf="@+id/storyDetailChatEditText" />
+            app:layout_constraintBottom_toBottomOf="@+id/storyDetailCommentEditText"
+            app:layout_constraintEnd_toEndOf="@id/storyDetailCommentEditText"
+            app:layout_constraintTop_toTopOf="@+id/storyDetailCommentEditText" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/storyDetailChatUserProfileImageView"
+            android:id="@+id/storyDetailCommentUserProfileImageView"
             android:layout_width="41dp"
             android:layout_height="41dp"
             android:layout_marginStart="15dp"

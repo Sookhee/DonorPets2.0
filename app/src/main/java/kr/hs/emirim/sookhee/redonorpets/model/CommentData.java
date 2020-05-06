@@ -1,12 +1,12 @@
 package kr.hs.emirim.sookhee.redonorpets.model;
 
-public class ChatData {
+public class CommentData {
     String name;
     String content;
     String img;
 
-    public ChatData(){}
-    public ChatData(String name, String content, String img){
+    public CommentData(){}
+    public CommentData(String name, String content, String img){
         this.name = name;
         this.content = content;
         this.img = img;
