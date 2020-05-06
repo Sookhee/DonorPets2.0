@@ -44,7 +44,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/storyChatInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -59,32 +59,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp">
-
-                <com.loopeer.shadow.ShadowView
-                    android:id="@+id/shadow_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="1.5dp"
-                    android:onClick="onShelterProfileClick"
-                    app:cornerRadius="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shadowColor="#26000000"
-                    app:shadowDy="2"
-                    app:shadowMarginBottom="15dp"
-                    app:shadowMarginLeft="15dp"
-                    app:shadowMarginRight="15dp"
-                    app:shadowMarginTop="15dp"
-                    app:shadowRadius="6dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/shelterProfileImageView"
-                        android:layout_width="33.5dp"
-                        android:layout_height="33.5dp"
-                        android:src="@drawable/ic_launcher_background" />
-
-                </com.loopeer.shadow.ShadowView>
 
                 <TextView
                     android:id="@+id/shelterNameTextView"
@@ -115,6 +89,32 @@
                     app:layout_constraintBottom_toBottomOf="@+id/shadow_view"
                     app:layout_constraintStart_toEndOf="@+id/shadow_view" />
 
+                <com.loopeer.shadow.ShadowView
+                    android:id="@+id/shadow_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="1.5dp"
+                    android:onClick="onShelterProfileClick"
+                    app:cornerRadius="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shadowColor="#26000000"
+                    app:shadowDy="2"
+                    app:shadowMarginBottom="15dp"
+                    app:shadowMarginLeft="15dp"
+                    app:shadowMarginRight="15dp"
+                    app:shadowMarginTop="15dp"
+                    app:shadowRadius="6dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/shelterProfileImageView"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_launcher_background" />
+
+                </com.loopeer.shadow.ShadowView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -144,7 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -172,6 +174,66 @@
                     app:layout_constraintTop_toTopOf="@id/storyLkeButton" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/storyDetailChatLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp" />
+
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/storyChatInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/storyDetailChatEditText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/chat_background"
+            android:ems="10"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:hint="댓글달기"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="6sp"
+            android:paddingStart="20dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/storyDetailChatUserProfileImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/storyDetailChatSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:padding="10dp"
+            android:text="게시"
+            android:textColor="@color/deep_sky_blue"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/storyDetailChatEditText"
+            app:layout_constraintEnd_toEndOf="@id/storyDetailChatEditText"
+            app:layout_constraintTop_toTopOf="@+id/storyDetailChatEditText" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/storyDetailChatUserProfileImageView"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

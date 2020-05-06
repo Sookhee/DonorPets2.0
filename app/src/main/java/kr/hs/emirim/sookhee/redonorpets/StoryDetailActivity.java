@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ public class StoryDetailActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvDate;
     TextView tvShelterName;
+    TextView tvChatSubmit;
+    EditText etChat;
     ImageView ivShelterImg;
     LinearLayout lStoryContent;
     View view;
@@ -128,6 +131,17 @@ public class StoryDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        etChat = findViewById(R.id.storyDetailChatEditText);
+        tvChatSubmit = findViewById(R.id.storyDetailChatSubmitButton);
+        tvChatSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = etChat.getText().toString();
+                Toast.makeText(getApplicationContext(), "" + s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void onBackClick(View v){
