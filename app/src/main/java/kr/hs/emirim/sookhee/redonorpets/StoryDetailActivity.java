@@ -1,9 +1,12 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,6 +15,7 @@ import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -32,6 +36,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.sookhee.redonorpets.adapter.ChatAdapter;
+import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.ChatData;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
+
 public class StoryDetailActivity extends AppCompatActivity {
 
     TextView tvTitle;
@@ -42,6 +51,10 @@ public class StoryDetailActivity extends AppCompatActivity {
     ImageView ivShelterImg;
     LinearLayout lStoryContent;
     View view;
+
+    RecyclerView recyclerView;
+    LinearLayoutManager mLayoutManager;
+    ChatAdapter adapter;
 
     // Firebase
     private FirebaseDatabase FirebaseDatabase;
@@ -63,6 +76,8 @@ public class StoryDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         storyPosition = intent.getExtras().getString("storyPosition");
         shelterPosition = intent.getExtras().getString("shelterPosition");
+
+        recyclerView = (RecyclerView)findViewById(R.id.storyDetailChatLayout);
 
         FirebaseDatabase =FirebaseDatabase.getInstance();
 
@@ -132,13 +147,62 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
+        storyDatabaseReference.child("chat").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String key = dataSnapshot.getKey();
+                ChatData chatData = dataSnapshot.getValue(ChatData.class);
+
+                adapter.addDataAndUpdate(key, chatData);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String key = dataSnapshot.getKey();
+                ChatData chatData = dataSnapshot.getValue(ChatData.class);
+
+                adapter.addDataAndUpdate(key, chatData);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                adapter.deleteDataAndUpdate(key);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        adapter = new ChatAdapter(this);
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+
         etChat = findViewById(R.id.storyDetailChatEditText);
         tvChatSubmit = findViewById(R.id.storyDetailChatSubmitButton);
         tvChatSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = etChat.getText().toString();
-                Toast.makeText(getApplicationContext(), "" + s, Toast.LENGTH_SHORT).show();
+                String message = etChat.getText().toString();
+                Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).show();
+                if (!TextUtils.isEmpty(message)) {
+                    etChat.setText("");
+                    ChatData chatData = new ChatData();
+                    chatData.setName("test_name");
+                    chatData.setContent(message);
+                    chatData.setImg("https://images.unsplash.com/photo-1522039553440-46d3e1e61e4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80");
+                    storyDatabaseReference.child("chat").push().setValue(chatData);
+                }
             }
         });
 
@@ -158,7 +222,6 @@ public class StoryDetailActivity extends AppCompatActivity {
     public void setStoryContentLayout(int text, int img){
         lStoryContent.removeAllViews();
         do{
-            Log.e( "들어옴", "" + this.storyTextList.size() + " " + this.storyImgList.size());
             if(text < storyTextList.size()){
                 TextView tv = new TextView(this);
                 tv.setText(storyTextList.get(text));
