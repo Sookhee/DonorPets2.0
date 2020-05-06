@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -165,13 +166,18 @@ public class ShelterProfileActivity extends AppCompatActivity {
         btnDonation.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent;
-                intent = new Intent(getApplicationContext(), DonationActivity.class);
-                intent.putExtra("shelterPosition", shelterPosition);
-                intent.putExtra("donationObject", donationObject);
-                intent.putExtra("realDonationObjectList", realDonationObjectList);
-                intent.putExtra("realDonationList", realDonationList);
-                startActivity(intent);
+                if(realDonationList.size() > 0){
+                    Intent intent;
+                    intent = new Intent(getApplicationContext(), DonationActivity.class);
+                    intent.putExtra("shelterPosition", shelterPosition);
+                    intent.putExtra("donationObject", donationObject);
+                    intent.putExtra("realDonationObjectList", realDonationObjectList);
+                    intent.putExtra("realDonationList", realDonationList);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "기부 물품을 먼저 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
