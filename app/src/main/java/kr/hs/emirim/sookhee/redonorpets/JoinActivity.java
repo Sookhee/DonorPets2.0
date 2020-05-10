@@ -3,6 +3,7 @@ package kr.hs.emirim.sookhee.redonorpets;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -37,6 +38,16 @@ public class JoinActivity extends AppCompatActivity {
                                        int position, long id) {}
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        TextView next = (TextView)findViewById(R.id.next);
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),JoinActivity2.class);
+                startActivity(intent);
+            }
         });
 
     }

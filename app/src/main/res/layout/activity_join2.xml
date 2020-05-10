@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JoinActivity">
+    tools:context=".JoinActivity2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
@@ -33,7 +33,7 @@
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
             android:lineSpacingExtra="7.5sp"
-            android:text="다음"
+            android:text="완료"
             android:textColor="@color/deep_sky_blue"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:text="닉네임과 지역을\n설정해주세요!"
+            android:text="이메일과 비밀번호를\n설정해주세요!"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -66,46 +66,48 @@
             android:textSize="13sp"
             android:textColor="@color/black"
             android:lineSpacingExtra="6sp"
-            android:text="닉네임"
-            android:id="@+id/nickname"/>
+            android:text="이메일"
+            android:id="@+id/email"/>
 
         <EditText
-            android:id="@+id/edit_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="9.8dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:backgroundTint="@color/deep_sky_blue"
-            android:hint="닉네임을 입력하세요."
+            android:hint="이메일을 입력하세요."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nickname" />
+            app:layout_constraintTop_toBottomOf="@id/email"
+            android:id="@+id/edit_email"
+            android:backgroundTint = "@color/deep_sky_blue"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_nickname"
+            app:layout_constraintTop_toBottomOf="@id/edit_email"
             android:layout_marginStart="15dp"
             android:layout_marginTop="35.2dp"
             android:textSize="13sp"
             android:textColor="@color/black"
             android:lineSpacingExtra="6sp"
             android:text="지역"
-            android:id="@+id/city"/>
+            android:id="@+id/pw"/>
 
-        <Spinner
-            android:id="@+id/spinner1"
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="9.8dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:entries="@array/city"
+            android:inputType="textPassword"
+            android:hint="비밀번호를 입력하세요."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city" />
+            app:layout_constraintTop_toBottomOf="@id/pw"
+            android:id="@+id/edit_pw"
+            android:backgroundTint = "@color/deep_sky_blue"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
