@@ -92,7 +92,7 @@
             android:textSize="13sp"
             android:textColor="@color/black"
             android:lineSpacingExtra="6sp"
-            android:text="지역"
+            android:text="비밀번호"
             android:id="@+id/pw"/>
 
         <EditText
