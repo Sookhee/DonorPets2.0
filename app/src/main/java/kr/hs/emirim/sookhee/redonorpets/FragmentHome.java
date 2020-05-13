@@ -40,8 +40,6 @@ public class FragmentHome extends Fragment {
     DatabaseReference mRef = database.getReference().child("story");
     Query storyQuery = mRef;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -56,7 +56,7 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
         public TextView tvObjectName;
         public TextView tvObjectPoint;
         public EditText tvCountObject;
-        public Button btnAdd;
+        public Button btnPlus;
         public Button btnMinus;
         public View pView;
 
@@ -67,8 +67,8 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.ViewHo
             tvObjectName = (TextView) itemView.findViewById(R.id.objectNameTextView);
             tvObjectPoint = (TextView) itemView.findViewById(R.id.pointTextView);
             tvCountObject =  (EditText) itemView.findViewById(R.id.countObjectTextView);
-            btnAdd = (Button) itemView.findViewById(R.id.addObjectCountButton);
-            btnAdd.setOnClickListener(new View.OnClickListener(){
+            btnPlus = (Button) itemView.findViewById(R.id.addObjectCountButton);
+            btnPlus.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     int count = Integer.parseInt(tvCountObject.getText().toString());

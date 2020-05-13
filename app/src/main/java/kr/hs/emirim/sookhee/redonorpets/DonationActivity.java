@@ -268,8 +268,8 @@ public class DonationActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
-    public void setTotalPoint(int point, boolean isCheck){
-        if(isCheck){
+    public void setTotalPoint(int point, boolean isPlus){
+        if(isPlus){
             totalPoint += point;
             tvTotalPoint.setText(Integer.toString(totalPoint));
         }
