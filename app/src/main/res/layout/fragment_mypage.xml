@@ -109,8 +109,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/shelterProfileImageView"
-                android:layout_width="105dp"
-                android:layout_height="105dp"
+                android:layout_width="102dp"
+                android:layout_height="102dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background" />
 
@@ -153,7 +153,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
@@ -174,14 +175,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mypageShelterRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15">
 
         </androidx.recyclerview.widget.RecyclerView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
