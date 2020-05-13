@@ -1,14 +1,12 @@
-package kr.hs.emirim.sookhee.redonorpets;
+package kr.hs.emirim.sookhee.redonorpets.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +15,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
+import kr.hs.emirim.sookhee.redonorpets.R;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
+import kr.hs.emirim.sookhee.redonorpets.StoryDetailActivity;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHolder> {
 
     private Context mCtx;
     private HashMap<String, StoryData> mData;
     private ArrayList<String> shelterPosition = new ArrayList<>();
+    private ArrayList<String> storyPosition = new ArrayList<>();
 
     public StoryAdapter(Context mCtx) {
         this.mCtx = mCtx;
@@ -35,7 +37,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mCtx).inflate(R.layout.story_item, parent, false);
 
-
         return new CustomViewHolder(v);
     }
 
@@ -45,9 +46,12 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
         String img = story.getMainImg();
         shelterPosition.add(story.getShelterPosition());
+        storyPosition.add(story.getStoryPosition());
 
         holder.tvTitle.setText(story.getTitle());
         holder.tvShelter.setText(story.getShelterName());
+        holder.tvLikeCount.setText(Integer.toString(story.getLikeCount()));
+        holder.tvCommentCount.setText(Integer.toString(story.getCommentCount()));
         Picasso.get().load(img).into(holder.ivMainImg);
 
     }
@@ -61,14 +65,19 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
         TextView tvTitle;
         TextView tvShelter;
+        TextView tvLikeCount;
+        TextView tvCommentCount;
         ImageView ivMainImg;
-
+        public View pView;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
 
+            this.pView = itemView;
             tvTitle = itemView.findViewById(R.id.storyTitle);
             tvShelter = itemView.findViewById(R.id.storyShelter);
+            tvLikeCount = itemView.findViewById(R.id.storyLikeCountTextView);
+            tvCommentCount = itemView.findViewById(R.id.storyCommentCountTextView);
             ivMainImg = itemView.findViewById(R.id.storyMainImg);
 
             itemView.setOnClickListener(new View.OnClickListener(){
@@ -77,8 +86,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
                 public void onClick(View v){
                     Intent intent;
                     intent = new Intent(v.getContext(), StoryDetailActivity.class);
-                    intent.putExtra("storyPosition", String.valueOf(getAdapterPosition()));
-                    intent.putExtra("shelterPosition", shelterPosition.get(getAdapterPosition()));
+                    intent.putExtra("storyPosition",  storyPosition.get(getItemCount() - 1 - getAdapterPosition()));
+                    intent.putExtra("shelterPosition",  shelterPosition.get(getItemCount() - 1 - getAdapterPosition()));
                     v.getContext().startActivity(intent);
                 }
             });
@@ -100,7 +109,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
     public void clearData(){
         mData.clear();
         notifyDataSetChanged();
-
     }
 
 }
