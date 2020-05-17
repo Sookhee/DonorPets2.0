@@ -98,7 +98,6 @@ public class ShelterProfileActivity extends AppCompatActivity {
                 tvDonorCount = findViewById(R.id.donorCountTextView);
                 tvDonorCount.setText((dataSnapshot.child("donorCount").getValue(int.class).toString()));
                 shelterLikeCount = Integer.parseInt(dataSnapshot.child("likeCount").getValue(int.class).toString());
-                Toast.makeText(getApplicationContext(), "shelterLikeCount" + shelterLikeCount, Toast.LENGTH_SHORT).show();
                 tvLikeCount = findViewById(R.id.likeCountTextView);
                 tvLikeCount.setText((dataSnapshot.child("likeCount").getValue(int.class).toString()));
             }

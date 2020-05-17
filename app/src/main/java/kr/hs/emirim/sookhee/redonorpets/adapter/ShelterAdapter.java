@@ -36,7 +36,6 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.CustomVi
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mCtx).inflate(R.layout.shelter_item, parent, false);
 
-
         return new CustomViewHolder(v);
     }
 

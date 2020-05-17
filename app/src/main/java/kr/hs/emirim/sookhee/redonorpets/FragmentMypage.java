@@ -35,7 +35,6 @@ public class FragmentMypage extends Fragment {
     TextView tvPoint;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mRef = database.getReference().child("shelter");
     DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
 
 
@@ -73,7 +72,7 @@ public class FragmentMypage extends Fragment {
 
     public void resetShelterRecyclerView(View view){
 
-        mRef.addChildEventListener(new ChildEventListener() {
+        userDatabaseReference.child("likeShelterList").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String key = dataSnapshot.getKey();
