@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterDonationAdapter;
@@ -44,6 +46,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
     TextView tvLikeCount;
     ImageView ivShelterImg;
     Button btnDonation;
+    Button btnShelterLike;
 
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
@@ -58,10 +61,13 @@ public class ShelterProfileActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private DatabaseReference shelterDatabaseReference;
     private DatabaseReference storyDatabaseReference = FirebaseDatabase.getInstance().getReference().child("story");
+    private DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("user").child("0");
     Query storyQuery;
 
     //
     private String shelterPosition;
+    private Boolean isLike = false;
+    private int shelterLikeCount;
     private ArrayList<DonationObjectData> donationObject = new ArrayList<>();
     private ArrayList<DonationObjectData> realDonationObjectList = new ArrayList<>();
     private ArrayList<String> realDonationList = new ArrayList<>();
@@ -91,6 +97,8 @@ public class ShelterProfileActivity extends AppCompatActivity {
                 tvStoryCount.setText((dataSnapshot.child("storyCount").getValue(int.class).toString()));
                 tvDonorCount = findViewById(R.id.donorCountTextView);
                 tvDonorCount.setText((dataSnapshot.child("donorCount").getValue(int.class).toString()));
+                shelterLikeCount = Integer.parseInt(dataSnapshot.child("likeCount").getValue(int.class).toString());
+                Toast.makeText(getApplicationContext(), "shelterLikeCount" + shelterLikeCount, Toast.LENGTH_SHORT).show();
                 tvLikeCount = findViewById(R.id.likeCountTextView);
                 tvLikeCount.setText((dataSnapshot.child("likeCount").getValue(int.class).toString()));
             }
@@ -180,10 +188,84 @@ public class ShelterProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //보호소 좋아요 버튼 기능 구현
+        userDatabaseReference.child("likeShelter").child(shelterPosition).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (Boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_white);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_white);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnShelterLike = (Button)findViewById(R.id.shelterLikeButton);
+        btnShelterLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isLike){
+                    //true -> false
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put(shelterPosition+"/isLike", false);
+
+                    Map<String, Object> shelterCountMap = new HashMap<String, Object>();
+                    shelterCountMap.put("likeCount", shelterLikeCount-1);
+
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
+                    shelterDatabaseReference.updateChildren(shelterCountMap);
+
+
+                }else{
+                    //false -> true
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put(shelterPosition+"/isLike", true);
+
+                    Map<String, Object> shelterCountMap = new HashMap<String, Object>();
+                    shelterCountMap.put("likeCount", shelterLikeCount+1);
+
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
+                    shelterDatabaseReference.updateChildren(shelterCountMap);
+
+                }
+            }
+        });
     }
 
     private void setDonationObject(){
-
         donationAdapter = new ShelterDonationAdapter(this, donationObject);
         donationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         donationRecyclerView.setLayoutManager(donationLayoutManager);
@@ -207,5 +289,9 @@ public class ShelterProfileActivity extends AppCompatActivity {
 
     public void onBackClick(View v){
         super.onBackPressed();
+    }
+
+    public void setIsLike(boolean isLike){
+        this.isLike = isLike;
     }
 }
