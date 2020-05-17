@@ -82,6 +82,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         shelterPosition = intent.getExtras().getString("shelterPosition");
 
+        //보호소 프로필 정보 세팅
         FirebaseDatabase =FirebaseDatabase.getInstance();
         shelterDatabaseReference = FirebaseDatabase.getReference("shelter").child(shelterPosition);
         shelterDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -117,6 +118,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        //보호소 스토리 recyclerView 세팅
         recyclerView = (RecyclerView)findViewById(R.id.shelterProfileRecyclerView);
         storyQuery = storyDatabaseReference.orderByChild("shelterPosition").equalTo(shelterPosition).limitToLast(2);
         storyQuery.addChildEventListener(new ChildEventListener() {
@@ -153,6 +155,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        //보호소 기부 물품 받아오기
         donationRecyclerView = (RecyclerView)findViewById(R.id.shelterDonationObjectRecyclerView);
         FirebaseDatabase.getReference("shelter").child(shelterPosition).child("donationObject").addValueEventListener(new ValueEventListener() {
             @Override
@@ -177,7 +180,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-
+        //보호소 기부 버튼 눌렀을 때
         btnDonation = findViewById(R.id.donationButton);
         btnDonation.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -245,36 +248,39 @@ public class ShelterProfileActivity extends AppCompatActivity {
         btnShelterLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLike){
-                    //true -> false
+                if(isLike){ //true -> false
+
+                    //관심있는 보호소 false
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
                     isLikeMap.put(shelterPosition+"/isLike", false);
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
 
+                    //이 보호소를 좋아하는 사람들 count +1
                     Map<String, Object> shelterCountMap = new HashMap<String, Object>();
                     shelterCountMap.put("likeCount", shelterLikeCount-1);
-
-
-
-                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
                     shelterDatabaseReference.updateChildren(shelterCountMap);
 
-                }else{
-                    //false -> true
+                    //관심있는 보호소 리스트에서 삭제
+                    userDatabaseReference.child("likeShelterList").child(shelterPosition).removeValue();
+
+                }else{ //false -> true
+                    //관심있는 보호소 true
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
                     isLikeMap.put(shelterPosition+"/isLike", true);
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
 
+                    //이 보호소를 좋아하는 사람들 count +1
                     Map<String, Object> shelterCountMap = new HashMap<String, Object>();
                     shelterCountMap.put("likeCount", shelterLikeCount+1);
+                    shelterDatabaseReference.updateChildren(shelterCountMap);
 
+                    //관심있는 보호소 리스트에 추가
                     Map<String, Object> likeShelterListMap = new HashMap<String, Object>();
                     likeShelterListMap.put("name", shelterName);
                     likeShelterListMap.put("phone", shelterPhone);
                     likeShelterListMap.put("profileImg", shelterImg);
                     likeShelterListMap.put("shelterPosition", shelterPosition);
                     likeShelterListMap.put("storyCount", shelterStoryCount);
-
-                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
-                    shelterDatabaseReference.updateChildren(shelterCountMap);
                     userDatabaseReference.child("likeShelterList").child(shelterPosition).updateChildren(likeShelterListMap);
 
                 }
@@ -282,6 +288,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
         });
     }
 
+    //보호소 기부 물품 recyclerView 세팅
     private void setDonationObject(){
         donationAdapter = new ShelterDonationAdapter(this, donationObject);
         donationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
