@@ -108,8 +108,6 @@ public class FragmentMypage extends Fragment {
 
         adapter = new ShelterAdapter(getActivity());
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }

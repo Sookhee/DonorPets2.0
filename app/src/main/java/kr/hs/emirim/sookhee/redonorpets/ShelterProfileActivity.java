@@ -34,6 +34,7 @@ import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterDonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
+import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class ShelterProfileActivity extends AppCompatActivity {
@@ -65,9 +66,9 @@ public class ShelterProfileActivity extends AppCompatActivity {
     Query storyQuery;
 
     //
-    private String shelterPosition;
+    private String shelterPosition, shelterName, shelterPhone, shelterImg;
     private Boolean isLike = false;
-    private int shelterLikeCount;
+    private int shelterLikeCount, shelterStoryCount;
     private ArrayList<DonationObjectData> donationObject = new ArrayList<>();
     private ArrayList<DonationObjectData> realDonationObjectList = new ArrayList<>();
     private ArrayList<String> realDonationList = new ArrayList<>();
@@ -86,17 +87,25 @@ public class ShelterProfileActivity extends AppCompatActivity {
         shelterDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String img = dataSnapshot.child("profileImg").getValue(String.class);
+                shelterName = dataSnapshot.child("name").getValue(String.class);
                 tvShelterName = findViewById(R.id.shelterNameTextView);
-                tvShelterName.setText(dataSnapshot.child("name").getValue(String.class));
+                tvShelterName.setText(shelterName);
+
+                shelterPhone = dataSnapshot.child("phone").getValue(String.class);
                 tvPhone = findViewById(R.id.shelterPhoneTextView);
-                tvPhone.setText(dataSnapshot.child("phone").getValue(String.class));
+                tvPhone.setText(shelterPhone);
+
+                shelterImg = dataSnapshot.child("profileImg").getValue(String.class);
                 ivShelterImg = findViewById(R.id.shelterProfileImageView);
-                Picasso.get().load(img).into(ivShelterImg);
+                Picasso.get().load(shelterImg).into(ivShelterImg);
+
+                shelterStoryCount = dataSnapshot.child("storyCount").getValue(int.class);
                 tvStoryCount = findViewById(R.id.storyCountTextView);
-                tvStoryCount.setText((dataSnapshot.child("storyCount").getValue(int.class).toString()));
+                tvStoryCount.setText(Integer.toString(shelterLikeCount));
+
                 tvDonorCount = findViewById(R.id.donorCountTextView);
                 tvDonorCount.setText((dataSnapshot.child("donorCount").getValue(int.class).toString()));
+
                 shelterLikeCount = Integer.parseInt(dataSnapshot.child("likeCount").getValue(int.class).toString());
                 tvLikeCount = findViewById(R.id.likeCountTextView);
                 tvLikeCount.setText((dataSnapshot.child("likeCount").getValue(int.class).toString()));
@@ -244,9 +253,10 @@ public class ShelterProfileActivity extends AppCompatActivity {
                     Map<String, Object> shelterCountMap = new HashMap<String, Object>();
                     shelterCountMap.put("likeCount", shelterLikeCount-1);
 
+
+
                     userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
                     shelterDatabaseReference.updateChildren(shelterCountMap);
-
 
                 }else{
                     //false -> true
@@ -256,8 +266,16 @@ public class ShelterProfileActivity extends AppCompatActivity {
                     Map<String, Object> shelterCountMap = new HashMap<String, Object>();
                     shelterCountMap.put("likeCount", shelterLikeCount+1);
 
+                    Map<String, Object> likeShelterListMap = new HashMap<String, Object>();
+                    likeShelterListMap.put("name", shelterName);
+                    likeShelterListMap.put("phone", shelterPhone);
+                    likeShelterListMap.put("profileImg", shelterImg);
+                    likeShelterListMap.put("shelterPosition", shelterPosition);
+                    likeShelterListMap.put("storyCount", shelterStoryCount);
+
                     userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
                     shelterDatabaseReference.updateChildren(shelterCountMap);
+                    userDatabaseReference.child("likeShelterList").child(shelterPosition).updateChildren(likeShelterListMap);
 
                 }
             }
