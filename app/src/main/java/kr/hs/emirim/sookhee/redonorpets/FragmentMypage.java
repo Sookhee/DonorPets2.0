@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,11 +17,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterAdapter;
-import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
-import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class FragmentMypage extends Fragment {
     View mypageView;
@@ -28,8 +30,13 @@ public class FragmentMypage extends Fragment {
     LinearLayoutManager mLayoutManager;
     ShelterAdapter adapter;
 
+    CircleImageView ivProfile;
+    TextView tvName;
+    TextView tvPoint;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mRef = database.getReference().child("shelter");
+    DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +47,24 @@ public class FragmentMypage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.mypageView = view;
+
+        userDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String profileImg = dataSnapshot.child("profileImg").getValue(String.class).toString();
+                ivProfile = mypageView.findViewById(R.id.userProfileImageView);
+                Picasso.get().load(profileImg).into(ivProfile);
+                tvName = mypageView.findViewById(R.id.userNameTextView);
+                tvName.setText(dataSnapshot.child("id").getValue(String.class));
+                tvPoint = mypageView.findViewById(R.id.userPointTextView);
+                tvPoint.setText(dataSnapshot.child("point").getValue(int.class) + "p");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         recyclerView = (RecyclerView)mypageView.findViewById(R.id.mypageShelterRecyclerView);
 
