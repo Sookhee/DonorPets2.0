@@ -79,8 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email"
-            android:id="@+id/edit_email"
-            android:backgroundTint = "@color/deep_sky_blue"/>
+            android:id="@+id/edit_email"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,8 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pw"
-            android:id="@+id/edit_pw"
-            android:backgroundTint = "@color/deep_sky_blue"/>
+            android:id="@+id/edit_pw"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

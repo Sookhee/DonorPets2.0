@@ -11,6 +11,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class JoinActivity extends AppCompatActivity {
         guide.setText(ssb);
 
         Spinner s = (Spinner)findViewById(R.id.spinner1);
+        s.setPrompt("지역을 선택하세요.");
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -40,8 +42,16 @@ public class JoinActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        TextView next = (TextView)findViewById(R.id.next);
+        ImageView backButton = (ImageView)findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        TextView next = (TextView)findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
