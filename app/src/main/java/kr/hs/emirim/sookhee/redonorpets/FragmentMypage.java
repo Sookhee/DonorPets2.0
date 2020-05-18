@@ -1,9 +1,11 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,7 @@ public class FragmentMypage extends Fragment {
     CircleImageView ivProfile;
     TextView tvName;
     TextView tvPoint;
+    Button btnSetting;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
@@ -62,6 +65,15 @@ public class FragmentMypage extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        btnSetting = (Button)mypageView.findViewById(R.id.settingButton);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SettingActivity.class);
+                startActivity(intent);
             }
         });
 
