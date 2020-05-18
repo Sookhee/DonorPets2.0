@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import kr.hs.emirim.sookhee.redonorpets.adapter.CommentAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.CommentData;
 
@@ -46,6 +47,7 @@ public class StoryDetailActivity extends AppCompatActivity {
     EditText etComment;
     Button btnStoryLike;
     ImageView ivShelterImg;
+    CircleImageView ivUserProfile;
     LinearLayout lStoryContent;
     View view;
 
@@ -57,6 +59,7 @@ public class StoryDetailActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private DatabaseReference storyDatabaseReference;
     private DatabaseReference shelterDatabaseReference;
+    private DatabaseReference userDatabaseReference;
 
     private String storyPosition;
     private String shelterPosition;
@@ -65,6 +68,7 @@ public class StoryDetailActivity extends AppCompatActivity {
     private int storyLikeCount, commentCount;
     final ArrayList<String> storyImgList = new ArrayList<>();
     final ArrayList<String> storyTextList = new ArrayList<>();
+    private String userName, userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class StoryDetailActivity extends AppCompatActivity {
         btnStoryLike = (Button) findViewById(R.id.storyLkeButton);
         tvLikeCount = findViewById(R.id.storyLikeCountTextView);
         recyclerView = (RecyclerView)findViewById(R.id.storyDetailCommentLayout);
+        ivUserProfile = findViewById(R.id.storyDetailCommentUserProfileImageView);
 
         FirebaseDatabase =FirebaseDatabase.getInstance();
 
@@ -155,6 +160,23 @@ public class StoryDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        //사용자 정보 불러오기
+        userDatabaseReference = FirebaseDatabase.getReference("user").child("0");
+        userDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userName = dataSnapshot.child("id").getValue(String.class);
+                userProfile = dataSnapshot.child("profileImg").getValue(String.class);
+                Picasso.get().load(userProfile).into(ivUserProfile);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         //스토리 좋아요 버튼 기능 구현
         storyDatabaseReference.child("liker").child("donor").addChildEventListener(new ChildEventListener() {
@@ -282,9 +304,9 @@ public class StoryDetailActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(message)) {
                     etComment.setText("");
                     CommentData commentData = new CommentData();
-                    commentData.setName("test_name");
+                    commentData.setName(userName);
                     commentData.setContent(message);
-                    commentData.setImg("https://images.unsplash.com/photo-1522039553440-46d3e1e61e4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80");
+                    commentData.setImg(userProfile);
                     storyDatabaseReference.child("comment").push().setValue(commentData);
 
                     Map<String, Object> commentCountMap = new HashMap<String, Object>();
