@@ -43,24 +43,6 @@ public class FragmentMypage extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
 
-    //appcompatimageview는 어케 연결하는거야.... 찾다가 지쳤어 미안해 ㅜㅜ
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        setting = (AppCompatImageView)view.findViewById(R.id.settingButton);
-//        setting.setOnClickListener(myListener);
-//
-//    }
-//
-//    View.OnClickListener myListener = new View.OnClickListener()
-//    {
-//        @Override
-//        public void onClick(View v) {
-//
-//        }
-//    };
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mypage, container, false);
     }

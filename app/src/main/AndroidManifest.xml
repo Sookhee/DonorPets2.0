@@ -10,13 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".JoinActivity2"/>
-        <activity android:name=".JoinActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".JoinActivity"/>
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".EditPasswdActivity" />
         <activity android:name=".SettingActivity"></activity>
@@ -25,6 +19,11 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".StoryDetailActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
