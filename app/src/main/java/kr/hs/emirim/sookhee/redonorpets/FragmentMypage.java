@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +21,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterAdapter;
-import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
-import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class FragmentMypage extends Fragment {
     View mypageView;
@@ -32,8 +35,13 @@ public class FragmentMypage extends Fragment {
     ShelterAdapter adapter;
     AppCompatImageView setting;
 
+    CircleImageView ivProfile;
+    TextView tvName;
+    TextView tvPoint;
+    Button btnSetting;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mRef = database.getReference().child("shelter");
+    DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
 
     //appcompatimageview는 어케 연결하는거야.... 찾다가 지쳤어 미안해 ㅜㅜ
 //    @Override
@@ -62,6 +70,33 @@ public class FragmentMypage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.mypageView = view;
 
+        userDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String profileImg = dataSnapshot.child("profileImg").getValue(String.class).toString();
+                ivProfile = mypageView.findViewById(R.id.userProfileImageView);
+                Picasso.get().load(profileImg).into(ivProfile);
+                tvName = mypageView.findViewById(R.id.userNameTextView);
+                tvName.setText(dataSnapshot.child("id").getValue(String.class));
+                tvPoint = mypageView.findViewById(R.id.userPointTextView);
+                tvPoint.setText(dataSnapshot.child("point").getValue(int.class) + "p");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnSetting = (Button)mypageView.findViewById(R.id.settingButton);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = (RecyclerView)mypageView.findViewById(R.id.mypageShelterRecyclerView);
 
         resetShelterRecyclerView(mypageView);
@@ -69,7 +104,7 @@ public class FragmentMypage extends Fragment {
 
     public void resetShelterRecyclerView(View view){
 
-        mRef.addChildEventListener(new ChildEventListener() {
+        userDatabaseReference.child("likeShelterList").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String key = dataSnapshot.getKey();
@@ -105,8 +140,6 @@ public class FragmentMypage extends Fragment {
 
         adapter = new ShelterAdapter(getActivity());
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }
