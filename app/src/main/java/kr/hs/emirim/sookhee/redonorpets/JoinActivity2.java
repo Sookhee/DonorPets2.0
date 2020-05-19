@@ -31,7 +31,6 @@ public class JoinActivity2 extends AppCompatActivity {
         guide.setText(ssb);
 
         ImageView backButton = (ImageView)findViewById(R.id.backButton);
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
