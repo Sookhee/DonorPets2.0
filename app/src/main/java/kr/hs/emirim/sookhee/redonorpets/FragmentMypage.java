@@ -1,12 +1,15 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,27 +42,15 @@ public class FragmentMypage extends Fragment {
     TextView tvName;
     TextView tvPoint;
     Button btnSetting;
+    ProgressBar pbProgressLevel;
+    TextView tvProgressLevelName;
+    ImageView ivProgressIcon;
+
+
+    private int userLevel;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference userDatabaseReference = database.getReference().child("user").child("0");
-
-    //appcompatimageview는 어케 연결하는거야.... 찾다가 지쳤어 미안해 ㅜㅜ
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        setting = (AppCompatImageView)view.findViewById(R.id.settingButton);
-//        setting.setOnClickListener(myListener);
-//
-//    }
-//
-//    View.OnClickListener myListener = new View.OnClickListener()
-//    {
-//        @Override
-//        public void onClick(View v) {
-//
-//        }
-//    };
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mypage, container, false);
@@ -69,6 +60,10 @@ public class FragmentMypage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.mypageView = view;
+
+        pbProgressLevel = (ProgressBar)mypageView.findViewById(R.id.userPointProgressBar);
+        tvProgressLevelName = (TextView) mypageView.findViewById(R.id.userLevelTextView);
+        ivProgressIcon = (ImageView)mypageView.findViewById(R.id.userLevelImageView);
 
         userDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,6 +75,8 @@ public class FragmentMypage extends Fragment {
                 tvName.setText(dataSnapshot.child("id").getValue(String.class));
                 tvPoint = mypageView.findViewById(R.id.userPointTextView);
                 tvPoint.setText(dataSnapshot.child("point").getValue(int.class) + "p");
+                userLevel = dataSnapshot.child("point").getValue(int.class);
+                setUserLevelProgress();
             }
 
             @Override
@@ -142,5 +139,33 @@ public class FragmentMypage extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void setUserLevelProgress(){
+        if(userLevel >= 0 && userLevel < 100){
+            pbProgressLevel.setProgress(userLevel);
+            ivProgressIcon.setImageResource(R.drawable.donor_level_01);
+            tvProgressLevelName.setText("오리지널 도너츠");
+        }
+        else if(userLevel >= 100 && userLevel < 200){
+            pbProgressLevel.setProgress(userLevel-100);
+            ivProgressIcon.setImageResource(R.drawable.donor_level_02);
+            tvProgressLevelName.setText("딸기시럽 도너츠");
+        }
+        else if(userLevel >= 200 && userLevel < 300){
+            pbProgressLevel.setProgress(userLevel-200);
+            ivProgressIcon.setImageResource(R.drawable.donor_level_03);
+            tvProgressLevelName.setText("레인보우 도너츠");
+        }
+        else if(userLevel >= 300 && userLevel < 400){
+            pbProgressLevel.setProgress(userLevel-300);
+            ivProgressIcon.setImageResource(R.drawable.donor_level_04);
+            tvProgressLevelName.setText("킹 도너츠");
+        }
+        else{
+            pbProgressLevel.setProgress(userLevel-400);
+            ivProgressIcon.setImageResource(R.drawable.donor_level_05);
+            tvProgressLevelName.setText("레인보우 킹 도너츠");
+        }
     }
 }
