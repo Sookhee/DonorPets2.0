@@ -56,37 +56,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/storyContentLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/notosanscjkkr_bold"
-                android:includeFontPadding="false"
-                android:text="도너츠 보호소에\n많은 기부 감사합니다!"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/greyish" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shelter_infomation"
                 android:layout_width="match_parent"
@@ -149,6 +118,35 @@
                 </com.loopeer.shadow.ShadowView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="도너츠 보호소에\n많은 기부 감사합니다!"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="15dp"
+                android:background="@color/greyish" />
+
+            <LinearLayout
+                android:id="@+id/storyContentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
