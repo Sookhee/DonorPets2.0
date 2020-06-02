@@ -27,11 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterDonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
+import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class ShelterProfileActivity extends AppCompatActivity {
@@ -44,6 +47,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
     TextView tvLikeCount;
     ImageView ivShelterImg;
     Button btnDonation;
+    Button btnShelterLike;
 
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
@@ -58,10 +62,13 @@ public class ShelterProfileActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private DatabaseReference shelterDatabaseReference;
     private DatabaseReference storyDatabaseReference = FirebaseDatabase.getInstance().getReference().child("story");
+    private DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("user").child("0");
     Query storyQuery;
 
     //
-    private String shelterPosition;
+    private String shelterPosition, shelterName, shelterPhone, shelterImg;
+    private Boolean isLike = false;
+    private int shelterLikeCount, shelterStoryCount;
     private ArrayList<DonationObjectData> donationObject = new ArrayList<>();
     private ArrayList<DonationObjectData> realDonationObjectList = new ArrayList<>();
     private ArrayList<String> realDonationList = new ArrayList<>();
@@ -75,22 +82,32 @@ public class ShelterProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         shelterPosition = intent.getExtras().getString("shelterPosition");
 
+        //보호소 프로필 정보 세팅
         FirebaseDatabase =FirebaseDatabase.getInstance();
         shelterDatabaseReference = FirebaseDatabase.getReference("shelter").child(shelterPosition);
         shelterDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String img = dataSnapshot.child("profileImg").getValue(String.class);
+                shelterName = dataSnapshot.child("name").getValue(String.class);
                 tvShelterName = findViewById(R.id.shelterNameTextView);
-                tvShelterName.setText(dataSnapshot.child("name").getValue(String.class));
+                tvShelterName.setText(shelterName);
+
+                shelterPhone = dataSnapshot.child("phone").getValue(String.class);
                 tvPhone = findViewById(R.id.shelterPhoneTextView);
-                tvPhone.setText(dataSnapshot.child("phone").getValue(String.class));
+                tvPhone.setText(shelterPhone);
+
+                shelterImg = dataSnapshot.child("profileImg").getValue(String.class);
                 ivShelterImg = findViewById(R.id.shelterProfileImageView);
-                Picasso.get().load(img).into(ivShelterImg);
+                Picasso.get().load(shelterImg).into(ivShelterImg);
+
+                shelterStoryCount = dataSnapshot.child("storyCount").getValue(int.class);
                 tvStoryCount = findViewById(R.id.storyCountTextView);
-                tvStoryCount.setText((dataSnapshot.child("storyCount").getValue(int.class).toString()));
+                tvStoryCount.setText(Integer.toString(shelterLikeCount));
+
                 tvDonorCount = findViewById(R.id.donorCountTextView);
                 tvDonorCount.setText((dataSnapshot.child("donorCount").getValue(int.class).toString()));
+
+                shelterLikeCount = Integer.parseInt(dataSnapshot.child("likeCount").getValue(int.class).toString());
                 tvLikeCount = findViewById(R.id.likeCountTextView);
                 tvLikeCount.setText((dataSnapshot.child("likeCount").getValue(int.class).toString()));
             }
@@ -101,6 +118,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        //보호소 스토리 recyclerView 세팅
         recyclerView = (RecyclerView)findViewById(R.id.shelterProfileRecyclerView);
         storyQuery = storyDatabaseReference.orderByChild("shelterPosition").equalTo(shelterPosition).limitToLast(2);
         storyQuery.addChildEventListener(new ChildEventListener() {
@@ -137,6 +155,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
             }
         });
 
+        //보호소 기부 물품 받아오기
         donationRecyclerView = (RecyclerView)findViewById(R.id.shelterDonationObjectRecyclerView);
         FirebaseDatabase.getReference("shelter").child(shelterPosition).child("donationObject").addValueEventListener(new ValueEventListener() {
             @Override
@@ -161,7 +180,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
-
+        //보호소 기부 버튼 눌렀을 때
         btnDonation = findViewById(R.id.donationButton);
         btnDonation.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -180,10 +199,97 @@ public class ShelterProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //보호소 좋아요 버튼 기능 구현
+        userDatabaseReference.child("likeShelter").child(shelterPosition).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (Boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_white);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                boolean isLike = (boolean)dataSnapshot.getValue();
+                if(isLike == true){
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_blue);
+                    setIsLike(true);
+                }
+                else{
+                    btnShelterLike.setBackgroundResource(R.drawable.icon_like_white);
+                    setIsLike(false);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btnShelterLike = (Button)findViewById(R.id.shelterLikeButton);
+        btnShelterLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isLike){ //true -> false
+
+                    //관심있는 보호소 false
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put(shelterPosition+"/isLike", false);
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
+
+                    //이 보호소를 좋아하는 사람들 count +1
+                    Map<String, Object> shelterCountMap = new HashMap<String, Object>();
+                    shelterCountMap.put("likeCount", shelterLikeCount-1);
+                    shelterDatabaseReference.updateChildren(shelterCountMap);
+
+                    //관심있는 보호소 리스트에서 삭제
+                    userDatabaseReference.child("likeShelterList").child(shelterPosition).removeValue();
+
+                }else{ //false -> true
+                    //관심있는 보호소 true
+                    Map<String, Object> isLikeMap = new HashMap<String, Object>();
+                    isLikeMap.put(shelterPosition+"/isLike", true);
+                    userDatabaseReference.child("likeShelter").updateChildren(isLikeMap);
+
+                    //이 보호소를 좋아하는 사람들 count +1
+                    Map<String, Object> shelterCountMap = new HashMap<String, Object>();
+                    shelterCountMap.put("likeCount", shelterLikeCount+1);
+                    shelterDatabaseReference.updateChildren(shelterCountMap);
+
+                    //관심있는 보호소 리스트에 추가
+                    Map<String, Object> likeShelterListMap = new HashMap<String, Object>();
+                    likeShelterListMap.put("name", shelterName);
+                    likeShelterListMap.put("phone", shelterPhone);
+                    likeShelterListMap.put("profileImg", shelterImg);
+                    likeShelterListMap.put("shelterPosition", shelterPosition);
+                    likeShelterListMap.put("storyCount", shelterStoryCount);
+                    userDatabaseReference.child("likeShelterList").child(shelterPosition).updateChildren(likeShelterListMap);
+
+                }
+            }
+        });
     }
 
+    //보호소 기부 물품 recyclerView 세팅
     private void setDonationObject(){
-
         donationAdapter = new ShelterDonationAdapter(this, donationObject);
         donationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         donationRecyclerView.setLayoutManager(donationLayoutManager);
@@ -207,5 +313,9 @@ public class ShelterProfileActivity extends AppCompatActivity {
 
     public void onBackClick(View v){
         super.onBackPressed();
+    }
+
+    public void setIsLike(boolean isLike){
+        this.isLike = isLike;
     }
 }
