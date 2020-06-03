@@ -43,7 +43,34 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+        <EditText
+            android:id="@+id/joinEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="9.8dp"
+            android:layout_marginEnd="15dp"
+            android:hint="이메일을 입력하세요."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email" />
+
+        <EditText
+            android:id="@+id/joinPasswdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="9.8dp"
+            android:layout_marginEnd="15dp"
+            android:hint="비밀번호를 입력하세요."
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pw" />
 
         <TextView
             android:id="@+id/guide"
@@ -57,55 +84,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/pw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guide"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="55dp"
-            android:textSize="13sp"
-            android:textColor="@color/black"
-            android:lineSpacingExtra="6sp"
-            android:text="이메일"
-            android:id="@+id/email"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9.8dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:hint="이메일을 입력하세요."
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email"
-            android:id="@+id/edit_email"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_email"
             android:layout_marginStart="15dp"
             android:layout_marginTop="35.2dp"
-            android:textSize="13sp"
-            android:textColor="@color/black"
             android:lineSpacingExtra="6sp"
             android:text="비밀번호"
-            android:id="@+id/pw"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9.8dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:inputType="textPassword"
-            android:hint="비밀번호를 입력하세요."
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pw"
-            android:id="@+id/edit_pw"/>
+            app:layout_constraintTop_toBottomOf="@id/joinEmailEditText" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="55dp"
+            android:lineSpacingExtra="6sp"
+            android:text="이메일"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guide" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -19,6 +19,7 @@
             android:layout_width="16.1dp"
             android:layout_height="15.9dp"
             android:layout_marginStart="15dp"
+            android:onClick="onBackClick"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/next"
@@ -70,7 +71,7 @@
             android:id="@+id/nickname"/>
 
         <EditText
-            android:id="@+id/edit_nickname"
+            android:id="@+id/joinNicknameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -85,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_nickname"
+            app:layout_constraintTop_toBottomOf="@id/joinNicknameEditText"
             android:layout_marginStart="15dp"
             android:layout_marginTop="35.2dp"
             android:textSize="13sp"
@@ -95,7 +96,7 @@
             android:id="@+id/city"/>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/joinAreaSpinner"
             android:layout_width="match_parent"
             android:layout_height="31dp"
             android:layout_marginStart="15dp"

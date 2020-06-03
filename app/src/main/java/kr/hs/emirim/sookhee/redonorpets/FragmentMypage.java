@@ -27,8 +27,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import kr.hs.emirim.sookhee.redonorpets.adapter.BadgeAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterAdapter;
+import kr.hs.emirim.sookhee.redonorpets.model.BadgeData;
 import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 
 public class FragmentMypage extends Fragment {
@@ -97,6 +101,7 @@ public class FragmentMypage extends Fragment {
         recyclerView = (RecyclerView)mypageView.findViewById(R.id.mypageShelterRecyclerView);
 
         resetShelterRecyclerView(mypageView);
+
     }
 
     public void resetShelterRecyclerView(View view){
@@ -135,6 +140,7 @@ public class FragmentMypage extends Fragment {
             }
         });
 
+        // 관심있는 보호소
         adapter = new ShelterAdapter(getActivity());
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);

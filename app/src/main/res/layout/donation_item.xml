@@ -46,6 +46,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="1"
+        android:enabled="false"
         android:clickable="false"
         android:textColor="@color/black"
         android:textSize="11sp"
