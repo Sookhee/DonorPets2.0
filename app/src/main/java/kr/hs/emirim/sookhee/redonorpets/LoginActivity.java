@@ -3,10 +3,13 @@ package kr.hs.emirim.sookhee.redonorpets;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,6 +43,30 @@ public class LoginActivity extends AppCompatActivity {
         etPasswd = (EditText)findViewById(R.id.loginPasswdEditText);
         btnLogin = (Button)findViewById(R.id.loginButton);
         tvGoJoin = (TextView)findViewById(R.id.loginGoJoinTextView);
+
+        etEmail.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER){
+                    etPasswd.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        etPasswd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow( etPasswd.getWindowToken(), 0);
+                    return true;
+
+                }
+                return false;
+            }
+        });
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {

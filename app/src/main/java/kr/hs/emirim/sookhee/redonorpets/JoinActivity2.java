@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +60,31 @@ public class JoinActivity2 extends AppCompatActivity {
         ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#137ef5")), 5, 9, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         guide.setText(ssb);
 
+
+        etJoinEmail.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER){
+                    etJoinPasswd.requestFocus();
+                    return true;
+
+                }
+                return false;
+            }
+        });
+
+        etJoinPasswd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow( etJoinPasswd.getWindowToken(), 0);
+                    return true;
+
+                }
+                return false;
+            }
+        });
 
         TextView tvGoLogin = (TextView)findViewById(R.id.next);
         tvGoLogin.setOnClickListener(new View.OnClickListener() {
