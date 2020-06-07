@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
     EditText etEmail;
     EditText etPasswd;
@@ -46,19 +48,27 @@ public class LoginActivity extends AppCompatActivity {
                 email = etEmail.getText().toString().trim();
                 passwd = etPasswd.getText().toString().trim();
 
-                firebaseAuth.signInWithEmailAndPassword(email, passwd)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Toast.makeText(getApplicationContext(), "이메일 형식을 다시 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,15}.$", passwd)){
+                    Toast.makeText(getApplicationContext(), "비밀번호 형식을 다시 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                    firebaseAuth.signInWithEmailAndPassword(email, passwd)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
 //                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호를 다시 확인해주세요", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "가입되지 않은 계정입니다", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-
+                            });
+                }
             }
         });
 
