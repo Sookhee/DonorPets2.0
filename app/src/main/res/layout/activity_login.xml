@@ -44,7 +44,7 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
-            android:textColor="@color/greyish"
+            android:textColor="@color/black"
             android:textColorHint="@color/greyish"
             android:textSize="13sp" />
 
@@ -64,10 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_regular"
-            android:hint="비밀번호를 입력해주세요"
+            android:hint="숫자,문자,특수문자 모두 포함 (8~15자)"
             android:includeFontPadding="false"
             android:inputType="textPassword"
-            android:textColor="@color/greyish"
+            android:textColor="@color/black"
             android:textColorHint="@color/greyish"
             android:textSize="13sp" />
 

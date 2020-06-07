@@ -54,14 +54,14 @@ public class JoinActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nickname = etJoinNickname.getText().toString();
+                nickname = etJoinNickname.getText().toString().trim();
                 area = spJoinArea.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(), "" + nickname + " " + area, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(),JoinActivity2.class);
                 intent.putExtra("nickname", nickname);
                 intent.putExtra("area", area);
                 startActivity(intent);
+                finish();
             }
         });
 
