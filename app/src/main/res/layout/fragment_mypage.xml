@@ -136,8 +136,7 @@
                         android:id="@+id/userProfileImageView"
                         android:layout_width="102dp"
                         android:layout_height="102dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_background" />
+                        android:scaleType="centerCrop" />
 
                 </com.loopeer.shadow.ShadowView>
 

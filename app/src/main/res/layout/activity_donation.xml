@@ -125,8 +125,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/shelterProfileImageView"
                             android:layout_width="33.5dp"
-                            android:layout_height="33.5dp"
-                            android:src="@drawable/ic_launcher_background" />
+                            android:layout_height="33.5dp" />
 
                     </com.loopeer.shadow.ShadowView>
 

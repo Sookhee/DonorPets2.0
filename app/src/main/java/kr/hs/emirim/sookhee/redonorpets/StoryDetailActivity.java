@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +39,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import kr.hs.emirim.sookhee.redonorpets.adapter.CommentAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.CommentData;
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class StoryDetailActivity extends AppCompatActivity {
 
@@ -64,6 +68,7 @@ public class StoryDetailActivity extends AppCompatActivity {
     private String storyPosition;
     private String shelterPosition;
     private boolean isLike = false;
+    private String userEmail = "";
     private int text = 0, img = 0;
     private int storyLikeCount, commentCount;
     final ArrayList<String> storyImgList = new ArrayList<>();
@@ -74,6 +79,9 @@ public class StoryDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_detail);
+
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        userEmail = pref.getString("userEmail", "");
 
         view = getLayoutInflater().from(this).inflate(R.layout.activity_story_detail, null);
         Intent intent = getIntent();
@@ -162,13 +170,29 @@ public class StoryDetailActivity extends AppCompatActivity {
         });
 
         //사용자 정보 불러오기
-        userDatabaseReference = FirebaseDatabase.getReference("user").child("0");
-        userDatabaseReference.addValueEventListener(new ValueEventListener() {
+        userDatabaseReference = FirebaseDatabase.getReference("user");
+        Query userQuery = userDatabaseReference.orderByChild("email").equalTo(userEmail);
+        userQuery.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 userName = dataSnapshot.child("id").getValue(String.class);
                 userProfile = dataSnapshot.child("profileImg").getValue(String.class);
                 Picasso.get().load(userProfile).into(ivUserProfile);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                adapter.deleteDataAndUpdate(key);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -300,7 +324,6 @@ public class StoryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String message = etComment.getText().toString();
-                Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).show();
                 if (!TextUtils.isEmpty(message)) {
                     etComment.setText("");
                     CommentData commentData = new CommentData();

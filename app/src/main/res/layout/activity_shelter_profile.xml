@@ -225,8 +225,7 @@
                         android:id="@+id/shelterProfileImageView"
                         android:layout_width="105dp"
                         android:layout_height="105dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_background" />
+                        android:scaleType="centerCrop" />
 
                 </com.loopeer.shadow.ShadowView>
             </androidx.constraintlayout.widget.ConstraintLayout>

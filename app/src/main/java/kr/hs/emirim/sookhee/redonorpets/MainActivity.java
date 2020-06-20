@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,15 +22,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        boolean isLogin = pref.getBoolean("isLogin", false);
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+        if(isLogin == false) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-        bottomNavigationView.setSelectedItemId(R.id.homeItem);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+
+            BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+            bottomNavigationView.setSelectedItemId(R.id.homeItem);
+        }
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{

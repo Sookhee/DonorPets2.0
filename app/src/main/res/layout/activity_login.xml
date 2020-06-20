@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_regular"
-            android:hint="숫자,문자,특수문자 모두 포함 (8~15자)"
+            android:hint="숫자,문자,특수문자 모두 포함 (6~15자)"
             android:includeFontPadding="false"
             android:inputType="textPassword"
             android:textColor="@color/black"

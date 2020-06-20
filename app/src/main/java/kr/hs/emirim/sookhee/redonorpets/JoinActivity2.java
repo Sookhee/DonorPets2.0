@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -24,8 +25,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import kr.hs.emirim.sookhee.redonorpets.model.CommentData;
+import kr.hs.emirim.sookhee.redonorpets.model.UserData;
 
 public class JoinActivity2 extends AppCompatActivity {
     Intent intent;
@@ -34,6 +42,7 @@ public class JoinActivity2 extends AppCompatActivity {
 
     String nickname, area, email, passwd;
 
+    private DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("user");
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -96,7 +105,7 @@ public class JoinActivity2 extends AppCompatActivity {
                 if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Toast.makeText(getApplicationContext(), "올바른 이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show();
                 }
-                else if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,15}.$", passwd)){
+                else if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{6,15}.$", passwd)){
                     Toast.makeText(getApplicationContext(), "올바른 비밀번호 형식이 아닙니다", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -107,8 +116,10 @@ public class JoinActivity2 extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(JoinActivity2.this, LoginActivity.class);
-                                        startActivity(intent);
+                                        UserData userData = new UserData(nickname, email, area);
+                                        userDatabaseReference.push().setValue(userData);
+
+                                        Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
                                         finish();
                                     } else {
                                         Toast.makeText(JoinActivity2.this, "이미 가입된 메일입니다", Toast.LENGTH_SHORT).show();

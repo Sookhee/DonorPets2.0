@@ -29,9 +29,10 @@
                 android:action="android.intent.action.VIEW"/>
         </Preference>
         <Preference
-            android:title="로그아웃"
+            android:id="@+id/logout"
             android:key="logout"
-            android:id="@+id/logout" />
+            android:onClick="onClickLogout"
+            android:title="로그아웃" />
     </PreferenceCategory>
 
 </PreferenceScreen>
