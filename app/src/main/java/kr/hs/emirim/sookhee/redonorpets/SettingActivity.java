@@ -28,6 +28,7 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean("isLogin", false);
+        editor.putString("userEmail", "");
         editor.commit();
 
         Intent intent;

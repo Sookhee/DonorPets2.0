@@ -22,16 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         boolean isLogin = pref.getBoolean("isLogin", false);
 
-        if(isLogin == false) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            super.onCreate(savedInstanceState);
+        if(isLogin == true) {
             setContentView(R.layout.activity_main);
 
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -40,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
             BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
             bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
             bottomNavigationView.setSelectedItemId(R.id.homeItem);
+        }
+        else{
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         }
     }
 
