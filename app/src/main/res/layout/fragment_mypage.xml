@@ -66,13 +66,14 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="0dp"
                     android:layout_height="7dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="20dp"
                     android:progressDrawable="@drawable/custom_progress"
-                    app:layout_constraintBottom_toBottomOf="@+id/shadow_view"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/shadow_view" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout8" />
 
                 <TextView
                     android:id="@+id/userLevelTextView"
@@ -91,15 +92,15 @@
                     android:id="@+id/userNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
                     android:text="DonorPets"
                     android:textColor="@color/black"
                     android:textSize="21sp"
-                    app:layout_constraintStart_toEndOf="@+id/shadow_view"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout8" />
 
                 <TextView
                     android:id="@+id/userPointTextView"
@@ -114,31 +115,48 @@
                     app:layout_constraintBottom_toTopOf="@+id/userPointProgressBar"
                     app:layout_constraintEnd_toEndOf="@+id/userPointProgressBar" />
 
-                <com.loopeer.shadow.ShadowView
-                    android:id="@+id/shadow_view"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:elevation="1.5dp"
-                    app:cornerRadius="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shadowColor="#26000000"
-                    app:shadowDy="2"
-                    app:shadowMarginBottom="15dp"
-                    app:shadowMarginLeft="5dp"
-                    app:shadowMarginRight="5dp"
-                    app:shadowMarginTop="0dp"
-                    app:shadowRadius="10dp">
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/userProfileImageView"
-                        android:layout_width="102dp"
-                        android:layout_height="102dp"
-                        android:scaleType="centerCrop" />
+                    <com.loopeer.shadow.ShadowView
+                        android:id="@+id/shadow_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:elevation="1.5dp"
+                        app:cornerRadius="80dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shadowColor="#26000000"
+                        app:shadowDy="4"
+                        app:shadowMargin="10dp"
+                        app:shadowRadius="10dp">
 
-                </com.loopeer.shadow.ShadowView>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/userProfileImageView"
+                            android:layout_width="98dp"
+                            android:layout_height="98dp"
+                            android:scaleType="centerCrop" />
+                    </com.loopeer.shadow.ShadowView>
+
+                    <ImageView
+                        android:id="@+id/editProfileImageImageView"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:elevation="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/icon_camera" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

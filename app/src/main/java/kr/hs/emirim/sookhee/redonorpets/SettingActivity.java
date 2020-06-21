@@ -35,4 +35,6 @@ public class SettingActivity extends AppCompatActivity {
         intent = new Intent(view.getContext(), LoginActivity.class);
         startActivity(intent);
     }
+
+
 }

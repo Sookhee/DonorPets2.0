@@ -73,7 +73,7 @@ public class StoryDetailActivity extends AppCompatActivity {
     private int storyLikeCount, commentCount;
     final ArrayList<String> storyImgList = new ArrayList<>();
     final ArrayList<String> storyTextList = new ArrayList<>();
-    private String userName, userProfile;
+    private String userName = "temporary", userProfile, putUserIsLike = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,40 @@ public class StoryDetailActivity extends AppCompatActivity {
         FirebaseDatabase =FirebaseDatabase.getInstance();
 
         lStoryContent = (LinearLayout)findViewById(R.id.storyContentLayout);
+
+        //사용자 정보 불러오기
+        userDatabaseReference = FirebaseDatabase.getReference("user");
+        Query userQuery = userDatabaseReference.orderByChild("email").equalTo(userEmail);
+        userQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                userName = dataSnapshot.child("id").getValue(String.class);
+                userProfile = dataSnapshot.child("profileImg").getValue(String.class);
+                Picasso.get().load(userProfile).into(ivUserProfile);
+                putUserIsLike = (userName + "/isLike");
+                Toast.makeText(getApplicationContext(), putUserIsLike, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                adapter.deleteDataAndUpdate(key);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //스토리 기본 정보 불러오기
         storyDatabaseReference = FirebaseDatabase.getReference("story").child(storyPosition);
@@ -169,41 +203,9 @@ public class StoryDetailActivity extends AppCompatActivity {
             }
         });
 
-        //사용자 정보 불러오기
-        userDatabaseReference = FirebaseDatabase.getReference("user");
-        Query userQuery = userDatabaseReference.orderByChild("email").equalTo(userEmail);
-        userQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                userName = dataSnapshot.child("id").getValue(String.class);
-                userProfile = dataSnapshot.child("profileImg").getValue(String.class);
-                Picasso.get().load(userProfile).into(ivUserProfile);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                String key = dataSnapshot.getKey();
-                adapter.deleteDataAndUpdate(key);
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
         //스토리 좋아요 버튼 기능 구현
-        storyDatabaseReference.child("liker").child("donor").addChildEventListener(new ChildEventListener() {
+        Query storyLikeQuery = storyDatabaseReference.child("liker").child(userName);
+        storyDatabaseReference.child("liker").child("ggkgk").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 boolean isLike = (Boolean)dataSnapshot.getValue();
@@ -252,7 +254,7 @@ public class StoryDetailActivity extends AppCompatActivity {
                 if(isLike){
                     //true -> false
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
-                    isLikeMap.put("donor/isLike", false);
+                    isLikeMap.put(putUserIsLike, false);
 
                     Map<String, Object> storyCountMap = new HashMap<String, Object>();
                     storyCountMap.put("likeCount", storyLikeCount-1);
@@ -263,7 +265,7 @@ public class StoryDetailActivity extends AppCompatActivity {
                 }else{
                     //false -> true
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
-                    isLikeMap.put("donor/isLike", true);
+                    isLikeMap.put(putUserIsLike, true);
 
                     Map<String, Object> storyCountMap = new HashMap<String, Object>();
                     storyCountMap.put("likeCount", storyLikeCount+1);

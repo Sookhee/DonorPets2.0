@@ -13,7 +13,7 @@ public class UserData {
         this.id = id;
         this.email = email;
         this.area = area;
-        this.profileImg = "https://firebasestorage.googleapis.com/v0/b/donorpetsver2.appspot.com/o/default-profile.jpg?alt=media&token=63f0941b-cbdf-4639-8fc7-def0ae9f2ffe";
+        this.profileImg = "https://firebasestorage.googleapis.com/v0/b/donorpetsver2.appspot.com/o/default-profile.png?alt=media&token=9913d8d6-552d-49d2-82a0-948e2bb85a27";
         this.donationCount = 0;
         this.point = 0;
     }
