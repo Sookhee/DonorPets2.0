@@ -106,7 +106,7 @@ public class DonationActivity extends AppCompatActivity {
             chip.setCheckable(true);
             chip.setCheckedIconVisible(false);
             chip.setChipIconSize(dm.density*15);
-            chip.setHeight((int)dm.density*70);
+            chip.setHeight((int)dm.density*55);
             chip.setChipStartPadding(dm.density*9);
             if(donationObject.get(i).getIsDonation()){
                 chip.setChipIcon(getResources().getDrawable(R.drawable.icon_check_true));
@@ -246,7 +246,6 @@ public class DonationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(checkTerms[1] == true && checkTerms[2] && totalPoint > 0){
-                    Toast.makeText(getApplicationContext(), "제출", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else if(totalPoint == 0){

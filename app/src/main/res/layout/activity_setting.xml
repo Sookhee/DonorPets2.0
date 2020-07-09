@@ -63,13 +63,13 @@
 
                 <ImageView
                     android:id="@+id/imageView21"
-                    android:layout_width="8dp"
+                    android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_marginEnd="15dp"
+                    android:background="@drawable/icon_right_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_home" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -120,6 +120,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -157,6 +159,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -175,13 +179,13 @@
 
                 <ImageView
                     android:id="@+id/imageView24"
-                    android:layout_width="8dp"
+                    android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_marginEnd="15dp"
+                    android:background="@drawable/icon_right_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icon_home" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView24"

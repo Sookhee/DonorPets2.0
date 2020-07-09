@@ -1,5 +1,7 @@
 package kr.hs.emirim.sookhee.redonorpets.model;
 
+import java.util.ArrayList;
+
 public class StoryData {
 
     public String title;
@@ -10,7 +12,6 @@ public class StoryData {
     public String storyPosition;
     public int likeCount;
     public int commentCount;
-
 
     public StoryData() {
     }

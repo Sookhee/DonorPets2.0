@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/donationButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +64,23 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/shelter_background" />
 
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/layer_shelter_profile" />
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="15dp"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +119,15 @@
                             android:textSize="20sp" />
                     </LinearLayout>
 
+                    <View
+                        android:id="@+id/view12"
+                        android:layout_width="0.6dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_weight="1"
+                        android:background="@color/greyish" />
+
                     <LinearLayout
                         android:id="@+id/donorCount"
                         android:layout_width="wrap_content"
@@ -139,6 +160,15 @@
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
+
+                    <View
+                        android:id="@+id/view13"
+                        android:layout_width="0.6dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_weight="1"
+                        android:background="@color/greyish" />
 
                     <LinearLayout
                         android:id="@+id/likeCount"
@@ -259,6 +289,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
+                    android:overScrollMode="never"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -293,6 +324,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView7" />

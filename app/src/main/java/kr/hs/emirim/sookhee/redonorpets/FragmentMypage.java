@@ -1,6 +1,5 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -52,15 +49,12 @@ public class FragmentMypage extends Fragment {
     Button btnSetting;
     ProgressBar pbProgressLevel;
     TextView tvProgressLevelName;
-    ImageView ivProgressIcon, ivEditProfile;
-
-    String userEmail = "";
+    ImageView ivProgressIcon;
 
     private int userLevel;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference userDatabaseReference = database.getReference().child("user");
-    Query userQuery;
+    DatabaseReference userDatabaseReference = database.getReference().child("user").child("-MAFju1Ieq4ZfwhhdhsR");
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mypage, container, false);
@@ -71,18 +65,13 @@ public class FragmentMypage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.mypageView = view;
 
-        SharedPreferences pref = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        userEmail = pref.getString("userEmail", "");
-
         pbProgressLevel = (ProgressBar)mypageView.findViewById(R.id.userPointProgressBar);
         tvProgressLevelName = (TextView) mypageView.findViewById(R.id.userLevelTextView);
         ivProgressIcon = (ImageView)mypageView.findViewById(R.id.userLevelImageView);
-        ivEditProfile = (ImageView)mypageView.findViewById(R.id.editProfileImageImageView);
 
-        userQuery = userDatabaseReference.orderByChild("email").equalTo(userEmail);
-        userQuery.addChildEventListener(new ChildEventListener() {
+        userDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String profileImg = dataSnapshot.child("profileImg").getValue(String.class).toString();
                 ivProfile = mypageView.findViewById(R.id.userProfileImageView);
                 Picasso.get().load(profileImg).into(ivProfile);
@@ -95,26 +84,10 @@ public class FragmentMypage extends Fragment {
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                String key = dataSnapshot.getKey();
-                adapter.deleteDataAndUpdate(key);
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
 
         btnSetting = (Button)mypageView.findViewById(R.id.settingButton);
         btnSetting.setOnClickListener(new View.OnClickListener() {
@@ -122,13 +95,6 @@ public class FragmentMypage extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SettingActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        ivEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "클릭", Toast.LENGTH_SHORT).show();
             }
         });
 

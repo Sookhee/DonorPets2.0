@@ -2,6 +2,7 @@ package kr.hs.emirim.sookhee.redonorpets.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
         holder.tvLikeCount.setText(Integer.toString(story.getLikeCount()));
         holder.tvCommentCount.setText(Integer.toString(story.getCommentCount()));
         Picasso.get().load(img).into(holder.ivMainImg);
+
 
     }
 

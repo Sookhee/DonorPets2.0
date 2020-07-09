@@ -62,7 +62,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private DatabaseReference shelterDatabaseReference;
     private DatabaseReference storyDatabaseReference = FirebaseDatabase.getInstance().getReference().child("story");
-    private DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("user").child("0");
+    private DatabaseReference userDatabaseReference = FirebaseDatabase.getInstance().getReference().child("user").child("-MAFju1Ieq4ZfwhhdhsR");
     Query storyQuery;
 
     //
@@ -102,7 +102,7 @@ public class ShelterProfileActivity extends AppCompatActivity {
 
                 shelterStoryCount = dataSnapshot.child("storyCount").getValue(int.class);
                 tvStoryCount = findViewById(R.id.storyCountTextView);
-                tvStoryCount.setText(Integer.toString(shelterLikeCount));
+                tvStoryCount.setText(Integer.toString(shelterStoryCount));
 
                 tvDonorCount = findViewById(R.id.donorCountTextView);
                 tvDonorCount.setText((dataSnapshot.child("donorCount").getValue(int.class).toString()));

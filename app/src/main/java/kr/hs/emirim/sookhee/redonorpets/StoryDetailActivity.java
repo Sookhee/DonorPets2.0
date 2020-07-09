@@ -90,12 +90,12 @@ public class StoryDetailActivity extends AppCompatActivity {
 
         btnStoryLike = (Button) findViewById(R.id.storyLkeButton);
         tvLikeCount = findViewById(R.id.storyLikeCountTextView);
-        recyclerView = (RecyclerView)findViewById(R.id.storyDetailCommentLayout);
+        recyclerView = (RecyclerView) findViewById(R.id.storyDetailCommentLayout);
         ivUserProfile = findViewById(R.id.storyDetailCommentUserProfileImageView);
 
-        FirebaseDatabase =FirebaseDatabase.getInstance();
+        FirebaseDatabase = FirebaseDatabase.getInstance();
 
-        lStoryContent = (LinearLayout)findViewById(R.id.storyContentLayout);
+        lStoryContent = (LinearLayout) findViewById(R.id.storyContentLayout);
 
         //사용자 정보 불러오기
         userDatabaseReference = FirebaseDatabase.getReference("user");
@@ -107,7 +107,6 @@ public class StoryDetailActivity extends AppCompatActivity {
                 userProfile = dataSnapshot.child("profileImg").getValue(String.class);
                 Picasso.get().load(userProfile).into(ivUserProfile);
                 putUserIsLike = (userName + "/isLike");
-                Toast.makeText(getApplicationContext(), putUserIsLike, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -205,15 +204,14 @@ public class StoryDetailActivity extends AppCompatActivity {
 
         //스토리 좋아요 버튼 기능 구현
         Query storyLikeQuery = storyDatabaseReference.child("liker").child(userName);
-        storyDatabaseReference.child("liker").child("ggkgk").addChildEventListener(new ChildEventListener() {
+        storyDatabaseReference.child("liker").child("sookhee").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                boolean isLike = (Boolean)dataSnapshot.getValue();
-                if(isLike == true){
+                boolean isLike = (Boolean) dataSnapshot.getValue();
+                if (isLike == true) {
                     btnStoryLike.setBackgroundResource(R.drawable.icon_like_blue);
                     setIsLike(true);
-                }
-                else{
+                } else {
                     btnStoryLike.setBackgroundResource(R.drawable.icon_like_gray);
                     setIsLike(false);
                 }
@@ -221,12 +219,11 @@ public class StoryDetailActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                boolean isLike = (boolean)dataSnapshot.getValue();
-                if(isLike == true){
+                boolean isLike = (boolean) dataSnapshot.getValue();
+                if (isLike == true) {
                     btnStoryLike.setBackgroundResource(R.drawable.icon_like_blue);
                     setIsLike(true);
-                }
-                else{
+                } else {
                     btnStoryLike.setBackgroundResource(R.drawable.icon_like_gray);
                     setIsLike(false);
                 }
@@ -251,24 +248,24 @@ public class StoryDetailActivity extends AppCompatActivity {
         btnStoryLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLike){
+                if (isLike) {
                     //true -> false
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
                     isLikeMap.put(putUserIsLike, false);
 
                     Map<String, Object> storyCountMap = new HashMap<String, Object>();
-                    storyCountMap.put("likeCount", storyLikeCount-1);
+                    storyCountMap.put("likeCount", storyLikeCount - 1);
 
                     storyDatabaseReference.child("liker").updateChildren(isLikeMap);
                     storyDatabaseReference.updateChildren(storyCountMap);
 
-                }else{
+                } else {
                     //false -> true
                     Map<String, Object> isLikeMap = new HashMap<String, Object>();
                     isLikeMap.put(putUserIsLike, true);
 
                     Map<String, Object> storyCountMap = new HashMap<String, Object>();
-                    storyCountMap.put("likeCount", storyLikeCount+1);
+                    storyCountMap.put("likeCount", storyLikeCount + 1);
 
                     storyDatabaseReference.child("liker").updateChildren(isLikeMap);
                     storyDatabaseReference.updateChildren(storyCountMap);
@@ -335,7 +332,7 @@ public class StoryDetailActivity extends AppCompatActivity {
                     storyDatabaseReference.child("comment").push().setValue(commentData);
 
                     Map<String, Object> commentCountMap = new HashMap<String, Object>();
-                    commentCountMap.put("commentCount", commentCount+1);
+                    commentCountMap.put("commentCount", commentCount + 1);
 
                     storyDatabaseReference.updateChildren(commentCountMap);
                 }
@@ -344,51 +341,50 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     }
 
-    public void onBackClick(View v){
+    public void onBackClick(View v) {
         super.onBackPressed();
     }
 
-    public void setIsLike(boolean isLike){
+    public void setIsLike(boolean isLike) {
         this.isLike = isLike;
     }
 
-    public void onShelterProfileClick(View v){
+    public void onShelterProfileClick(View v) {
         Intent intent;
         intent = new Intent(v.getContext(), ShelterProfileActivity.class);
         intent.putExtra("shelterPosition", shelterPosition);
         startActivity(intent);
     }
 
-    public void setStoryContentLayout(int text, int img){
+    public void setStoryContentLayout(int text, int img) {
         lStoryContent.removeAllViews();
-        do{
-            if(text < storyTextList.size()){
+        do {
+            if (text < storyTextList.size()) {
                 TextView tv = new TextView(this);
                 tv.setText(storyTextList.get(text));
                 tv.setLineSpacing(0, 1.1f);
-                tv.setPadding(0, (int)convertDpToPixel(15), 0, 0);
+                tv.setPadding(0, (int) convertDpToPixel(15), 0, 0);
                 tv.setTypeface(ResourcesCompat.getFont(this, R.font.notosanscjkkr_regular));
                 tv.setIncludeFontPadding(false);
                 tv.setTextColor(Color.BLACK);
                 lStoryContent.addView(tv);
             }
-            if(img < storyImgList.size()){
+            if (img < storyImgList.size()) {
                 ImageView iv = new ImageView(this);
                 Picasso.get().load(storyImgList.get(img)).into(iv);
                 iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                iv.setPadding(0, (int)convertDpToPixel(15), 0, 0);
+                iv.setPadding(0, (int) convertDpToPixel(15), 0, 0);
                 lStoryContent.addView(iv);
             }
             text++;
             img++;
-        }while(text < storyTextList.size() || img < storyImgList.size());
+        } while (text < storyTextList.size() || img < storyImgList.size());
     }
 
-    public float convertDpToPixel(float dp){
+    public float convertDpToPixel(float dp) {
         Resources resources = this.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        float px = dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
         return px;
     }
-
 }

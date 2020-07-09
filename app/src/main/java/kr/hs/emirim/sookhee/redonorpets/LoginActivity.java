@@ -1,6 +1,7 @@
 package kr.hs.emirim.sookhee.redonorpets;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -22,8 +23,16 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.regex.Pattern;
+
+import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etEmail;
@@ -34,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     String email, passwd;
 
     FirebaseAuth firebaseAuth;
+    private FirebaseDatabase FirebaseDatabase;
+    private DatabaseReference userDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         etPasswd = (EditText)findViewById(R.id.loginPasswdEditText);
         btnLogin = (Button)findViewById(R.id.loginButton);
         tvGoJoin = (TextView)findViewById(R.id.loginGoJoinTextView);
+
+        FirebaseDatabase =FirebaseDatabase.getInstance();
+        userDatabaseReference = FirebaseDatabase.getReference("user");
 
         etEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -93,10 +107,42 @@ public class LoginActivity extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 
                                         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = pref.edit();
+                                        final SharedPreferences.Editor editor = pref.edit();
                                         editor.putString("userEmail", email);
                                         editor.putBoolean("isLogin", true);
                                         editor.commit();
+
+                                        Query userQuery = userDatabaseReference.orderByChild("email").equalTo(email);
+                                        userQuery.addChildEventListener(new ChildEventListener() {
+                                            @Override
+                                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                                String key = dataSnapshot.getKey();
+
+                                                Log.e("KEY", key);
+                                                editor.putString("userKey", key);
+                                            }
+
+                                            @Override
+                                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                                String key = dataSnapshot.getKey();
+
+                                                editor.putString("userKey", key);
+                                            }
+
+                                            @Override
+                                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                                            }
+
+                                            @Override
+                                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
 
                                         startActivity(intent);
                                         finish();
