@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "614450532092",
+    "project_id": "donerpets-1e943",
+    "storage_bucket": "donerpets-1e943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614450532092:android:e654d56beecbf50dd45179",
+        "android_client_info": {
+          "package_name": "kr.hs.emirim.sookhee.redonorpets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614450532092-edj9ffppk283o5id3n5da2jr2er8g3jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWjYckMrMHAry7qD2I4n2EI1xxh5dT3rQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614450532092-edj9ffppk283o5id3n5da2jr2er8g3jg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
