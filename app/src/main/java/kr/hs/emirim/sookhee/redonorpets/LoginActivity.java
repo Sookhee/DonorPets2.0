@@ -32,7 +32,7 @@ import com.google.firebase.database.Query;
 
 import java.util.regex.Pattern;
 
-import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
+import kr.hs.emirim.sookhee.redonorpets.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etEmail;
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                                         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
                                         final SharedPreferences.Editor editor = pref.edit();
