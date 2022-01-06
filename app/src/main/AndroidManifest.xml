@@ -18,7 +18,9 @@
         <activity android:name=".DonationActivity" />
         <activity android:name=".ShelterProfileActivity" />
         <activity android:name=".StoryDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
