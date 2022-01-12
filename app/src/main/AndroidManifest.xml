@@ -19,7 +19,7 @@
         <activity android:name=".ShelterProfileActivity" />
         <activity android:name=".StoryDetailActivity" />
         <activity
-            android:name=".main.MainActivity"
+            android:name="kr.hs.emirim.sookhee.redonorpets.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

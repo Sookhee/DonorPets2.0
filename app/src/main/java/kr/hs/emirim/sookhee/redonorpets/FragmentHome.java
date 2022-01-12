@@ -52,50 +52,50 @@ public class FragmentHome extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.homeView = view;
 
-        recyclerView = (RecyclerView)homeView.findViewById(R.id.homeStoryRecyclerView);
-
-        resetStoryRecyclerView(homeView);
-
-        vCheck1 = homeView.findViewById(R.id.mainCheckView1);
-        vCheck2 = homeView.findViewById(R.id.mainCheckView2);
-        vCheck3 = homeView.findViewById(R.id.mainCheckView3);
-
-        tvCheck1 = (TextView)homeView.findViewById(R.id.mainCheckTextView1);
-        tvCheck1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setView1();
-                checkView = 1;
-            }
-        });
-
-        tvCheck2 = (TextView)homeView.findViewById(R.id.mainCheckTextView2);
-        tvCheck2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setView2();
-                checkView = 2;
-            }
-        });
-
-        tvCheck3 = (TextView)homeView.findViewById(R.id.mainCheckTextView3);
-        tvCheck3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setView3();
-                checkView = 3;
-            }
-        });
-
-        if(checkView == 1){
-            setView1();
-        }
-        else if(checkView == 2){
-            setView2();
-        }
-        else if(checkView == 3){
-            setView3();
-        }
+        recyclerView = (RecyclerView)homeView.findViewById(R.id.storyRecyclerView);
+//
+//        resetStoryRecyclerView(homeView);
+//
+//        vCheck1 = homeView.findViewById(R.id.mainCheckView1);
+//        vCheck2 = homeView.findViewById(R.id.mainCheckView2);
+//        vCheck3 = homeView.findViewById(R.id.mainCheckView3);
+//
+//        tvCheck1 = (TextView)homeView.findViewById(R.id.mainCheckTextView1);
+//        tvCheck1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setView1();
+//                checkView = 1;
+//            }
+//        });
+//
+//        tvCheck2 = (TextView)homeView.findViewById(R.id.mainCheckTextView2);
+//        tvCheck2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setView2();
+//                checkView = 2;
+//            }
+//        });
+//
+//        tvCheck3 = (TextView)homeView.findViewById(R.id.mainCheckTextView3);
+//        tvCheck3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setView3();
+//                checkView = 3;
+//            }
+//        });
+//
+//        if(checkView == 1){
+//            setView1();
+//        }
+//        else if(checkView == 2){
+//            setView2();
+//        }
+//        else if(checkView == 3){
+//            setView3();
+//        }
 
     }
 

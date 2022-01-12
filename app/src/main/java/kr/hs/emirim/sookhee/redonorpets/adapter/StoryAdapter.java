@@ -2,7 +2,6 @@ package kr.hs.emirim.sookhee.redonorpets.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mCtx).inflate(R.layout.story_item, parent, false);
+        View v = LayoutInflater.from(mCtx).inflate(R.layout.item_story, parent, false);
 
         return new CustomViewHolder(v);
     }
@@ -77,10 +76,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
 
             this.pView = itemView;
             tvTitle = itemView.findViewById(R.id.storyTitle);
-            tvShelter = itemView.findViewById(R.id.storyShelter);
-            tvLikeCount = itemView.findViewById(R.id.storyLikeCountTextView);
-            tvCommentCount = itemView.findViewById(R.id.storyCommentCountTextView);
-            ivMainImg = itemView.findViewById(R.id.storyMainImg);
+//            tvShelter = itemView.findViewById(R.id.storyShelter);
+//            tvLikeCount = itemView.findViewById(R.id.storyLikeCountTextView);
+//            tvCommentCount = itemView.findViewById(R.id.storyCommentCountTextView);
+//            ivMainImg = itemView.findViewById(R.id.storyMainImg);
 
             itemView.setOnClickListener(new View.OnClickListener(){
 

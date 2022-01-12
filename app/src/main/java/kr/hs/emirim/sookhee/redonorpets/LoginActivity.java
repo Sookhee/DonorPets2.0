@@ -32,7 +32,7 @@ import com.google.firebase.database.Query;
 
 import java.util.regex.Pattern;
 
-import kr.hs.emirim.sookhee.redonorpets.main.MainActivity;
+import kr.hs.emirim.sookhee.redonorpets.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etEmail;

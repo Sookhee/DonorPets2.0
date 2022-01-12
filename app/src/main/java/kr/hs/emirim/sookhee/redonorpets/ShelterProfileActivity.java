@@ -29,13 +29,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import kr.hs.emirim.sookhee.redonorpets.adapter.DonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.ShelterDonationAdapter;
 import kr.hs.emirim.sookhee.redonorpets.adapter.StoryAdapter;
 import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
-import kr.hs.emirim.sookhee.redonorpets.model.ShelterData;
 import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
+import kr.hs.emirim.sookhee.redonorpets.ui.home.StoryFeedAdapter;
 
 public class ShelterProfileActivity extends AppCompatActivity {
     public static Context mContext;

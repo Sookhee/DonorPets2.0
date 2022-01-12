@@ -10,8 +10,7 @@
     </style>
 
     <!-- Bottom navigation theme. -->
-    <style name="Widget.BottomNavigationView"
-        parent="Widget.Design.BottomNavigationView">
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/notosanscjkkr_medium</item>
         <item name="android:textSize">8sp</item>
         <item name="iconPadding">0dp</item>
@@ -25,6 +24,21 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Custom Tab -->
+    <style name="CustomTab">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabGravity">center</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorColor">@color/deep_sky_blue</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabSelectedTextColor">@color/deep_sky_blue</item>
+        <item name="tabTextColor">@color/greyish</item>
+    </style>
+
+    <style name="TabTextAppearance">
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
