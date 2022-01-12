@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_marginRight="15dp">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <import type="kotlin.Unit" />
+
+        <import type="kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter" />
+
+        <variable
+            name="item"
+            type="Shelter" />
+
+        <variable
+            name="onItemClick"
+            type="Function1&lt;Shelter, Unit>" />
+    </data>
 
     <com.loopeer.shadow.ShadowView
-        android:id="@+id/shadow_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        android:background="#dddddd"
-        app:cornerRadius="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="-8dp"
+        app:cornerRadius="8dp"
+        app:shadowColor="#dddddd"
+        app:shadowMargin="8dp"
+        app:shadowRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{()->onItemClick.invoke(item)}">
 
             <ImageView
-                android:id="@+id/shelterProfileImageView"
+                android:id="@+id/ivShelterProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
@@ -34,11 +45,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/shalterLayoutImageView"
+            <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="1dp"
                 android:background="#44333333"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,41 +55,40 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/shelterNameTextView"
+                android:id="@+id/tvShelterName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
-                android:text="도너츠 유기견 보호소"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="도너츠 유기견 보호소" />
 
             <TextView
-                android:id="@+id/shelterStoryCountTextView"
+                android:id="@+id/tvStoryCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="32dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
-                android:text="18개의 스토리"
                 android:textColor="@color/white"
-                android:textSize="8sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="18개의 스토리" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.loopeer.shadow.ShadowView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
