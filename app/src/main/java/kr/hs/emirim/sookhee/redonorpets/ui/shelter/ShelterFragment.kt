@@ -1,5 +1,6 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.shelter
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -96,7 +97,9 @@ class ShelterFragment : Fragment() {
     private fun initRecyclerView() {
         binding.shelterRecyclerView.adapter = ShelterAdapter().apply {
             onItemClick = {
+                val intent = Intent(context, ShelterProfileActivity::class.java)
 
+                startActivity(intent)
             }
         }
     }

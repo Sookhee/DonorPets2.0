@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.shelter.ShelterProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.story.StoryActivity"
             android:exported="true" />
         <activity android:name=".LoginActivity" />
