@@ -6,4 +6,9 @@
     <string name="setting">환경설정</string>
     <string name="donation">기부하기</string>
     <string name="story">스토리</string>
+
+    // story
+    <string name="add_comment">게시</string>
+    <string name="add_comment_hint">댓글달기</string>
+    <string name="like_count">%d명이 응원합니다</string>
 </resources>

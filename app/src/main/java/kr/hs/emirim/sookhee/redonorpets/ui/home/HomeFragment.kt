@@ -1,5 +1,6 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import kr.hs.emirim.sookhee.redonorpets.databinding.FragmentHomeBinding
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.StoryFeed
 import kr.hs.emirim.sookhee.redonorpets.ui.UiState
+import kr.hs.emirim.sookhee.redonorpets.ui.story.StoryActivity
 
 /**
  *  HomeFragment.kt
@@ -96,7 +98,9 @@ class HomeFragment : Fragment() {
     private fun initRecyclerView() {
         binding.storyRecyclerView.adapter = StoryFeedAdapter().apply {
             onItemClick = {
-                // TODO : move to StoryDetailActivity
+                val intent = Intent(context, StoryActivity::class.java)
+
+                startActivity(intent)
             }
         }
     }

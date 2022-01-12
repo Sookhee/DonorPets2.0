@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 import kr.hs.emirim.sookhee.redonorpets.R;
 import kr.hs.emirim.sookhee.redonorpets.model.StoryData;
-import kr.hs.emirim.sookhee.redonorpets.StoryDetailActivity;
+import kr.hs.emirim.sookhee.redonorpets.ui.story.StoryActivity;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHolder> {
 
@@ -86,7 +86,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.CustomViewHo
                 @Override
                 public void onClick(View v){
                     Intent intent;
-                    intent = new Intent(v.getContext(), StoryDetailActivity.class);
+                    intent = new Intent(v.getContext(), StoryActivity.class);
                     intent.putExtra("storyPosition",  storyPosition.get(getItemCount() - 1 - getAdapterPosition()));
                     intent.putExtra("shelterPosition",  shelterPosition.get(getItemCount() - 1 - getAdapterPosition()));
                     v.getContext().startActivity(intent);
