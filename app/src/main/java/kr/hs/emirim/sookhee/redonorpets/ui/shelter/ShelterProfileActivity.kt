@@ -3,6 +3,7 @@ package kr.hs.emirim.sookhee.redonorpets.ui.shelter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityShelterProfileBinding
 
 class ShelterProfileActivity : AppCompatActivity() {
@@ -15,5 +16,14 @@ class ShelterProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(ShelterViewModel::class.java)
 
         setContentView(binding.root)
+
+        viewModel.getShelterData("")
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.shelterData.asLiveData().observe(this) {
+            binding.shelter = it
+        }
     }
 }

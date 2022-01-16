@@ -13,5 +13,8 @@ data class Shelter(
     val area: String = "",
     val phone: String = "",
     val profileImage: String = "",
-    val storyCount: Int = 0
+    val storyCount: Int = 0,
+    val donorCount: Int = 0,
+    val likeCount: Int = 0,
+    val productList: Map<String, String> = emptyMap()
 )
