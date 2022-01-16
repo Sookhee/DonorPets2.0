@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ShelterProfileActivity">
+    tools:context=".ui.shelter.ShelterProfileActivity">
 
     <Button
         android:id="@+id/donationButton"
@@ -14,7 +14,7 @@
         android:background="@color/deep_sky_blue"
         android:fontFamily="@font/notosanscjkkr_medium"
         android:lineSpacingExtra="7.5sp"
-        android:text="이 보호소에 기부하기"
+        android:text="@string/button_donation"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,346 +35,270 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <View
-                android:id="@+id/view"
+            <ImageView
+                android:id="@+id/ivProfileBackground"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/shelter_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivProfileBackgroundLayer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/layer_shelter_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.loopeer.shadow.ShadowView
+                android:id="@+id/svShelterProfile"
                 android:layout_width="wrap_content"
-                android:layout_height="7.5dp"
+                android:layout_height="wrap_content"
+                android:elevation="1.5dp"
+                app:cornerRadius="80dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivProfileBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProfileBackground"
+                app:shadowColor="#26000000"
+                app:shadowDy="2"
+                app:shadowMargin="16dp"
+                app:shadowRadius="6dp"
+                tools:ignore="UnusedAttribute">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivShelterProfile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop" />
+
+            </com.loopeer.shadow.ShadowView>
+
+            <TextView
+                android:id="@+id/tvShelterName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/svShelterProfile"
+                tools:text="도너츠 유기견 보호소" />
+
+            <TextView
+                android:id="@+id/tvShelterPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/greyish"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvShelterName"
+                tools:text="010-0000-0000" />
+
+            <TextView
+                android:id="@+id/tvItemStoryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/item_story"
+                android:textColor="@color/greyish"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/itemDivider1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvShelterPhone" />
+
+            <TextView
+                android:id="@+id/tvItemStoryCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tvItemStoryTitle"
+                app:layout_constraintStart_toStartOf="@id/tvItemStoryTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvItemStoryTitle"
+                tools:text="00" />
+
+            <View
+                android:id="@+id/itemDivider1"
+                android:layout_width="0.5dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="32dp"
+                android:background="@color/greyish"
+                app:layout_constraintBottom_toBottomOf="@id/tvItemStoryCount"
+                app:layout_constraintEnd_toStartOf="@id/tvItemDonorTitle"
+                app:layout_constraintStart_toEndOf="@id/tvItemStoryTitle"
+                app:layout_constraintTop_toTopOf="@id/tvItemStoryTitle" />
+
+            <TextView
+                android:id="@+id/tvItemDonorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/item_donor"
+                android:textColor="@color/greyish"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/itemDivider2"
+                app:layout_constraintStart_toEndOf="@id/itemDivider1"
+                app:layout_constraintTop_toTopOf="@id/tvItemStoryTitle" />
+
+            <TextView
+                android:id="@+id/tvItemDonorCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tvItemDonorTitle"
+                app:layout_constraintStart_toStartOf="@id/tvItemDonorTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvItemDonorTitle"
+                tools:text="00" />
+
+            <View
+                android:id="@+id/itemDivider2"
+                android:layout_width="0.5dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="32dp"
+                android:background="@color/greyish"
+                app:layout_constraintBottom_toBottomOf="@id/tvItemDonorCount"
+                app:layout_constraintEnd_toStartOf="@id/tvItemLikeTitle"
+                app:layout_constraintStart_toEndOf="@id/tvItemDonorTitle"
+                app:layout_constraintTop_toTopOf="@id/tvItemDonorTitle" />
+
+            <TextView
+                android:id="@+id/tvItemLikeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/item_like"
+                android:textColor="@color/greyish"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemDivider2"
+                app:layout_constraintTop_toTopOf="@id/tvItemStoryTitle" />
+
+            <TextView
+                android:id="@+id/tvItemLikeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/tvItemLikeTitle"
+                app:layout_constraintStart_toStartOf="@id/tvItemLikeTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvItemLikeTitle"
+                tools:text="00" />
+
+            <View
+                android:id="@+id/profileDivider"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
                 android:layout_marginTop="15dp"
                 android:background="#e8e8e8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shelterProfileLayout" />
+                app:layout_constraintTop_toBottomOf="@id/tvItemStoryCount" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/shelterProfileLayout"
+            <TextView
+                android:id="@+id/tvTitleProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/item_product"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileDivider" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingStart="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/tvTitleProduct"
+                tools:ignore="RtlSymmetry"
+                tools:listitem="@layout/shelter_donation_item" />
 
-                <ImageView
-                    android:id="@+id/shelterBackgroundImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/shelter_background" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/layer_shelter_profile" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/shelterPhoneTextView">
-
-                    <LinearLayout
-                        android:id="@+id/storyCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/storyTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanscjkkr_regular"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="6sp"
-                            android:text="스토리"
-                            android:textColor="@color/greyish"
-                            android:textSize="12.5sp" />
-
-                        <TextView
-                            android:id="@+id/storyCountTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2.5dp"
-                            android:fontFamily="@font/notosanscjkkr_medium"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="5sp"
-                            android:text="00"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/view12"
-                        android:layout_width="0.6dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginRight="35dp"
-                        android:layout_weight="1"
-                        android:background="@color/greyish" />
-
-                    <LinearLayout
-                        android:id="@+id/donorCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/donorTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanscjkkr_regular"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="6sp"
-                            android:text="후원자"
-                            android:textColor="@color/greyish"
-                            android:textSize="12.5sp" />
-
-                        <TextView
-                            android:id="@+id/donorCountTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2.5dp"
-                            android:fontFamily="@font/notosanscjkkr_medium"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="5sp"
-                            android:text="00"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/view13"
-                        android:layout_width="0.6dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="35dp"
-                        android:layout_marginRight="35dp"
-                        android:layout_weight="1"
-                        android:background="@color/greyish" />
-
-                    <LinearLayout
-                        android:id="@+id/likeCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/likeTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanscjkkr_regular"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="6sp"
-                            android:text="관심"
-                            android:textColor="@color/greyish"
-                            android:textSize="12.5sp" />
-
-                        <TextView
-                            android:id="@+id/likeCountTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2.5dp"
-                            android:fontFamily="@font/notosanscjkkr_medium"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="5sp"
-                            android:text="00"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/shelterPhoneTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="4.5sp"
-                    android:text="010-0000-0000"
-                    android:textColor="@color/greyish"
-                    android:textSize="10sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shelterNameTextView" />
-
-                <TextView
-                    android:id="@+id/shelterNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="9.5sp"
-                    android:text="도너츠 유기견 보호소"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shadow_view" />
-
-                <com.loopeer.shadow.ShadowView
-                    android:id="@+id/shadow_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
-                    android:elevation="1.5dp"
-                    app:cornerRadius="80dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shadowColor="#26000000"
-                    app:shadowDy="2"
-                    app:shadowMarginBottom="7.5dp"
-                    app:shadowMarginLeft="15dp"
-                    app:shadowMarginRight="15dp"
-                    app:shadowMarginTop="15dp"
-                    app:shadowRadius="6dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/shelterProfileImageView"
-                        android:layout_width="105dp"
-                        android:layout_height="105dp"
-                        android:scaleType="centerCrop" />
-
-                </com.loopeer.shadow.ShadowView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/shelterDonationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
+            <TextView
+                android:id="@+id/tvTitleStory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/item_story"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view">
+                app:layout_constraintTop_toBottomOf="@id/productRecyclerView" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="17.5sp"
-                    android:text="기부품목"
-                    android:textColor="@color/black"
-                    android:textSize="17.5sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/shelterDonationObjectRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:overScrollMode="never"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/shelterStoryLayout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/storyRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shelterDonationLayout">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="8.5sp"
-                    android:text="스토리"
-                    android:textColor="@color/black"
-                    android:textSize="17.5sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/shelterProfileRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:overScrollMode="never"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView7" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/tvTitleStory"
+                tools:listitem="@layout/item_story" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/icon_back_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="16.1dp"
-            android:layout_height="15.9dp"
-            android:layout_marginStart="15dp"
-            android:onClick="onBackClick"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-            app:srcCompat="@drawable/icon_back_white" />
-
-        <Button
-            android:id="@+id/shelterLikeButton"
-            android:layout_width="20dp"
-            android:layout_height="18dp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-            android:stateListAnimator="@null"
-            android:background="@drawable/icon_like_white" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/notosanscjkkr_medium"
-            android:lineSpacingExtra="7.5sp"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/btnLike"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/icon_like_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

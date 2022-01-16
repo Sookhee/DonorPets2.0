@@ -22,7 +22,6 @@
         <activity android:name=".EditPasswdActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".DonationActivity" />
-        <activity android:name=".ShelterProfileActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

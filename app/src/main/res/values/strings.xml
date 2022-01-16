@@ -11,4 +11,12 @@
     <string name="add_comment">게시</string>
     <string name="add_comment_hint">댓글달기</string>
     <string name="like_count">%d명이 응원합니다</string>
+
+    // shelter profile
+    <string name="button_donation">이 보호소에 기부하기</string>
+    <string name="item_story">스토리</string>
+    <string name="item_donor">후원자</string>
+    <string name="item_like">관심</string>
+    <string name="item_product">기부품목</string>
+
 </resources>

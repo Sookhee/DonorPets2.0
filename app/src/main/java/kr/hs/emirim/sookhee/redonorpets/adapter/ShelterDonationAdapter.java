@@ -20,7 +20,6 @@ import java.util.List;
 
 import kr.hs.emirim.sookhee.redonorpets.DonationActivity;
 import kr.hs.emirim.sookhee.redonorpets.R;
-import kr.hs.emirim.sookhee.redonorpets.ShelterProfileActivity;
 import kr.hs.emirim.sookhee.redonorpets.model.DonationObjectData;
 
 public class ShelterDonationAdapter extends RecyclerView.Adapter<ShelterDonationAdapter.ViewHolder> {
@@ -77,12 +76,12 @@ public class ShelterDonationAdapter extends RecyclerView.Adapter<ShelterDonation
                     if(getCheckInAdapter(pView) == false){
                         ivObjectCheck.setVisibility(View.VISIBLE);
                         setCheckInAdapter(pView);
-                        ((ShelterProfileActivity)ShelterProfileActivity.mContext).addRealDonationObjectList(getObjectInAdapter(pView), getPointInAdapter(pView), getTagInAdpater(pView));
+//                        ((ShelterProfileActivity)ShelterProfileActivity.mContext).addRealDonationObjectList(getObjectInAdapter(pView), getPointInAdapter(pView), getTagInAdpater(pView));
                     }
                     else{
                         ivObjectCheck.setVisibility(View.INVISIBLE);
                         setCheckInAdapter(pView);
-                        ((ShelterProfileActivity)ShelterProfileActivity.mContext).removeRealDonationObjectList(getObjectInAdapter(pView), getTagInAdpater(pView));
+//                        ((ShelterProfileActivity)ShelterProfileActivity.mContext).removeRealDonationObjectList(getObjectInAdapter(pView), getTagInAdpater(pView));
                     }
                 }
             });
