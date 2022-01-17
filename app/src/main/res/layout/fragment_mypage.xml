@@ -1,237 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/topNavLayout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvTopbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:includeFontPadding="false"
-                    android:lineSpacingExtra="7.5sp"
                     android:text="@string/mypage"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/topbarDivider"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
-                    android:id="@+id/settingButton"
+                <ImageView
+                    android:id="@+id/btnSetting"
                     android:layout_width="21dp"
                     android:layout_height="21dp"
-                    android:layout_marginEnd="15dp"
-                    android:stateListAnimator="@null"
-                    android:background="@drawable/icon_setting"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_setting"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTopbarTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView2" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="@id/tvTopbarTitle" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/userProfileLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <View
+                    android:id="@+id/topbarDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.loopeer.shadow.ShadowView
+                    android:id="@+id/svUserProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:elevation="1.5dp"
+                    app:cornerRadius="80dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/topbarDivider"
+                    app:shadowColor="#26000000"
+                    app:shadowDy="4"
+                    app:shadowMargin="8dp"
+                    app:shadowRadius="8dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivUserProfile"
+                        android:layout_width="98dp"
+                        android:layout_height="98dp"
+                        android:scaleType="centerCrop" />
+                </com.loopeer.shadow.ShadowView>
 
                 <ImageView
-                    android:id="@+id/userLevelImageView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    app:layout_constraintBottom_toTopOf="@+id/userPointProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/userPointProgressBar" />
-
-                <ProgressBar
-                    android:id="@+id/userPointProgressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="7dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="20dp"
-                    android:progressDrawable="@drawable/custom_progress"
-                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/constraintLayout8" />
+                    android:id="@+id/ivEditUserProfile"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/svUserProfile"
+                    app:layout_constraintEnd_toEndOf="@id/svUserProfile"
+                    app:srcCompat="@drawable/icon_camera" />
 
                 <TextView
-                    android:id="@+id/userLevelTextView"
+                    android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
-                    android:fontFamily="@font/notosanscjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/userLevelImageView"
-                    app:layout_constraintStart_toEndOf="@+id/userLevelImageView"
-                    app:layout_constraintTop_toTopOf="@+id/userLevelImageView" />
-
-                <TextView
-                    android:id="@+id/userNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
                     android:text="DonorPets"
                     android:textColor="@color/black"
-                    android:textSize="21sp"
-                    app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
-                    app:layout_constraintTop_toTopOf="@+id/constraintLayout8" />
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@id/svUserProfile"
+                    app:layout_constraintTop_toTopOf="@id/svUserProfile" />
+
+                <ProgressBar
+                    android:id="@+id/levelProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:progressDrawable="@drawable/custom_progress"
+                    app:layout_constraintBottom_toBottomOf="@id/svUserProfile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvUserName" />
+
+                <ImageView
+                    android:id="@+id/ivUserLevel"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toTopOf="@id/levelProgressBar"
+                    app:layout_constraintStart_toStartOf="@id/levelProgressBar" />
 
                 <TextView
-                    android:id="@+id/userPointTextView"
+                    android:id="@+id/tvUserLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/ivUserLevel"
+                    app:layout_constraintStart_toEndOf="@id/ivUserLevel"
+                    app:layout_constraintTop_toTopOf="@id/ivUserLevel"
+                    tools:text="스트로베리 도너츠" />
+
+                <TextView
+                    android:id="@+id/tvUserPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
-                    android:text="0p"
                     android:textColor="@color/greyish"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/userPointProgressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/userPointProgressBar" />
+                    app:layout_constraintBottom_toTopOf="@id/levelProgressBar"
+                    app:layout_constraintEnd_toEndOf="@id/levelProgressBar"
+                    tools:text="0p" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <View
+                    android:id="@+id/profileDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#e8e8e8"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.loopeer.shadow.ShadowView
-                        android:id="@+id/shadow_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:elevation="1.5dp"
-                        app:cornerRadius="80dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:shadowColor="#26000000"
-                        app:shadowDy="4"
-                        app:shadowMargin="10dp"
-                        app:shadowRadius="10dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/userProfileImageView"
-                            android:layout_width="98dp"
-                            android:layout_height="98dp"
-                            android:scaleType="centerCrop" />
-                    </com.loopeer.shadow.ShadowView>
-
-                    <ImageView
-                        android:id="@+id/editProfileImageImageView"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:elevation="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:srcCompat="@drawable/icon_camera" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/view7"
-                android:layout_width="match_parent"
-                android:layout_height="7.5dp"
-                android:layout_marginTop="15dp"
-                android:background="#e8e8e8" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/badgeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+                    app:layout_constraintTop_toBottomOf="@id/svUserProfile" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/tvTitleBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
                     android:text="뱃지"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/profileDivider" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mypageBadgeRecyclerView"
+                    android:id="@+id/badgeRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView14" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/likeShelterLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleBadge"
+                    tools:listitem="@layout/mypage_badge_item" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tvTitleMyShelter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
                     android:text="관심있는 보호소"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/badgeRecyclerView" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mypageShelterRecyclerView"
-                    android:layout_width="0dp"
+                    android:id="@+id/myShelterRecyclerView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleMyShelter"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/shelter_item">
 
                 </androidx.recyclerview.widget.RecyclerView>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-    </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
