@@ -3,8 +3,8 @@ package kr.hs.emirim.sookhee.redonorpets.ui.mypage
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.Badge
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
-import kr.hs.emirim.sookhee.redonorpets.model.BadgeData
 
 /**
  *  MypageViewModel.kt
@@ -14,8 +14,8 @@ import kr.hs.emirim.sookhee.redonorpets.model.BadgeData
  */
 
 class MypageViewModel : ViewModel() {
-    private val _badgeList = MutableStateFlow<List<BadgeData>>(emptyList())
-    val badgeList: StateFlow<List<BadgeData>> = _badgeList
+    private val _badgeList = MutableStateFlow<List<Badge>>(emptyList())
+    val badgeList: StateFlow<List<Badge>> = _badgeList
 
     private val _myShelterList = MutableStateFlow<List<Shelter>>(emptyList())
     val myShelterList: StateFlow<List<Shelter>> = _myShelterList
@@ -36,7 +36,8 @@ class MypageViewModel : ViewModel() {
         )
 
         val FAKE_BADGE_LIST = listOf(
-            BadgeData()
+            Badge("", isClear = false, title = "TITLE1", imageUrl = ""),
+            Badge("", isClear = false, title = "TITLE2", imageUrl = ""),
         )
     }
 }

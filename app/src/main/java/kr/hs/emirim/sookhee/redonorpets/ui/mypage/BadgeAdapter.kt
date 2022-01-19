@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.sookhee.redonorpets.databinding.ItemBadgeBinding
-import kr.hs.emirim.sookhee.redonorpets.model.BadgeData
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.Badge
 
 /**
  *  BadgeAdapter.kt
@@ -17,8 +17,8 @@ import kr.hs.emirim.sookhee.redonorpets.model.BadgeData
 class BadgeAdapter :
     RecyclerView.Adapter<BadgeAdapter.ViewHolder>() {
 
-    private var items: List<BadgeData> = emptyList()
-    var onItemClick: ((selectedItem: BadgeData) -> Unit)? = null
+    private var items: List<Badge> = emptyList()
+    var onItemClick: ((selectedItem: Badge) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,14 +34,14 @@ class BadgeAdapter :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItem(list: List<BadgeData>) {
+    fun setItem(list: List<Badge>) {
         items = list
         notifyDataSetChanged()
     }
 
     class ViewHolder(
         private val binding: ItemBadgeBinding,
-        onItemClick: ((selectedItem: BadgeData) -> Unit)?,
+        onItemClick: ((selectedItem: Badge) -> Unit)?,
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -51,7 +51,7 @@ class BadgeAdapter :
 
         @SuppressLint("SetTextI18n")
         fun bind(
-            item: BadgeData,
+            item: Badge,
         ) {
             binding.item = item
         }

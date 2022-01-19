@@ -9,15 +9,15 @@
 
         <import type="kotlin.Unit" />
 
-        <import type="kr.hs.emirim.sookhee.redonorpets.model.BadgeData" />
+        <import type="kr.hs.emirim.sookhee.redonorpets.domain.entity.Badge" />
 
         <variable
             name="item"
-            type="BadgeData" />
+            type="Badge" />
 
         <variable
             name="onItemClick"
-            type="Function1&lt;BadgeData, Unit>" />
+            type="Function1&lt;Badge, Unit>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/notosanscjkkr_medium"
-            android:text="@{item.badgeTitle}"
+            android:text="@{item.title}"
             android:textColor="@color/greyish"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
