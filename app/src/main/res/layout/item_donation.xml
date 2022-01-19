@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kr.hs.emirim.sookhee.redonorpets.domain.entity.Donation" />
+
+        <variable
+            name="item"
+            type="Donation" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivDonationObject"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivDonationBackgroundLayer"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivDonationObject"
+            app:layout_constraintEnd_toEndOf="@id/ivDonationObject"
+            app:layout_constraintStart_toStartOf="@id/ivDonationObject"
+            app:layout_constraintTop_toTopOf="@id/ivDonationObject"
+            app:srcCompat="@drawable/shelter_donation_layer" />
+
+        <TextView
+            android:id="@+id/tvDonationName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@{item.name}"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@id/ivDonationObject"
+            app:layout_constraintStart_toStartOf="@id/ivDonationObject"
+            app:layout_constraintTop_toBottomOf="@id/ivDonationObject"
+            tools:text="수건" />
+
+        <com.loopeer.shadow.ShadowView
+            android:id="@+id/svDonationCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shadowColor="#26000000"
+            app:shadowMargin="5dp"
+            app:shadowRadius="6dp">
+
+            <ImageView
+                android:id="@+id/ivCheck"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_check_true" />
+
+        </com.loopeer.shadow.ShadowView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

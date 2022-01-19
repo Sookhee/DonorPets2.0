@@ -3,7 +3,9 @@ package kr.hs.emirim.sookhee.redonorpets.ui.shelter
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.Donation
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.StoryFeed
 import kr.hs.emirim.sookhee.redonorpets.ui.UiState
 
 /**
@@ -17,6 +19,9 @@ class ShelterViewModel : ViewModel() {
     private val _shelterState = MutableStateFlow<UiState>(UiState.Loading)
     val shelterState: StateFlow<UiState> = _shelterState
 
+    private val _storyList = MutableStateFlow<List<StoryFeed>>(emptyList())
+    val storyList: StateFlow<List<StoryFeed>> = _storyList
+
     private val _shelterData = MutableStateFlow(Shelter())
     val shelterData: StateFlow<Shelter> = _shelterData
 
@@ -26,6 +31,11 @@ class ShelterViewModel : ViewModel() {
 
     fun getShelterData(id: String) {
         _shelterData.value = FAKE_SHELTER_DATA
+        getShelterStory(id)
+    }
+
+    private fun getShelterStory(id: String) {
+        _storyList.value = FAKE_STORY_LIST
     }
 
     private val FAKE_SHELTER_LIST = listOf(
@@ -47,6 +57,13 @@ class ShelterViewModel : ViewModel() {
         storyCount = 10,
         donorCount = 3,
         likeCount = 291,
-        productList = mapOf(Pair("수건", ""), Pair("사료", ""))
+        productList = listOf(
+            Donation(id = "", name = "수건", point = 0, imageUri = "", quantity = 0),
+            Donation(id = "", name = "사료", point = 0, imageUri = "", quantity = 0),
+        )
+    )
+
+    private val FAKE_STORY_LIST = listOf(
+        StoryFeed("story1", "title 1", "1", "First Shelter", "서울", "", "2022.01.02", 9, 0),
     )
 }

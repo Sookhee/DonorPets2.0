@@ -250,7 +250,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/productRecyclerView"
+                    android:id="@+id/donationRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -263,7 +263,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleProduct"
                     tools:ignore="RtlSymmetry"
-                    tools:listitem="@layout/shelter_donation_item" />
+                    tools:listitem="@layout/item_donation" />
 
                 <TextView
                     android:id="@+id/tvTitleStory"
@@ -277,7 +277,7 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/donationRecyclerView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/storyRecyclerView"

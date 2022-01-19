@@ -1,10 +1,13 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.shelter
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityShelterProfileBinding
+import kr.hs.emirim.sookhee.redonorpets.ui.home.StoryFeedAdapter
+import kr.hs.emirim.sookhee.redonorpets.ui.story.StoryActivity
 
 class ShelterProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityShelterProfileBinding
@@ -19,11 +22,33 @@ class ShelterProfileActivity : AppCompatActivity() {
 
         viewModel.getShelterData("")
         observeData()
+
+        initDonationRecyclerView()
+        initStoryRecyclerView()
     }
 
     private fun observeData() {
         viewModel.shelterData.asLiveData().observe(this) {
             binding.shelter = it
+            (binding.donationRecyclerView.adapter as DonationAdapter).setItem(it.productList)
+        }
+
+        viewModel.storyList.asLiveData().observe(this) {
+            (binding.storyRecyclerView.adapter as StoryFeedAdapter).setItem(it)
+        }
+    }
+
+    private fun initDonationRecyclerView() {
+        binding.donationRecyclerView.adapter = DonationAdapter()
+    }
+
+    private fun initStoryRecyclerView() {
+        binding.storyRecyclerView.adapter = StoryFeedAdapter().apply {
+            onItemClick = {
+                val intent = Intent(this@ShelterProfileActivity, StoryActivity::class.java)
+
+                startActivity(intent)
+            }
         }
     }
 }
