@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.sookhee.redonorpets.common.setImageWithUrl
+import kr.hs.emirim.sookhee.redonorpets.databinding.ItemShelterBinding
 import kr.hs.emirim.sookhee.redonorpets.databinding.ItemShelterGridBinding
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
 
@@ -16,18 +17,33 @@ import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
  */
 
 class ShelterAdapter :
-    RecyclerView.Adapter<ShelterAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: List<Shelter> = emptyList()
+
+    var shelterViewType = SHELTER_VIEW_TYPE.GRID
     var onItemClick: ((selectedItem: Shelter) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(ItemShelterGridBinding.inflate(inflater, parent, false), onItemClick)
+
+        return when (shelterViewType) {
+            SHELTER_VIEW_TYPE.GRID -> ShelterGridViewHolder(
+                ItemShelterGridBinding.inflate(inflater, parent, false),
+                onItemClick
+            )
+            SHELTER_VIEW_TYPE.LIST -> ShelterListViewHolder(
+                ItemShelterBinding.inflate(inflater, parent, false),
+                onItemClick
+            )
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (shelterViewType) {
+            SHELTER_VIEW_TYPE.GRID -> (holder as ShelterGridViewHolder).bind(items[position])
+            SHELTER_VIEW_TYPE.LIST -> (holder as ShelterListViewHolder).bind(items[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +56,7 @@ class ShelterAdapter :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(
+    class ShelterGridViewHolder(
         private val binding: ItemShelterGridBinding,
         onItemClick: ((selectedItem: Shelter) -> Unit)?,
     ) :
@@ -60,5 +76,29 @@ class ShelterAdapter :
             binding.tvStoryCount.text = "${item.storyCount}개의 스토리"
             binding.ivShelterProfile.setImageWithUrl(item.profileImage)
         }
+    }
+
+    class ShelterListViewHolder(
+        private val binding: ItemShelterBinding,
+        onItemClick: ((selectedItem: Shelter) -> Unit)?,
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.onItemClick = onItemClick
+        }
+
+        @SuppressLint("SetTextI18n")
+        fun bind(
+            item: Shelter,
+        ) {
+            binding.item = item
+
+            binding.ivShelterProfile.setImageWithUrl(item.profileImage)
+        }
+    }
+
+    companion object {
+        enum class SHELTER_VIEW_TYPE { GRID, LIST }
     }
 }

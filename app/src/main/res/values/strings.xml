@@ -18,5 +18,7 @@
     <string name="item_donor">후원자</string>
     <string name="item_like">관심</string>
     <string name="item_product">기부품목</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

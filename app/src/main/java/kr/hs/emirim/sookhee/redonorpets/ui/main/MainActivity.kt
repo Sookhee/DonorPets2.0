@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import kr.hs.emirim.sookhee.redonorpets.*
 import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityMainBinding
 import kr.hs.emirim.sookhee.redonorpets.ui.home.HomeFragment
+import kr.hs.emirim.sookhee.redonorpets.ui.mypage.MypageFragment
 import kr.hs.emirim.sookhee.redonorpets.ui.shelter.ShelterFragment
 
 /**
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private val shelterFragment by lazy { ShelterFragment() }
     private val homeFragment by lazy { HomeFragment() }
-    private val mypageFragment by lazy { FragmentMypage() }
+    private val mypageFragment by lazy { MypageFragment() }
     private var activeFragment = homeFragment as Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {

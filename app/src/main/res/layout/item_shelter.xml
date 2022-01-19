@@ -1,44 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivShelterProfile"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/tvShelterName"
-        android:layout_width="wrap_content"
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <import type="kotlin.Unit" />
+
+        <import type="kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter" />
+
+        <variable
+            name="item"
+            type="Shelter" />
+
+        <variable
+            name="onItemClick"
+            type="Function1&lt;Shelter, Unit>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/notosanscjkkr_medium"
-        android:includeFontPadding="false"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/ivShelterProfile"
-        app:layout_constraintTop_toTopOf="@id/ivShelterProfile"
-        tools:text="도너츠 유기견 보호소" />
+        android:onClick="@{()->onItemClick.invoke(item)}">
 
-    <TextView
-        android:id="@+id/tvShelterPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:includeFontPadding="false"
-        android:textColor="@color/greyish"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/ivShelterProfile"
-        app:layout_constraintStart_toEndOf="@id/ivShelterProfile"
-        tools:ignore="SmallSp"
-        tools:text="010-0000-0000" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivShelterProfile"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvShelterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@{item.name}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/ivShelterProfile"
+            app:layout_constraintTop_toTopOf="@id/ivShelterProfile"
+            tools:text="도너츠 유기견 보호소" />
+
+        <TextView
+            android:id="@+id/tvShelterPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="@{item.phone}"
+            android:textColor="@color/greyish"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivShelterProfile"
+            app:layout_constraintStart_toEndOf="@id/ivShelterProfile"
+            tools:ignore="SmallSp"
+            tools:text="010-0000-0000" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
