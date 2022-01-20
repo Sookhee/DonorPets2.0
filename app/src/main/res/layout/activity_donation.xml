@@ -157,7 +157,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/donationObjectRecyclerView"
                     tools:itemCount="3"
-                    tools:listitem="@layout/donation_item" />
+                    tools:listitem="@layout/item_donation_count" />
 
                 <View
                     android:id="@+id/donationObjectDivider"

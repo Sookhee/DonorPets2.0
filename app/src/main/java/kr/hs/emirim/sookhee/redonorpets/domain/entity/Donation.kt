@@ -13,5 +13,5 @@ data class Donation(
     val point: Int = 0,
     val imageUri: String = "",
     val quantity: Int = 1,
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
 )

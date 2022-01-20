@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kr.hs.emirim.sookhee.redonorpets.domain.entity.Donation" />
+
+        <variable
+            name="item"
+            type="Donation" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvDonationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@{item.name}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="수건" />
+
+        <TextView
+            android:id="@+id/tvDonationPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.point)}"
+            android:textColor="@color/greyish"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvDonationName"
+            app:layout_constraintStart_toEndOf="@id/tvDonationName"
+            app:layout_constraintTop_toTopOf="@id/tvDonationName"
+            tools:text="50" />
+
+        <TextView
+            android:id="@+id/tvDonationPointHelper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="p"
+            android:textColor="@color/greyish"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvDonationPoint"
+            app:layout_constraintStart_toEndOf="@id/tvDonationPoint"
+            app:layout_constraintTop_toTopOf="@id/tvDonationPoint" />
+
+        <View
+            android:id="@+id/donationObjectDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#e5e5e5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/btnPlus"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivPlus"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toBottomOf="@id/btnPlus"
+            app:layout_constraintEnd_toEndOf="@id/btnPlus"
+            app:layout_constraintStart_toStartOf="@id/btnPlus"
+            app:layout_constraintTop_toTopOf="@id/btnPlus" />
+
+        <TextView
+            android:id="@+id/tvDonationCount"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.quantity)}"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPlus"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <View
+            android:id="@+id/btnMinus"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvDonationCount"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivMinus"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/icon_minus"
+            app:layout_constraintBottom_toBottomOf="@id/btnMinus"
+            app:layout_constraintEnd_toEndOf="@id/btnMinus"
+            app:layout_constraintStart_toStartOf="@id/btnMinus"
+            app:layout_constraintTop_toTopOf="@id/btnMinus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
