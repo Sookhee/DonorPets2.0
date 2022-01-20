@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityShelterProfileBinding
+import kr.hs.emirim.sookhee.redonorpets.ui.donate.DonationActivity
 import kr.hs.emirim.sookhee.redonorpets.ui.home.StoryFeedAdapter
 import kr.hs.emirim.sookhee.redonorpets.ui.story.StoryActivity
 
@@ -25,6 +26,7 @@ class ShelterProfileActivity : AppCompatActivity() {
 
         initDonationRecyclerView()
         initStoryRecyclerView()
+        setOnClickListener()
     }
 
     private fun observeData() {
@@ -49,6 +51,21 @@ class ShelterProfileActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.btnLike.setOnClickListener {
+
+        }
+
+        binding.btnDonate.setOnClickListener {
+            val intent = Intent(this, DonationActivity::class.java)
+            startActivity(intent)
         }
     }
 }

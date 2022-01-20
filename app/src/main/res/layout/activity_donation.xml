@@ -1,542 +1,407 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    tools:context=".DonationActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvTopbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="16dp"
             android:includeFontPadding="false"
-            android:lineSpacingExtra="7.5sp"
             android:text="@string/donation"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/topbarDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/backButton"
-            android:layout_width="16.1dp"
-            android:layout_height="15.9dp"
-            android:layout_marginStart="15dp"
-            android:background="@drawable/icon_back_black"
-            android:onClick="onBackClick"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/icon_back_black"
+            app:layout_constraintBottom_toBottomOf="@id/tvTopbarTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="@id/tvTopbarTitle" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-        <LinearLayout
+        <View
+            android:id="@+id/topbarDivider"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/donation_shelter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteY="69dp">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="7.5sp"
-                    android:text="기부할 보호소"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/shelterPhoneTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/notosanscjkkr_regular"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="4.5sp"
-                        android:text="010-0000-0000"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/shadow_view" />
-
-                    <TextView
-                        android:id="@+id/shelterNameTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/notosanscjkkr_medium"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="도너츠 유기견 보호소"
-                        android:textColor="@color/black"
-                        android:textSize="12.5sp"
-                        app:layout_constraintStart_toEndOf="@+id/shadow_view"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.loopeer.shadow.ShadowView
-                        android:id="@+id/shadow_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:elevation="1.5dp"
-                        app:cornerRadius="80dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:shadowColor="#26000000"
-                        app:shadowDy="2"
-                        app:shadowMarginBottom="15dp"
-                        app:shadowMarginLeft="15dp"
-                        app:shadowMarginRight="10.5dp"
-                        app:shadowMarginTop="15dp"
-                        app:shadowRadius="6dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/shelterProfileImageView"
-                            android:layout_width="33.5dp"
-                            android:layout_height="33.5dp" />
-
-                    </com.loopeer.shadow.ShadowView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/donation_border2"
-                android:layout_width="match_parent"
-                android:layout_height="7.5dp"
-                android:background="#e8e8e8"
-                tools:layout_editor_absoluteY="261dp" />
-
-            <LinearLayout
-                android:id="@+id/donation_object"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteY="168dp">
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/notosanscjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="7.5sp"
-                    android:text="기부품목"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:scrollbars="none">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/donationObjectGroup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </com.google.android.material.chip.ChipGroup>
-                </HorizontalScrollView>
-
-            </LinearLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btnSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/topbarDivider">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="207dp">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/tvTitleShelterName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="기부할 보호소"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.loopeer.shadow.ShadowView
+                    android:id="@+id/svShelterProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="80dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleShelterName"
+                    app:shadowColor="#26000000"
+                    app:shadowDy="2"
+                    app:shadowMargin="16dp"
+                    app:shadowRadius="6dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivShelterProfile"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp" />
+
+                </com.loopeer.shadow.ShadowView>
+
+                <TextView
+                    android:id="@+id/tvShelterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/svShelterProfile"
+                    app:layout_constraintTop_toTopOf="@id/svShelterProfile"
+                    tools:text="도너츠 유기견 보호소" />
+
+                <TextView
+                    android:id="@+id/shelterPhoneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/svShelterProfile"
+                    app:layout_constraintStart_toEndOf="@id/svShelterProfile"
+                    tools:text="010-0000-0000" />
+
+                <View
+                    android:id="@+id/shelterDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="#e8e8e8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/svShelterProfile" />
+
+                <TextView
+                    android:id="@+id/tvTitleDonationList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16.3dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="기부품목"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/shelterDivider" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/donationObjectRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleDonationList" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/donationObjectCountRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/donationObjectRecyclerView"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/donation_item" />
+
+                <View
+                    android:id="@+id/donationObjectDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#e8e8e8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/donationObjectCountRecyclerView" />
+
+                <TextView
+                    android:id="@+id/tvTitleDonationPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:includeFontPadding="false"
                     android:text="획득 포인트"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/donation_objact_border" />
+                    app:layout_constraintTop_toBottomOf="@id/donationObjectDivider" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tvDonationPointHelper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:includeFontPadding="false"
-                    android:lineSpacingExtra="9sp"
                     android:text="Point"
                     android:textColor="@color/deep_sky_blue"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/textView10"
-                    app:layout_constraintEnd_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toTopOf="@+id/textView10" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvTitleDonationPoint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvTitleDonationPoint" />
 
                 <TextView
-                    android:id="@+id/donationPointTextView"
+                    android:id="@+id/tvDonationPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:includeFontPadding="false"
-                    android:lineSpacingExtra="9sp"
-                    android:text="80"
                     android:textColor="@color/deep_sky_blue"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                    app:layout_constraintEnd_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textView11" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvDonationPointHelper"
+                    app:layout_constraintEnd_toStartOf="@id/tvDonationPointHelper"
+                    app:layout_constraintTop_toTopOf="@id/tvDonationPointHelper"
+                    tools:text="80" />
 
                 <View
-                    android:id="@+id/donation_objact_border"
+                    android:id="@+id/pointDivider"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="16dp"
                     android:background="#e8e8e8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/donationObjectCountRecyclerView" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/donationObjectCountRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/donation_border"
-                android:layout_width="match_parent"
-                android:layout_height="7.5dp"
-                android:background="#e8e8e8"
-                tools:layout_editor_absoluteY="161dp" />
-
-            <LinearLayout
-                android:id="@+id/checkTermsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/terms1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:id="@+id/termsTextView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0"
-                        android:fontFamily="@font/notosanscjkkr_bold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="7.5sp"
-                        android:text="전체 동의"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/check1"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/check1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="0"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <View
-                            android:id="@+id/checkbox1"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:layout_weight="0"
-                            android:background="@drawable/border"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/checkImg1"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_check" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleDonationPoint" />
 
                 <View
-                    android:id="@+id/donation_border4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="#e8e8e8" />
+                    android:id="@+id/checkBoxAll"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pointDivider" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/terms2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/notosanscjkkr_medium"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="3.5sp"
-                        android:text="도너츠 이용약관 (필수)"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/check2"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/moreTextView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/notosanscjkkr_medium"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="5.5sp"
-                        android:text="보기"
-                        android:textColor="@color/greyish"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/check2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <View
-                            android:id="@+id/checkbox2"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:background="@drawable/border"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/checkImg2"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_check" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/terms3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp">
-
-                    <TextView
-                        android:id="@+id/moreTextView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="5.5sp"
-                        android:text="보기"
-                        android:textColor="@color/greyish"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/notosanscjkkr_medium"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="3.5sp"
-                        android:text="개인정보보호약관 (필수)"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/check3"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/check3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <View
-                            android:id="@+id/checkbox3"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:background="@drawable/border"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/checkImg3"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_check" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/terms4"
+                <TextView
+                    android:id="@+id/tvTermsAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp">
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="전체 동의"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBoxAll"
+                    app:layout_constraintStart_toEndOf="@id/checkBoxAll"
+                    app:layout_constraintTop_toTopOf="@id/checkBoxAll" />
 
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/notosanscjkkr_medium"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="3.5sp"
-                        android:text="도너츠 알림 수신 동의 (선택)"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/check4"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:id="@+id/termsDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="16dp"
+                    android:background="#e8e8e8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checkBoxAll" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/check4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                <View
+                    android:id="@+id/checkBox1"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/termsDivider" />
 
-                        <View
-                            android:id="@+id/checkbox4"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:background="@drawable/border"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/icCheck1"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox1"
+                    app:layout_constraintEnd_toEndOf="@id/checkBox1"
+                    app:layout_constraintStart_toStartOf="@id/checkBox1"
+                    app:layout_constraintTop_toTopOf="@id/checkBox1"
+                    app:srcCompat="@drawable/icon_check" />
 
-                        <ImageView
-                            android:id="@+id/checkImg4"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:visibility="invisible"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_check" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvTerms1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="도너츠 이용약관 (필수)"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox1"
+                    app:layout_constraintStart_toEndOf="@id/checkBox1"
+                    app:layout_constraintTop_toTopOf="@id/checkBox1" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tvTermsMore1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="보기"
+                    android:textColor="@color/greyish"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/checkBox1" />
 
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@color/deep_sky_blue"
-                android:fontFamily="@font/notosanscjkkr_medium"
-                android:lineSpacingExtra="7.5sp"
-                android:text="@string/donation"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                <View
+                    android:id="@+id/checkBox2"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checkBox1" />
 
-        </LinearLayout>
-    </ScrollView>
+                <ImageView
+                    android:id="@+id/icCheck2"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox2"
+                    app:layout_constraintEnd_toEndOf="@id/checkBox2"
+                    app:layout_constraintStart_toStartOf="@id/checkBox2"
+                    app:layout_constraintTop_toTopOf="@id/checkBox2"
+                    app:srcCompat="@drawable/icon_check" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvTerms2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="개인정보 이용약관 (필수)"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox2"
+                    app:layout_constraintStart_toEndOf="@id/checkBox2"
+                    app:layout_constraintTop_toTopOf="@id/checkBox2" />
+
+                <TextView
+                    android:id="@+id/tvTermsMore2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="보기"
+                    android:textColor="@color/greyish"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/checkBox2" />
+
+                <View
+                    android:id="@+id/checkBox3"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checkBox2" />
+
+                <ImageView
+                    android:id="@+id/icCheck3"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox3"
+                    app:layout_constraintEnd_toEndOf="@id/checkBox3"
+                    app:layout_constraintStart_toStartOf="@id/checkBox3"
+                    app:layout_constraintTop_toTopOf="@id/checkBox3"
+                    app:srcCompat="@drawable/icon_check" />
+
+                <TextView
+                    android:id="@+id/tvTerms3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="도너츠 알림 수신 동의 (선택)"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/checkBox3"
+                    app:layout_constraintStart_toEndOf="@id/checkBox3"
+                    app:layout_constraintTop_toTopOf="@id/checkBox3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/deep_sky_blue"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:text="@string/donation"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.donate.DonationActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.shelter.ShelterProfileActivity"
             android:exported="true" />
         <activity
@@ -22,7 +25,6 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".EditPasswdActivity" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".DonationActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
