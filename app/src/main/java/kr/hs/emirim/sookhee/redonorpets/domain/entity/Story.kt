@@ -12,9 +12,17 @@ data class Story(
     val title: String = "",
     val createDate: String = "",
     val updateDate: String = "",
-    val content: List<String> = emptyList(),
+    val content: List<StoryContent> = emptyList(),
     val shelterId: String = "",
     val shelterName: String = "",
     val shelterProfile: String = "",
     val likeCount: Int = 0,
 )
+
+data class StoryContent(
+    val id: String,
+    val type: CONTENT_TYPE,
+    val content: String,
+)
+
+enum class CONTENT_TYPE { IMAGE, TEXT }

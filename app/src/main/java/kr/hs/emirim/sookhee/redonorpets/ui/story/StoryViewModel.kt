@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.CONTENT_TYPE
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Comment
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Story
+import kr.hs.emirim.sookhee.redonorpets.domain.entity.StoryContent
 
 /**
  *  StoryViewModel.kt
@@ -22,12 +24,21 @@ class StoryViewModel : ViewModel() {
     val commentList: StateFlow<List<Comment>> = _commentList
 
     val storyDetail = _feed.combine(_shelter) { feed, shelter ->
+        val contentList = listOf(
+            StoryContent("", CONTENT_TYPE.TEXT, "문단 1"),
+            StoryContent("", CONTENT_TYPE.IMAGE, "#AAAAAA"),
+            StoryContent("", CONTENT_TYPE.TEXT, "문단 2"),
+            StoryContent("", CONTENT_TYPE.IMAGE, "#CCCCCC"),
+            StoryContent("", CONTENT_TYPE.TEXT, "문단 3"),
+            StoryContent("", CONTENT_TYPE.IMAGE, "#EEEEEE"),
+        )
+
         Story(
             id = "",
             title = "TITLE",
             createDate = "2022.01.12",
             updateDate = "2022.01.12",
-            content = listOf(),
+            content = contentList,
             shelterId = "",
             shelterName = "도너츠 보호소",
             shelterProfile = "",
