@@ -98,6 +98,7 @@ class ShelterFragment : Fragment() {
         binding.shelterRecyclerView.adapter = ShelterAdapter().apply {
             onItemClick = {
                 val intent = Intent(context, ShelterProfileActivity::class.java)
+                intent.putExtra("SHELTER_ID", it.id)
 
                 startActivity(intent)
             }

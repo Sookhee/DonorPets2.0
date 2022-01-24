@@ -1,5 +1,6 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import kr.hs.emirim.sookhee.redonorpets.databinding.FragmentMypageBinding
 import kr.hs.emirim.sookhee.redonorpets.ui.shelter.ShelterAdapter
+import kr.hs.emirim.sookhee.redonorpets.ui.shelter.ShelterProfileActivity
 
 /**
  *  MypageFragment.kt
@@ -69,7 +71,10 @@ class MypageFragment : Fragment() {
         binding.myShelterRecyclerView.adapter = ShelterAdapter().apply {
             shelterViewType = ShelterAdapter.Companion.SHELTER_VIEW_TYPE.LIST
             onItemClick = {
+                val intent = Intent(context, ShelterProfileActivity::class.java)
+                intent.putExtra("SHELTER_ID", it.id)
 
+                startActivity(intent)
             }
         }
     }

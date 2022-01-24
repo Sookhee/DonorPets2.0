@@ -1,6 +1,7 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.story
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityStoryBinding
 import kr.hs.emirim.sookhee.redonorpets.databinding.LayoutStoryImageBinding
 import kr.hs.emirim.sookhee.redonorpets.databinding.LayoutStoryTextBinding
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.CONTENT_TYPE
+import kr.hs.emirim.sookhee.redonorpets.ui.shelter.ShelterProfileActivity
 
 class StoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryBinding
@@ -62,10 +64,23 @@ class StoryActivity : AppCompatActivity() {
             // TODO: add comment
         }
 
+        binding.ivShelterProfile.setOnClickListener {
+            val intent = Intent(this, ShelterProfileActivity::class.java)
+            intent.putExtra("SHELTER_ID", binding.story?.shelterId ?: "")
+
+            startActivity(intent)
+        }
+
+        binding.tvShelterName.setOnClickListener {
+            val intent = Intent(this, ShelterProfileActivity::class.java)
+            intent.putExtra("SHELTER_ID", binding.story?.shelterId ?: "")
+
+            startActivity(intent)
+        }
+
         binding.commentRecyclerView.adapter = CommentAdapter()
         // TODO: set comment layout (user profile)
 
-        // TODO: set content container
     }
 
     private fun addImageView(content: String) {
