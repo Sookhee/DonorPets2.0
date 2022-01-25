@@ -1,5 +1,7 @@
 package kr.hs.emirim.sookhee.redonorpets.domain.entity
 
+import java.io.Serializable
+
 /**
  *  Donation.kt
  *
@@ -14,4 +16,4 @@ data class Donation(
     val imageUri: String = "",
     val quantity: Int = 1,
     var isChecked: Boolean = false,
-)
+): Serializable

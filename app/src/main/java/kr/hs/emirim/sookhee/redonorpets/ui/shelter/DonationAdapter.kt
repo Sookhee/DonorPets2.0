@@ -34,9 +34,13 @@ class DonationAdapter :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItem(list: List<Donation>) {
+    fun setItems(list: List<Donation>) {
         items = list
         notifyDataSetChanged()
+    }
+
+    fun getItems(): List<Donation> {
+        return items
     }
 
     class ViewHolder(
