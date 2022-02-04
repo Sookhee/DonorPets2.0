@@ -33,7 +33,7 @@ class ShelterProfileActivity : AppCompatActivity() {
     private fun observeData() {
         viewModel.shelterData.asLiveData().observe(this) {
             binding.shelter = it
-            (binding.donationRecyclerView.adapter as DonationAdapter).setItems(it.productList)
+            (binding.donationRecyclerView.adapter as DonationAdapter).setItems(it.objectList)
         }
 
         viewModel.storyList.asLiveData().observe(this) {

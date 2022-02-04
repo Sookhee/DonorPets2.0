@@ -1,11 +1,15 @@
 package kr.hs.emirim.sookhee.redonorpets.ui.shelter
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Donation
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.StoryFeed
+import kr.hs.emirim.sookhee.redonorpets.domain.usecase.GetShelterListUseCase
 import kr.hs.emirim.sookhee.redonorpets.ui.UiState
 
 /**
@@ -15,7 +19,9 @@ import kr.hs.emirim.sookhee.redonorpets.ui.UiState
  *  Copyright © 2022 DonorPets2.0. All rights reserved.
  */
 
-class ShelterViewModel : ViewModel() {
+class ShelterViewModel @ViewModelInject constructor(
+    private val getShelterListUseCase: GetShelterListUseCase
+) : ViewModel() {
     private val _shelterState = MutableStateFlow<UiState>(UiState.Loading)
     val shelterState: StateFlow<UiState> = _shelterState
 
@@ -26,7 +32,10 @@ class ShelterViewModel : ViewModel() {
     val shelterData: StateFlow<Shelter> = _shelterData
 
     fun getShelterList() {
-        _shelterState.value = UiState.Success(FAKE_SHELTER_LIST)
+        viewModelScope.launch {
+            val shelterList = getShelterListUseCase()
+            _shelterState.value = UiState.Success(shelterList)
+        }
     }
 
     fun getShelterData(id: String) {
@@ -57,7 +66,7 @@ class ShelterViewModel : ViewModel() {
         storyCount = 10,
         donorCount = 3,
         likeCount = 291,
-        productList = listOf(
+        objectList = listOf(
             Donation(id = "", name = "수건", point = 0, imageUri = "", quantity = 0),
             Donation(id = "", name = "사료", point = 0, imageUri = "", quantity = 0),
         )

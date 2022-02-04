@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kr.hs.emirim.sookhee.redonorpets.databinding.FragmentShelterBinding
 import kr.hs.emirim.sookhee.redonorpets.domain.entity.Shelter
 import kr.hs.emirim.sookhee.redonorpets.ui.UiState
@@ -20,6 +21,7 @@ import kr.hs.emirim.sookhee.redonorpets.ui.UiState
  *  Copyright © 2022 DonorPets2.0. All rights reserved.
  */
 
+@AndroidEntryPoint
 class ShelterFragment : Fragment() {
     private var _binding: FragmentShelterBinding? = null
     private val binding get() = _binding!!

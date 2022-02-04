@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import dagger.hilt.android.AndroidEntryPoint
 import kr.hs.emirim.sookhee.redonorpets.*
 import kr.hs.emirim.sookhee.redonorpets.databinding.ActivityMainBinding
 import kr.hs.emirim.sookhee.redonorpets.ui.home.HomeFragment
@@ -18,6 +19,7 @@ import kr.hs.emirim.sookhee.redonorpets.ui.shelter.ShelterFragment
  *  Copyright © 2022 DonorPets2.0. All rights reserved.
  */
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

@@ -16,5 +16,5 @@ data class Shelter(
     val storyCount: Int = 0,
     val donorCount: Int = 0,
     val likeCount: Int = 0,
-    val productList: List<Donation> = emptyList()
+    val objectList: List<Donation> = emptyList()
 )
